@@ -1,0 +1,43 @@
+.bill {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.trans-history h2 {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+/*--------------------------------*/
+.trans-history table,
+.detail-order table,
+th,
+td {
+    font-size: 20px;
+    border: 1px solid black;
+    text-align: center;
+}
+.detail-order {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+.detail-order table {
+    margin: auto;
+    margin-bottom: 50px;
+}
+/*=========================================*/
+table.render tbody {
+    width: 80%;
+}
+.img {
+    width: 70%;
+}
+.img img {
+    width: 70px;
+    height: 70px;
+}
+.detail-order h3 {
+    width: 80%;
+    margin: auto;
+}

@@ -1,0 +1,91 @@
+header {
+    min-height: 70px;
+    width: 100%;
+    display: flex !important;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+}
+header .logo {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+header ul {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+header ul li a {
+    font-size: 20px;
+    color: #000000;
+    font-weight: bold;
+}
+header ul li a:hover {
+    font-size: 25px;
+    color: #000;
+    font-weight: bold;
+    transition: 0.4s;
+}
+header .cart-icon {
+    position: relative;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+}
+header .cart-icon span {
+    color: #000;
+    position: absolute;
+    top: 5px;
+    right: 101px;
+    font-size: 20px;
+}
+header .search {
+    width: 25%;
+}
+header .search input {
+    font-size: 16px;
+    width: 80%;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #c8a9a9;
+    border-left: 1px solid;
+}
+.user {
+    width: 200px;
+    position: relative;
+    font-size: 20px;
+    color: #000000;
+    font-weight: bold;
+}
+.form {
+    width: 75%;
+    position: absolute;
+    right: 50px;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+}
+.form li {
+    /* border-bottom: 1px solid; */
+    background: #fbfbfb;
+}
+.form li a {
+    font-size: 17px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+}
+.form li a:hover {
+    font-size: 17px;
+    background: #cfabab;
+    transition: 0.4s;
+    font-weight: lighter;
+}
+.user:hover .form {
+    position: absolute;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.4s;
+}

@@ -1,0 +1,36 @@
+.cart-box {
+    max-width: 85%;
+    margin: auto;
+    margin-top: 50px;
+}
+.cart-item {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.cart-item img {
+    width: 10%;
+}
+.cart-quantity button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid black;
+}
+.cart-quantity button:active {
+    background-color: cyan;
+}
+.cart-quantity span {
+    margin: 0 5px 0 5px;
+}
+.drop-item {
+    font-weight: bold;
+    color: red;
+    font-size: 30px;
+}
+.shopping {
+    background: #79f6ea61;
+    padding: 15px;
+    font-weight: bold;
+}

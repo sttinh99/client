@@ -1,0 +1,80 @@
+.detail {
+    background: #dbf3f3d9;
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 150%;
+    box-shadow: 5px 0 5px #ddd;
+    padding: 20px 0 20px 0;
+}
+.detail img {
+    margin: 20px;
+    max-width: 500px;
+    height: 700px;
+    object-fit: contain;
+    display: block;
+}
+.box-detail {
+    max-width: 600px;
+    width: 100%;
+    height: 600px;
+    margin: 20px;
+}
+.box-detail .row-dt {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.row-dt h2 {
+    font-size: 30px;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.row-dt h6 {
+    font-size: 30px;
+    color: red;
+}
+.box-detail .infor {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    width: 100%;
+    height: 60%;
+}
+.row-price {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+.row-price p {
+    text-transform: capitalize;
+    color: black;
+}
+.row-price span {
+    text-transform: capitalize;
+    color: blue;
+}
+.box-detail .cart {
+    height: 10%;
+    background: #36acff;
+    padding: 10px 40px;
+    color: black;
+}
+.box-detail .cart:hover {
+    background: limegreen;
+    transition: 0.3s;
+}
+.related-products {
+    margin-top: 100px;
+}
+.related-products h2 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #666666;
+    font-weight: bold;
+}
