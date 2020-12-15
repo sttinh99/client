@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
-function ViewDetailOrder(props) {
+function ViewDetailOrder() {
     const state = useContext(GlobalState);
     const [history] = state.UserAPI.history;
     const [orderDetails, setOrderDetails] = useState([]);

@@ -10,12 +10,12 @@ function Login() {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value })
     }
+
     const loginSubmit = async (e) => {
         e.preventDefault()
         try {
-            console.log(user);
             await axios.post('/user/login', { ...user })
-            localStorage.setItem("firstLogin", true)
+            localStorage.setItem('firstLogin', true)
             window.location.href = '/'
         } catch (error) {
             //console.log(error.response);

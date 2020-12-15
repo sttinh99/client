@@ -14,22 +14,28 @@ import DetailProduct from './DetailProduct/DetailProduct'
 import TransitionHistory from './TransitionHistory/TransitionHisory'
 import ViewDetailOrder from './TransitionHistory/ViewDetailOrder'
 
+import Categories from './Categories/Categories'
+import CreateProduct from './Admin/CreateProduct/CreateProduct'
+
 import { GlobalState } from '../GlobalState'
 import Checkout from './Cart/Checkout';
 
 function Pages() {
     const state = useContext(GlobalState);
     const [isLogged] = state.UserAPI.isLogged;
+    const [isAdmin] = state.UserAPI.isAdmin;
+    const token = state.token
+    const [categories] = state.CategoryAPI.categories;
 
-    const notLogin = (isLogged) => {
-        setTimeout(() => {
-            if (!isLogged) {
-                if (window.confirm('Bạn phải đăng nhập để tiếp tục'))
-                    window.location.href = '/login'
-                else window.location.href = '/'
-            };
-        }, 3000);
-    }
+    // const notLogin = (isLogged) => {
+    //     setTimeout(() => {
+    //         if (!isLogged) {
+    //             if (window.confirm('Bạn phải đăng nhập để tiếp tục'))
+    //                 window.location.href = '/login'
+    //             else window.location.href = '/'
+    //         };
+    //     }, 3000);
+    // }
     return (
         <Switch>
             <Route path='/' exact>
@@ -51,17 +57,21 @@ function Pages() {
                 <Contact />
             </Route>
             <Route path='/login' exact>
-                {isLogged ?
+                {/* {isLogged ?
                     <Route path='/' exact>
                         <Home />
                     </Route>
-                    : <Login />}
+                    : <Login />} */}
+                <Login />
             </Route>
             <Route path='/register'>
-                {isLogged ? <Home /> : <Register />}
+                <Register />
             </Route>
             <Route path='/history' exact>
                 {isLogged ? <TransitionHistory /> : <Login />}
+            </Route>
+            <Route path='/category' exact>
+                {isAdmin ? <Categories /> : <NotFoundPage />}
             </Route>
             <Route path='/history/:id' exact>
                 <ViewDetailOrder />
@@ -72,9 +82,17 @@ function Pages() {
             <Route path='/checkout' exact>
                 <Checkout />
             </Route>
+
+            <Route path='/products/create' exact>
+                {isAdmin ? <CreateProduct categories={categories} token={token} /> : <NotFoundPage />}
+            </Route>
+            <Route path='/products/create/:id' exact>
+                {isAdmin ? <CreateProduct categories={categories} token={token} /> : <NotFoundPage />}
+            </Route>
             <Route path='*'>
                 <NotFoundPage />
             </Route>
+
         </Switch>
     );
 }

@@ -25,7 +25,7 @@ function Header() {
 
     const logoutUser = async () => {
         await axios.get('/user/logout');
-        localStorage.clear();
+        localStorage.removeItem('firstLogin')
         window.location.href = '/login'
     }
 
@@ -34,6 +34,7 @@ function Header() {
             <li><Link to='/products/create'>Create Product</Link></li>
             <li><Link to='/category'>Categories</Link></li>
             <li><Link to="/history">History Order</Link></li>
+            <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
         </>
     }
     const loggedRouter = () => {

@@ -6,6 +6,12 @@
     box-shadow: 0 0 10px #ddd;
     margin: 5px 0;
     position: relative;
+    z-index: 0;
+}
+.product_card.sold-out {
+    background: rgba(179, 179, 142, 0.507);
+    z-index: 1;
+    opacity: 0.4;
 }
 .product_card img {
     width: 100%;

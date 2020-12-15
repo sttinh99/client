@@ -40,3 +40,7 @@ button {
 @import url("./components/Pages/Auth/Auth.css");
 /*History*/
 @import url("./components/Pages/TransitionHistory/History.css");
+/*Categories*/
+@import url("./components/Pages/Categories/Categries.css");
+/*Create Product*/
+@import url("./components/Pages/Admin/CreateProduct/CreateProduct.css");

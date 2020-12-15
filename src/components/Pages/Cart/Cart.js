@@ -13,6 +13,7 @@ function Cart() {
     //const [isLogged] = useState(false)
     const [total, setTotal] = useState(0);
     useEffect(() => {
+        console.log(cart, 'cart');
         const getTotal = () => {
             const total = cart.reduce((prev, item) => {
                 return prev + item.count * item.prices
@@ -97,8 +98,5 @@ function Cart() {
             </div>
         </div>
     );
-}
-function fullItem() {
-    alert('san pham da dat so luong toi da');
 }
 export default Cart;

@@ -10,11 +10,15 @@ function Register() {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value })
     }
+
     const registerSubmit = async (e) => {
         e.preventDefault()
         try {
             await axios.post('/user/register', { ...user })
-            localStorage.setItem("firstLogin", true)
+
+            localStorage.setItem('firstLogin', true)
+
+
             window.location.href = '/'
         } catch (error) {
             //console.log(error.response);
