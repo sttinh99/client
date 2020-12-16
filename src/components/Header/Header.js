@@ -5,6 +5,7 @@ import axios from 'axios'
 import logo from '../../logo.svg'
 import v from '../../images/shopping-cart.svg'
 import './Header.css'
+import Search from '../Search/Search'
 
 import { GlobalState } from '../GlobalState'
 
@@ -85,9 +86,7 @@ function Header() {
                         </Link>
                     </div>
             }
-            <div className="search">
-                <input type="text" name="" id="" placeholder="find products here" />
-            </div>
+            <Search />
         </header>
     )
 }

@@ -40,7 +40,7 @@ header .cart-icon span {
     right: 101px;
     font-size: 20px;
 }
-header .search {
+/* header .search {
     width: 25%;
 }
 header .search input {
@@ -51,7 +51,7 @@ header .search input {
     border: none;
     border-bottom: 1px solid #c8a9a9;
     border-left: 1px solid;
-}
+} */
 .user {
     width: 200px;
     position: relative;

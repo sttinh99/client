@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { GlobalState } from '../../GlobalState'
 import ProductItem from '../Item/ProductItem'
 import Filter from '../../Filter/Filter'
+import Sort from '../../Sort/Sort'
 
 function Products() {
     const state = useContext(GlobalState)
@@ -16,6 +17,7 @@ function Products() {
     return (
         <>
             <Filter />
+            <Sort />
             <div className='products'>
                 {
                     products.map(product => {

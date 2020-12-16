@@ -50,10 +50,12 @@
     width: 75%;
     font-size: 30px;
     color: rebeccapurple;
+    text-transform: uppercase;
 }
 .category button {
     outline: none;
-    font-size: 15px;
+    font-size: 10px;
+    font-weight: bold;
     margin: 2px;
     padding: 10px 40px;
     background: rgb(235 67 67);
