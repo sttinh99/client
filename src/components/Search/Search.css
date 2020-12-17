@@ -1,12 +1,26 @@
 header .search {
     width: 25%;
+    position: relative;
 }
 header .search input {
     font-size: 16px;
     width: 80%;
     padding: 10px 15px;
     outline: none;
-    border: none;
-    border-bottom: 1px solid #c8a9a9;
-    border-left: 1px solid;
+    border: 1px solid rgb(224, 221, 221);
+
+    border-radius: 20px;
+}
+header .search .search-loupe{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(63, 137, 180);
+    position: absolute;
+    right: 50px;
+    bottom: 6px;
+}
+header .search .search-loupe img{
+    padding: 8px;
+    width: 50%;
 }

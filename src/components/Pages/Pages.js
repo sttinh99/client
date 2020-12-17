@@ -19,6 +19,7 @@ import CreateProduct from './Admin/CreateProduct/CreateProduct'
 
 import { GlobalState } from '../GlobalState'
 import Checkout from './Cart/Checkout';
+import Dasboard from '../AdminDasboard/Dasboard';
 
 function Pages() {
     const state = useContext(GlobalState);
@@ -66,6 +67,9 @@ function Pages() {
             </Route>
             <Route path='/register'>
                 <Register />
+            </Route>
+            <Route path='/dasboard' exact>
+                {isLogged ? <Dasboard /> : <Login />}
             </Route>
             <Route path='/history' exact>
                 {isLogged ? <TransitionHistory /> : <Login />}

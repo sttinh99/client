@@ -6,7 +6,7 @@ import logo from '../../logo.svg'
 import v from '../../images/shopping-cart.svg'
 import './Header.css'
 import Search from '../Search/Search'
-
+import uimg from "../../images/profile-user.svg";
 import { GlobalState } from '../GlobalState'
 
 function Header() {
@@ -29,27 +29,17 @@ function Header() {
         localStorage.removeItem('firstLogin')
         window.location.href = '/login'
     }
-
-    const adminRouter = () => {
-        return <>
-            <li><Link to='/products/create'>Create Product</Link></li>
-            <li><Link to='/category'>Categories</Link></li>
-            <li><Link to="/history">History Order</Link></li>
-            <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
-        </>
-    }
     const loggedRouter = () => {
         return <>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
             {/* <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li> */}
-            <li className="user">QuangTinh
-                <ul className='form'>
-                    <li><Link to="/infor">Thong Tin Ca Nhan</Link></li>
-                    <li><Link to="/history">Lich Su Giao Dich</Link></li>
+            <img src={uimg} alt="" className="user-img" />
+            <div className="user-content">Trương Quang Tịnh
+                <ul className='form-action'>
+                    <li><Link to="/infor">Your Profile</Link></li>
+                    <li><Link to="/history">Transaction History</Link></li>
                     <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
                 </ul>
-            </li>
+            </div>
         </>
     }
 
@@ -59,6 +49,7 @@ function Header() {
             <div className="logo">
                 <Link to='/'>
                     <img src={logo} alt="" width="100px" />
+                    <p>DogFootStore</p>
                 </Link>
             </div>
             <ul>
@@ -68,25 +59,27 @@ function Header() {
                 <li>
                     <Link to="/products">Products</Link>
                 </li>
-                {isAdmin ? adminRouter()
-                    : (isLogged ? loggedRouter() :
-                        <>
-                            <li><Link to="/about">About</Link></li>
-                            <li><Link to="/contact">Contact</Link></li>
-                            <li> <Link to="/login">Login</Link></li>
-                        </>)
-                }
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
             </ul>
+            <Search />
             {
                 isAdmin ? '' :
                     <div className="cart-icon">
                         <Link to='/cart' onClick={check}>
-                            <img src={v} alt="" width="50" ></img>
-                            <span>{cart.length}</span>
+                            <img src={v} alt=""></img>
                         </Link>
+                        <div>{cart.length}</div>
                     </div>
             }
-            <Search />
+            {
+                (isLogged ? loggedRouter() :
+                    <>
+                        <Link to="/login" style={{ display: "flex", flexDirection: "row" }}>
+                            <img src={uimg} alt="" className="user-img" />
+                            <div className="login-text">Login</div></Link>
+                    </>)
+            }
         </header>
     )
 }
