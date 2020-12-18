@@ -22,11 +22,17 @@ import Checkout from './Cart/Checkout';
 import Dasboard from '../AdminDasboard/Dasboard';
 
 function Pages() {
+
+    const styleObject = {
+        display: 'flex'
+    }
+
     const state = useContext(GlobalState);
     const [isLogged] = state.UserAPI.isLogged;
     const [isAdmin] = state.UserAPI.isAdmin;
     const token = state.token
     const [categories] = state.CategoryAPI.categories;
+
 
     // const notLogin = (isLogged) => {
     //     setTimeout(() => {
@@ -40,13 +46,13 @@ function Pages() {
     return (
         <Switch>
             <Route path='/' exact>
-                <Home />
+                {isAdmin ? <Dasboard /> : <Home />}
             </Route>
             <Route path='/home' exact>
-                <Home />
+                {isAdmin ? <Dasboard /> : <Home />}
             </Route>
             <Route path='/products' exact>
-                <Products />
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Products /></div> : <Products />}
             </Route>
             <Route path='/products/detail/:id' exact>
                 <DetailProduct />
@@ -69,13 +75,15 @@ function Pages() {
                 <Register />
             </Route>
             <Route path='/dasboard' exact>
-                {isLogged ? <Dasboard /> : <Login />}
+                {isAdmin ? <Dasboard /> : <NotFoundPage />}
             </Route>
             <Route path='/history' exact>
-                {isLogged ? <TransitionHistory /> : <Login />}
+                {
+                    isAdmin ? <div className='item' style={styleObject}><Dasboard /><TransitionHistory /></div> : (isLogged ? <TransitionHistory /> : <Login />)
+                }
             </Route>
             <Route path='/category' exact>
-                {isAdmin ? <Categories /> : <NotFoundPage />}
+                <div className='item' style={styleObject}><Dasboard /><Categories /></div>
             </Route>
             <Route path='/history/:id' exact>
                 <ViewDetailOrder />

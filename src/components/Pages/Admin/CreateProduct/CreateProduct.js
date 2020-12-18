@@ -50,19 +50,16 @@ function CreateProduct(props) {
         e.preventDefault();
         try {
             const file = e.target.files[0]
+            console.log(file);
             // console.log(file);
             if (!file) return alert('file not exists')
             let formData = new FormData()
             formData.append('file', file);
-            try {
-                const res = await axios.post('/images/upload', formData, {
-                    headers: { 'content-type': 'multipart/form-data', Authorization: token }
-                })
-                console.log(res);
-                setImages(res.data)
-            } catch (error) {
-                return alert(error.response.data.msg);
-            }
+            const res = await axios.post('/images/upload', formData, {
+                headers: { 'content-type': 'multipart/form-data', Authorization: token }
+            })
+            console.log(res, 'res');
+            setImages(res.data)
         } catch (error) {
             return alert(error.response.data.msg)
         }

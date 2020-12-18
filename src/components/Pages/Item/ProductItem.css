@@ -40,26 +40,11 @@
 .product_card .row_btn {
     width: 95%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
-#btn_buy,
-#btn_view {
-    color: black;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 5px 20px 5px;
-}
-#btn_buy {
-    background: lime;
-}
-#btn_view {
-    background: #ff9483;
-}
-#btn_buy:hover {
-    transition: 0.3s;
-    background: limegreen;
-}
-#btn_view:hover {
-    transition: 0.3s;
-    background: #ff6952;
+#btn_buy img,
+#btn_view img {
+    width: 40px;
+    height: 40px;
+    padding: 5px 10px 5px;
 }

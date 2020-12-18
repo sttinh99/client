@@ -75,9 +75,10 @@ function TransitionHisory() {
                                     <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                                     <td><Link to={`/history/${item._id}`}>ViewDetail</Link></td>
                                     {isAdmin &&
-                                        <td>
-                                            <input type="checkbox" checked={item.status} onChange={() => handleOnChange(item)} />
-                                        </td>
+                                        // <td>
+                                        //     <input type="checkbox" checked={item.status} onChange={() => handleOnChange(item)} />
+                                        // </td>
+                                        <button >export Bill</button>
                                     }
                                     {
                                         !isAdmin && isLogged &&

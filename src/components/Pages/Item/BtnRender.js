@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
+import edit from '../../../images/edit.svg'
+import remove from '../../../images/remove.svg'
+
 function BtnRender({ product, deleteProduct }) {
     //console.log(product);
     const state = useContext(GlobalState);
@@ -13,10 +16,10 @@ function BtnRender({ product, deleteProduct }) {
             {isAdmin ?
                 <>
                     <Link id="btn_buy" to={`/products/create/${product._id}`} >
-                        Edit
+                        <img src={edit}></img>
                     </Link>
                     <Link id="btn_view" to="#" onClick={deleteProduct}>
-                        Delete
+                        <img src={remove}></img>
                     </Link>
                 </> :
                 <>

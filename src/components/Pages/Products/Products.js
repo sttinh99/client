@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom'
 
 import { GlobalState } from '../../GlobalState'
 import ProductItem from '../Item/ProductItem'
+import AdminProducts from '../../Admin/AdminProducts/AdminProducts'
 import Filter from '../../Filter/Filter'
 import Sort from '../../Sort/Sort'
 
@@ -15,21 +17,57 @@ function Products() {
 
     //console.log(products);
     return (
-        <>
+        <div className={isAdmin ? 'no-care' : ""}>
             <div className="filter-n-sort">
-                <Filter />
-                <Sort />
+                <div className='create'>
+                    {
+                        isAdmin && <Link to="/products/create">Create Products</Link>
+                    }
+                </div>
+                <div className="filter-sort">
+                    <Filter />
+                    <Sort />
+                </div>
+
             </div>
-            <div className='products'>
-                {
-                    products.map(product => {
-                        //console.log(product);
-                        return <ProductItem key={product._id} product={product} isAdmin={isAdmin}
-                            token={token} callback={callback} setCallback={setCallback} />
-                    })
-                }
-            </div>
-        </>
+
+            {
+                !isAdmin ?
+                    <div className='products'>
+                        {
+                            products.map(product => {
+                                //console.log(product);
+                                return <ProductItem key={product._id} product={product} isAdmin={isAdmin}
+                                    token={token} callback={callback} setCallback={setCallback} />
+                            })
+                        }
+                    </div> :
+                    <div className='products-admin'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Prices</th>
+                                    <th>Quantity</th>
+                                    <th>Solded</th>
+                                    <th>Update/Drop</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    products.map(product => {
+                                        //console.log(product);
+                                        return <AdminProducts key={product._id} product={product} isAdmin={isAdmin}
+                                            token={token} callback={callback} setCallback={setCallback} />
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+            }
+        </div>
     );
 }
 

@@ -16,7 +16,7 @@ function Login() {
         try {
             await axios.post('/user/login', { ...user })
             localStorage.setItem('firstLogin', true)
-            window.location.href = '/dasboard/'
+            window.location.href = '/'
         } catch (error) {
             //console.log(error.response);
             alert(error.response.data.msg)
