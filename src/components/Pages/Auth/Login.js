@@ -16,7 +16,7 @@ function Login() {
         try {
             await axios.post('/user/login', { ...user })
             localStorage.setItem('firstLogin', true)
-            window.location.href = '/'
+            window.location.href = '/dasboard/'
         } catch (error) {
             //console.log(error.response);
             alert(error.response.data.msg)
@@ -27,12 +27,14 @@ function Login() {
             <form onSubmit={loginSubmit}>
                 <h2 style={{ "textAlign": "center" }}>Login</h2>
                 <label name="email" htmlFor="email">Email:</label>
-                <input id="email" type='email' name='email' required placeholder='input email here' value={user.email} onChange={onChangeInput} />
+                <input id="email" type='email' name='email' required placeholder='Enter Your Email...' value={user.email} onChange={onChangeInput} />
                 <label name="password" htmlFor="password">Password:</label>
-                <input id="password" type='password' name='password' required placeholder='input password here' value={user.password} onChange={onChangeInput} />
+                <input id="password" type='password' name='password' required placeholder='Enter Your Password...' value={user.password} onChange={onChangeInput} />
                 <div className='row-auth'>
                     <button type='submit'>Login</button>
-                    <Link to='/register' className="register">Register</Link>
+                    <small> Register Without Account </small>
+                    <Link to='/register'>
+                        <button className="register">Register</button></Link>
                 </div>
             </form>
         </div>

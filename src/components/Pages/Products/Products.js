@@ -16,8 +16,10 @@ function Products() {
     //console.log(products);
     return (
         <>
-            <Filter />
-            <Sort />
+            <div className="filter-n-sort">
+                <Filter />
+                <Sort />
+            </div>
             <div className='products'>
                 {
                     products.map(product => {

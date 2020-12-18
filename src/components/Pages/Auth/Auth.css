@@ -1,13 +1,19 @@
 .login-page {
-    min-height: 800px;
+    min-height: 500px;
     display: flex;
-    background-image: linear-gradient(#91dbfd, #75fdf2);
+    background-color: #fff;
     justify-content: center;
-    align-items: center;
 }
 .login-page form {
-    width: 400px;
+    width: 500px;
     height: 500px;
+    box-shadow: 0 0 10px 3px rgb(223, 208, 208);
+    padding: 30px 50px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: rgb(252, 252, 252);
+    position: relative;
+    top:100px;
 }
 .login-page form label {
     font-weight: bold;
@@ -15,25 +21,28 @@
 }
 .login-page form h2 {
     font-size: 40px;
+    margin-bottom: 50px;
+    font-family: 'Langar', cursive;
 }
 .login-page form input {
     display: block;
-    width: 100%;
-    margin: auto;
+    width: 95%;
     outline: none;
     height: 40px;
     padding: 0 0 5px 15px;
     font-size: 20px;
-    margin-bottom: 10px;
+    margin: 12px 0;
+    margin-right: 20px;
     border-radius: 40px;
-    border: none;
+    border: 2px solid #888;
 }
 input::placeholder {
     font-size: 15px;
 }
 .login-page form .row-auth {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 30px;
 }
 .row-auth button {
     font-size: 15px;
@@ -41,17 +50,16 @@ input::placeholder {
     background: #8bd7cc;
     padding: 10px 30px;
     border-radius: 40px;
+    color: #fff;
+}
+.row-auth small{
+    margin-top: 20px;
+    text-align: center;
+    color: rgb(206, 205, 205);
+}
+.row-auth button.register{
+    width: 100%;
 }
 .row-auth button:active {
-    background: #4ea1c7;
-}
-a.register {
-    font-size: 15px;
-    outline: none;
-    background: #50e658;
-    padding: 10px 30px;
-    border-radius: 40px;
-}
-.row-auth button:active {
-    background: #3be744;
+    background: #2e8a76;
 }
