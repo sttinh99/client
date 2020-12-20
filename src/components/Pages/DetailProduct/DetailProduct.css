@@ -25,13 +25,14 @@
     margin: 20px;
 }
 .box-detail .row-dt {
-    height: 10%;
+    min-height: 10%;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
 .row-dt h2 {
-    font-size: 30px;
+    font-size: 20px;
+    min-height: 100px;
     text-transform: capitalize;
     font-weight: bold;
 }

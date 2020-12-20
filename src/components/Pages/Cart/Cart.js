@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
-import PaypalButton from './PaypalButton'
+// import PaypalButton from './PaypalButton'
 
 import axios from 'axios'
 
@@ -71,16 +71,6 @@ function Cart() {
             addToCart(cart);
         }
     }
-    const tranSuccess = async (payment) => {
-        console.log(payment, 'ppm');
-        const { paymentID, address } = payment
-        await axios.post('/payment', { cart, address, paymentID }, {
-            headers: { Authorization: token }
-        });
-        setCart([]);
-        addToCart([]);
-        alert('Ban da order thanh cong');
-    }
     if (cart.length === 0)
         return <>
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Cart Empty</h2>
@@ -107,7 +97,6 @@ function Cart() {
             <div className='total'>
                 <h3>Total: {total}đ</h3>
                 <Link to='/checkout'>Checkout</Link>
-                <PaypalButton total={total} tranSuccess={tranSuccess} />
             </div>
         </div>
     );

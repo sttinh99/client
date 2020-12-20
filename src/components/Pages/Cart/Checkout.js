@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 
+import PaypalButton from './PaypalButton'
+
 import axios from 'axios'
 
 
@@ -53,11 +55,22 @@ function Checkout() {
             alert(error.response.data.msg);
         }
     }
+    const tranSuccess = async (payment) => {
+        console.log(payment, 'ppm');
+        const { paymentID, address } = payment
+        await axios.post('/payment', { cart, address, paymentID }, {
+            headers: { Authorization: token }
+        });
+        setCart([]);
+        addToCart([]);
+        alert('Ban da order thanh cong');
+    }
     if (cart.length === 0)
         return <>
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Order Empty</h2>
             <Link to='/products' className="shopping">Go to Shopping</Link>
         </>
+
     return (
         <div className="check-out">
             <div className="infor">
@@ -81,7 +94,8 @@ function Checkout() {
                 }
                 <div className='total'>
                     <h3>Total: {total}đ</h3>
-                    <button onClick={orderSubmit}>Order</button>
+                    <button onClick={orderSubmit}>Order </button>
+                    <PaypalButton total={total} tranSuccess={tranSuccess} />
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ import Products from './Products/Products'
 import About from './About/About'
 import Contact from './Contact/Contact'
 import Cart from './Cart/Cart'
+import CreateAddress from './CreateAddress/CreateAddress'
 import NotFoundPage from './NotFound/NotFound'
 import DetailProduct from './DetailProduct/DetailProduct'
 import TransitionHistory from './TransitionHistory/TransitionHisory'
@@ -50,6 +51,9 @@ function Pages() {
             </Route>
             <Route path='/home' exact>
                 {isAdmin ? <Dasboard /> : <Home />}
+            </Route>
+            <Route path='/address' exact>
+                {!isLogged ? <NotFoundPage /> : <CreateAddress />}
             </Route>
             <Route path='/products' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Products /></div> : <Products />}

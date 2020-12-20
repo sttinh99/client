@@ -17,7 +17,7 @@ function DetailProduct() {
                 if (product._id === idProduct.id) setDetailProduct(product);
             })
         }
-    }, [idProduct.id])
+    }, [idProduct.id, products, idProduct])
     console.log(detailProduct);
     if (detailProduct.length === 0) return null
     return (
@@ -43,7 +43,7 @@ function DetailProduct() {
                     {
                         products.map(product => {
                             //console.log(limitRelated);
-                            if (product.category === detailProduct.category) {
+                            if (product.category === detailProduct.category && product.isDelete === false) {
                                 return <ProductItem key={product._id} product={product} />
                             }
                             return null

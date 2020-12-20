@@ -45,3 +45,5 @@ button {
 @import url("./components/Pages/Admin/CreateProduct/CreateProduct.css");
 /*Search*/
 @import url("./components/Search/Search.css");
+/*Address*/
+@import url("./components/Pages/CreateAddress/CreateAddress.css");

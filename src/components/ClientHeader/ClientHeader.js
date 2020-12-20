@@ -22,7 +22,7 @@ function ClientHeader({ logoutUser, uimg, check, v, cart }) {
                 <img src={uimg} alt="" className="user-img" />
                 <div className="user-content">Trương Quang Tịnh
                 <ul className='form-action'>
-                        <li><Link to="/infor">Your Profile</Link></li>
+                        <li><Link to="/address">List Addresses</Link></li>
                         <li><Link to="/history">Transaction History</Link></li>
                         <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
                     </ul>

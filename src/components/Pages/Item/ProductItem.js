@@ -7,15 +7,12 @@ function ProductItem({ product, isAdmin, token, callback, setCallback }) {
     //console.log(product);
     const deleteProduct = async () => {
         try {
-            const deleteImg = await axios.post('/images/delete', { public_id: product.images.public_id }, {
-                headers: { Authorization: token }
-            })
             const deleteProduct = await axios.post(`/products/delete/${product._id}`, {
                 headers: { Authorization: token }
             })
-            await deleteImg
             await deleteProduct
             setCallback(!callback)
+            alert('res');
         } catch (error) {
             alert(error.response.data.msg)
         }
@@ -27,7 +24,7 @@ function ProductItem({ product, isAdmin, token, callback, setCallback }) {
                 <div className="product_box">
                     <h2 title={product.title}>{product.title}</h2>
                     <p>{product.description}</p>
-                    <span>Price: {product.prices}đ</span>
+                    <span>Price: {product.prices}$</span>
                 </div>
                 Đã Hết Hàng
                 <p>solded: {product.sold}</p>
@@ -40,7 +37,7 @@ function ProductItem({ product, isAdmin, token, callback, setCallback }) {
             <div className="product_box">
                 <h2 title={product.title}>{product.title}</h2>
                 <p>{product.description}</p>
-                <span>Price: {product.prices}đ</span>
+                <span>Price: {product.prices}$</span>
             </div>
             <BtnRender product={product} deleteProduct={deleteProduct} />
             <p>solded: {product.sold}</p>

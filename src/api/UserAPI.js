@@ -7,6 +7,8 @@ function UserAPI(token) {
     const [cart, setCart] = useState([]);
     const [history, setHistory] = useState([]);
     const [callback, setCallback] = useState(false)
+    const [addresses, setAddresses] = useState([])
+    const [cities, setCities] = useState([])
 
     useEffect(() => {
         // console.log(token, 'tk');
@@ -16,9 +18,9 @@ function UserAPI(token) {
                     const res = await axios.get('/user/infor', {
                         headers: { Authorization: token }
                     });
-                    //console.log(res);
                     //console.log(res.data.user.role);
                     setIsLogged(true);
+                    setAddresses(res.data.user.address)
                     res.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
                     setCart(res.data.user.cart);
                 } catch (error) {
@@ -27,7 +29,7 @@ function UserAPI(token) {
             }
             getUser();
         }
-    }, [token])
+    }, [token, callback])
     const addCart = async (product) => {
         if (!isLogged) {
             window.location.href = '/login';
@@ -64,15 +66,22 @@ function UserAPI(token) {
             return alert('This product has been added to cart');
         }
     }
-    // console.log(history, 'userAPI');
+    useEffect(() => {
+        const getCity = async () => {
+            const res = await axios.get('https://thongtindoanhnghiep.co/api/city');
+            setCities(res.data.LtsItem)
+        }
+        getCity();
+    }, [])
     return {
         isLogged: [isLogged, setIsLogged],
         isAdmin: [isAdmin, setIsAdmin],
         cart: [cart, setCart],
-        //checkout: [checkout, setCheckout],
+        addresses: [addresses, setAddresses],
         addCart: addCart,
         history: [history, setHistory],
-        callback: [callback, setCallback]
+        callback: [callback, setCallback],
+        cities: [cities, setCities]
     }
 }
 

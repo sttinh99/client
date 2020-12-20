@@ -37,6 +37,9 @@ function Products() {
                         {
                             products.map(product => {
                                 //console.log(product);
+                                if (product.isDelete === true) {
+                                    return null;
+                                }
                                 return <ProductItem key={product._id} product={product} isAdmin={isAdmin}
                                     token={token} callback={callback} setCallback={setCallback} />
                             })
@@ -48,9 +51,9 @@ function Products() {
                                 <tr>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Prices</th>
                                     <th>Quantity</th>
+                                    <th>Prices</th>
+                                    <th>Category</th>
                                     <th>Solded</th>
                                     <th>Update/Drop</th>
                                 </tr>
@@ -59,6 +62,9 @@ function Products() {
                                 {
                                     products.map(product => {
                                         //console.log(product);
+                                        if (product.isDelete === true) {
+                                            return null;
+                                        }
                                         return <AdminProducts key={product._id} product={product} isAdmin={isAdmin}
                                             token={token} callback={callback} setCallback={setCallback} />
                                     })
