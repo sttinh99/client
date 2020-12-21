@@ -20,7 +20,7 @@ function UserAPI(token) {
                     });
                     //console.log(res.data.user.role);
                     setIsLogged(true);
-                    setAddresses(res.data.user.address)
+                    setAddresses(res.data.user.addresses)
                     res.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
                     setCart(res.data.user.cart);
                 } catch (error) {
