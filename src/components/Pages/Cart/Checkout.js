@@ -3,6 +3,7 @@ import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 
 import PaypalButton from './PaypalButton'
+import RenderAddresses from '../../Pages/CreateAddress/RenderAddresses'
 
 import axios from 'axios'
 
@@ -11,9 +12,8 @@ function Checkout() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.UserAPI.cart;
     const [token] = state.token
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
-
+    const [addresses] = state.UserAPI.addresses
+    const [address, setAddress] = useState({});
     //console.log(cart);
 
     const addToCart = async (cart) => {
@@ -25,14 +25,6 @@ function Checkout() {
 
     }
     //get address, phone
-    function handleOnChangeAddress(e) {
-        const value = e.target.value;
-        setAddress(value);
-    }
-    function handleOnChangePhone(e) {
-        const value = e.target.value;
-        setPhone(value);
-    }
 
     const total = cart.reduce((prev, item) => {
         return prev + item.count * item.prices
@@ -44,7 +36,7 @@ function Checkout() {
                     window.location.href = '/products'
                 }
             }
-            await axios.post('/checkout', { cart, address, phone }, {
+            await axios.post('/checkout', { cart, address: addresses[0] }, {
                 headers: { Authorization: token }
             });
             setCart([]);
@@ -73,29 +65,58 @@ function Checkout() {
 
     return (
         <div className="check-out">
+            <h2 className='out'>Checkout</h2>
             <div className="infor">
-                <h2>Thông Tin Nhận Hàng</h2>
-                <input name="address" value={address} onChange={handleOnChangeAddress} placeholder="address"></input>
-                <input name="phone" value={phone} onChange={handleOnChangePhone} placeholder="phone"></input>
+                <div className='inf'>
+                    <h2>Delivery address</h2>
+                    {
+                        addresses.length === 0 ? <Link to='/address' className='create-address'>CreateAddress</Link> : <RenderAddresses address={addresses[0]} />
+                    }
+                </div>
             </div>
             <div className="cart-box">
-                {
-                    cart.map(item => (
-                        <div className="cart-item" key={item._id}>
-                            <img src={item.images} alt="" />
-                            <p className='cart-title'>{item.title}</p>
-                            <p className='cart-price'>{item.prices}</p>
-                            <p className='cart-quantity'>
-                                <span>{item.count}</span>
-                            </p>
-                            <p className='cart-totalItem'>{item.count * item.prices}</p>
-                        </div>
-                    ))
-                }
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>prices</th>
+                            <th>Quantity</th>
+                            <th>totalPrice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            cart.map(item => {
+                                return <tr key={item._id}>
+                                    <td className='images'>
+                                        <img src={item.images} alt="..." />
+                                    </td>
+                                    <td className="title">{item.title}</td>
+                                    <td className="prices">{item.prices}$</td>
+                                    <td className="quantity">
+                                        <span>{item.count}</span>
+                                    </td>
+                                    <td className="total-prices">{item.count * item.prices}$</td>
+
+                                </tr>
+                            })
+                        }
+                    </tbody>
+                </table>
                 <div className='total'>
                     <h3>Total: {total}đ</h3>
-                    <button onClick={orderSubmit}>Order </button>
-                    <PaypalButton total={total} tranSuccess={tranSuccess} />
+                    <div className='choose-payment'>
+                        <div className='home'>
+                            <label>Payment at home</label>
+                            <button onClick={orderSubmit}>Order </button>
+                        </div>
+                        <hr />
+                        <div className='online'>
+                            <label>Online Payment</label>
+                            <PaypalButton total={total} tranSuccess={orderSubmit} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

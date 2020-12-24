@@ -12,6 +12,7 @@ function ViewDetailOrder() {
     useEffect(() => {
         if (params.id) {
             history.forEach(item => {
+                console.log(item);
                 if (item._id === params.id) setOrderDetails(item)
             });
         }
@@ -20,22 +21,16 @@ function ViewDetailOrder() {
     return (
         <div className="detail-order">
             <h2 style={{ "textAlign": "center" }}>Address Customer</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{orderDetails.name}</td>
-                        <td>{orderDetails.address}</td>
-                        <td>{orderDetails.phone}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div className="box-infor">
+                <div className='infor-user'>
+                    <lable>Name: </lable>
+                    <span>{orderDetails.address.name}, {orderDetails.address.phone}</span>
+                </div>
+                <div className='infor-products'>
+                    <lable>Address Recieve: </lable>
+                    <span>{orderDetails.address.inforAddress}, {orderDetails.address.ward}, {orderDetails.address.district}, {orderDetails.address.city}</span>
+                </div>
+            </div>
             <h2 style={{ "textAlign": "center" }}>View Detail</h2>
             <table className="render">
                 <thead>
@@ -54,7 +49,7 @@ function ViewDetailOrder() {
                             <td className='img'><img src={item.images} alt='images' /></td>
                             <td className='prices'>{item.prices}</td>
                             <td className='count'>{item.count}</td>
-                            <td className='total'>{item.count * item.prices}</td>
+                            <td className='total-item'>{item.count * item.prices}</td>
                         </tr>
                     })}
                 </tbody>

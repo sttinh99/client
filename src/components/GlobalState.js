@@ -27,8 +27,8 @@ export const DataProvider = ({ children }) => {
     }, [])
     const state = {
         token: [token, setToken],
-        ProductAPI: ProductAPI(),
         UserAPI: UserAPI(token),
+        ProductAPI: ProductAPI(),
         CategoryAPI: CategoryAPI()
     }
     //console.log(state, "globalState");

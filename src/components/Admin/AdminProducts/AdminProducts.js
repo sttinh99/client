@@ -1,8 +1,12 @@
-import React from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import React, { useContext } from 'react';
+import { GlobalState } from '../../GlobalState'
 import BtnRender from '../../Pages/Item/BtnRender'
 
-function AdminProducts({ product, token, callback, setCallback }) {
+
+function AdminProducts({ product, token }) {
+    const state = useContext(GlobalState)
+    const [callback, setCallback] = state.ProductAPI.callback
     const deleteProduct = async () => {
         try {
             const deleteImg = await axios.post('/images/delete', { public_id: product.images.public_id }, {

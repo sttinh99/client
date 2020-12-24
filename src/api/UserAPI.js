@@ -9,6 +9,7 @@ function UserAPI(token) {
     const [callback, setCallback] = useState(false)
     const [addresses, setAddresses] = useState([])
     const [cities, setCities] = useState([])
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         // console.log(token, 'tk');
@@ -81,7 +82,8 @@ function UserAPI(token) {
         addCart: addCart,
         history: [history, setHistory],
         callback: [callback, setCallback],
-        cities: [cities, setCities]
+        cities: [cities, setCities],
+        users: [users, setUsers]
     }
 }
 

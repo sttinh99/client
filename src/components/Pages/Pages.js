@@ -5,6 +5,7 @@ import Login from './Auth/Login'
 import Register from './Auth/Register'
 
 import Home from './Home/Home'
+import Users from '../Admin/AdminUsers/AdminUser'
 import Products from './Products/Products'
 import About from './About/About'
 import Contact from './Contact/Contact'
@@ -52,11 +53,15 @@ function Pages() {
             <Route path='/home' exact>
                 {isAdmin ? <Dasboard /> : <Home />}
             </Route>
-            <Route path='/address' exact>
-                {!isLogged ? <NotFoundPage /> : <CreateAddress />}
+            <Route path='/admin/users' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Users /></div> : <NotFoundPage />}
             </Route>
             <Route path='/products' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Products /></div> : <Products />}
+            </Route>
+
+            <Route path='/address' exact>
+                {!isLogged ? <NotFoundPage /> : <CreateAddress />}
             </Route>
             <Route path='/products/detail/:id' exact>
                 <DetailProduct />

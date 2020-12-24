@@ -22,13 +22,16 @@
 .display-addresses {
     width: 80%;
     margin: auto;
-    min-height: 100px;
-}
-.display-addresses .render-address {
-    padding: 10px 20px 10px;
-    margin: 10px 0 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: auto;
     border: 1px solid #777;
     border-radius: 10px;
+}
+.display-addresses .render-address {
+    margin: 10px 0 10px;
+    width: 80%;
+    margin: auto;
 }
 .list-addresses .create-address {
     position: absolute;

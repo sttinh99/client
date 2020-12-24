@@ -17,19 +17,22 @@ export default function Dasboard() {
             </div>
             <div className="general">
                 <div className="item">
-                    <img src={logo} alt="..." /><span><Link to="/dasboard/" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HOME</Link></span>
+                    <img src={logo} alt="..." /><Link to="/dasboard/" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HOME</Link>
                 </div>
                 <div className="item">
-                    <img src={logo} alt="..." /><span><Link to="/products/" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>PRODUCTS</Link></span>
+                    <img src={logo} alt="..." /><Link to="/admin/users" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>USER</Link>
                 </div>
                 <div className="item">
-                    <img src={logo} alt="..." /><span><Link to='/category' style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>CATEGORY</Link></span>
+                    <img src={logo} alt="..." /><Link to="/products/" style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>PRODUCTS</Link>
                 </div>
                 <div className="item">
-                    <img src={logo} alt="..." /><span><Link to='/history' style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HISTORY ORDER</Link></span>
+                    <img src={logo} alt="..." /><Link to='/category' style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>CATEGORY</Link>
                 </div>
                 <div className="item">
-                    <img src={logo} alt="..." /><span><Link to='/logout' onClick={logoutUser} style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>Logout</Link></span>
+                    <img src={logo} alt="..." /><Link to='/history' style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HISTORY ORDER</Link>
+                </div>
+                <div className="item">
+                    <img src={logo} alt="..." /><Link to='/logout' onClick={logoutUser} style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>LOGOUT</Link>
                 </div>
             </div>
         </div>

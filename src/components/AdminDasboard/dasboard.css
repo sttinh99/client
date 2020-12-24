@@ -12,13 +12,20 @@
     margin-right: 20px;
 }
 .left-nav {
-    width: 15%;
+    width: 16%;
     background-color: #2a3f54;
     color: #fff;
     float: left;
     height: calc(100vh - 75px);
     overflow: auto;
     z-index: 4;
+}
+.nav-title {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #050030;
 }
 .nav-title .logo {
     width: 40px;
@@ -29,18 +36,19 @@
     margin: 0;
     background-color: #fff;
 }
-.nav-title h2 {
-    padding-left: 20px;
-}
+
 .general .item {
     padding: 10px 10px;
-    margin: 8px;
-    width: 30px;
+    min-width: 30px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid #777;
+}
+.general .item:hover {
+    background-color: #51779d;
 }
 .general .item img {
-    width: 80%;
+    width: 30px;
     margin-right: 20px;
     background-color: #fff;
     border-radius: 50%;

@@ -27,8 +27,8 @@ function RenderAddresses({ address, index }) {
     return (
         <div className='render-address'>
             <h3>Name: {address.name}</h3>
-            <p>Địa Chỉ: {address.inforAddress},{address.ward}, {address.district}, {address.city}</p>
             <p>Phone: {address.phone}</p>
+            <p>Địa Chỉ: {address.inforAddress},{address.ward}, {address.district}, {address.city}</p>
             <p onClick={removeItem}>X</p>
         </div>
     );

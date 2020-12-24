@@ -21,13 +21,14 @@ function TransitionHisory() {
                     const res = await axios.get('/checkout', {
                         headers: { Authorization: token }
                     })
-                    // console.log(res.data.checkouts);
+                    console.log(res.data.checkouts);
                     setHistory(res.data.checkouts)
                 }
                 else {
                     const res = await axios.get('/user/history', {
                         headers: { Authorization: token }
                     })
+                    console.log(res.data);
                     setHistory(res.data)
                 }
             }
@@ -35,25 +36,26 @@ function TransitionHisory() {
         }
     }, [token, isAdmin, callback, setHistory])
 
-    const handleOnChange = async (item) => {
-        try {
-            await axios.post(`/checkout/${item._id}`, { status: !item.status },
-                {
-                    headers: { Authorization: token }
-                }
-            )
-            setCallback(!callback)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    useEffect(() => {
-        console.log('kkkk');
-    }, [history])
+    // const handleOnChange = async (item) => {
+    //     try {
+    //         await axios.post(`/checkout/${item._id}`, { status: !item.status },
+    //             {
+    //                 headers: { Authorization: token }
+    //             }
+    //         )
+    //         setCallback(!callback)
+    //     } catch (error) {
+    //         alert(error.message)
+    //     }
+    // }
     // const checkOrder = async (item) => {
     //     console.log(x.status, 'x');
     // }
+    if (history.length === 0)
+        return <>
+            <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>History Empty</h2>
+            <Link to='/products' className="shopping">Go to Shopping</Link>
+        </>
     return (
         <div className='bill'>
             <div className='trans-history'>
@@ -70,23 +72,16 @@ function TransitionHisory() {
                     <tbody>
                         {
                             history.map((item) => {
-                                return <tr key={item._id}>
-                                    <td>{item._id}</td>
-                                    <td>{new Date(item.createdAt).toLocaleDateString()}</td>
-                                    <td><Link to={`/history/${item._id}`}>ViewDetail</Link></td>
-                                    {isAdmin &&
-                                        // <td>
-                                        //     <input type="checkbox" checked={item.status} onChange={() => handleOnChange(item)} />
-                                        // </td>
-                                        <button >export Bill</button>
-                                    }
-                                    {
-                                        !isAdmin && isLogged &&
-                                        <td>
-                                            <input type="checkbox" checked={item.status} onChange={() => { }} />
+                                return (
+                                    <tr key={item._id}>
+                                        <td className='id-trans'>{item._id}</td>
+                                        <td className='dateOrder'>{new Date(item.createdAt).toLocaleDateString()}</td>
+                                        <td className='view-detail'>
+                                            <Link to={`/history/${item._id}`}>View Detail</Link>
                                         </td>
-                                    }
-                                </tr>
+                                        <td>{item.status ? 'Confirmed' : 'Are Confirming'}</td>
+                                    </tr>
+                                )
                             })
                         }
                     </tbody>

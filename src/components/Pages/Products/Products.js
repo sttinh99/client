@@ -14,7 +14,6 @@ function Products() {
     const [token] = state.token
     const [callback, setCallback] = state.ProductAPI.callback
 
-
     //console.log(products);
     return (
         <div className={isAdmin ? 'no-care' : ""}>
