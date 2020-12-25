@@ -49,7 +49,7 @@ function Header() {
                     <li><Link to="/home">Home</Link></li>
                     <li><Link to="/products">Products</Link></li>
                     <li><Link to="/about">About</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
+                    <li><Link to="/contact">Contact Us</Link></li>
                     <Link to="/login" style={{ display: "flex", flexDirection: "row" }}>
                         <img src={uimg} alt="" className="user-img" />
                         <div className="login-text">Login</div>

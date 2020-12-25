@@ -93,11 +93,11 @@ function Checkout() {
                                         <img src={item.images} alt="..." />
                                     </td>
                                     <td className="title">{item.title}</td>
-                                    <td className="prices">{item.prices}$</td>
+                                    <td className="prices">${item.prices}</td>
                                     <td className="quantity">
                                         <span>{item.count}</span>
                                     </td>
-                                    <td className="total-prices">{item.count * item.prices}$</td>
+                                    <td className="total-prices">${item.count * item.prices}</td>
 
                                 </tr>
                             })
@@ -105,7 +105,7 @@ function Checkout() {
                     </tbody>
                 </table>
                 <div className='total'>
-                    <h3>Total: {total}đ</h3>
+                    <h3>Total: ${total}</h3>
                     <div className='choose-payment'>
                         <div className='home'>
                             <label>Payment at home</label>

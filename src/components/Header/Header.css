@@ -1,11 +1,11 @@
 header {
     min-height: 70px;
-    height: 70px;
+    height: 85px;
     width: 100%;
     display: flex !important;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    background: rgb(248, 239, 239);
+    background: rgb(0 208 255);
     box-sizing: border-box;
     padding: 0 20px;
 }

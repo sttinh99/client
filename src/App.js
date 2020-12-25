@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { DataProvider } from './components/GlobalState'
 
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import Pages from './components/Pages/Pages'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <div className="App">
           <Header />
           <Pages />
+          <Footer />
         </div>
       </Router>
     </DataProvider>

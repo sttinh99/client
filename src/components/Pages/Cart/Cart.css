@@ -40,6 +40,10 @@
     padding: 15px;
     font-weight: bold;
 }
+.cart-icon span {
+    font-weight: bold;
+    color: red;
+}
 /*RenderCart*/
 table {
     width: 80%;

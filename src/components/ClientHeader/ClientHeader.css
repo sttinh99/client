@@ -4,8 +4,10 @@
     justify-content: space-around;
 }
 .client a {
-    font-size: 18px;
+    font-size: 25px;
+    font-family: initial;
     color: #252424c0;
+    text-decoration: none;
     font-weight: 500;
 }
 .cart-icon {
@@ -16,8 +18,9 @@
     height: 40%;
 }
 .client a:hover {
-    font-size: 18px;
+    font-size: 20px;
     color: #000000;
+    text-decoration: none;
     font-weight: 500;
     transition: 0.4s;
 }

@@ -12,16 +12,18 @@ header .search input {
     border-radius: 20px;
 }
 header .search .search-loupe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     background-color: rgb(63, 137, 180);
     position: absolute;
-    right: 0px;
+    right: 40px;
     bottom: 6px;
 }
 header .search .search-loupe img {
-    padding: 8px;
     width: 50%;
 }

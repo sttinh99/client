@@ -16,7 +16,7 @@ function Products() {
 
     //console.log(products);
     return (
-        <div className={isAdmin ? 'no-care' : ""}>
+        <div className={isAdmin ? 'no-care' : "care"}>
             <div className="filter-n-sort">
                 <div className='create'>
                     {

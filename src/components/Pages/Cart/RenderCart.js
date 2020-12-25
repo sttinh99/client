@@ -62,7 +62,7 @@ function RenderCart({ item }) {
                 <img src={item.images} alt="..." />
             </td>
             <td className="title">{item.title}</td>
-            <td className="prices">{item.prices}$</td>
+            <td className="prices">${item.prices}</td>
             <td className="quantity">
                 <button onClick={() => reduceItem(item._id)}>-</button>
                 <span>{item.count}</span>

@@ -6,13 +6,13 @@ function RenderBlock() {
     return (
         <section className="blog">
             <div className="container">
-                <h2 className="h2 upp align-center"> Blog Headlines </h2>
+                <h2 className="h2 upp align-center"> About Headline </h2>
                 <hr className="offset-lg" />
                 <div className="row">
                     <div className="col-sm-6 col-md-6 item">
                         <div className="body">
                             <Link to="#favorites" className="favorites"><i className="ion-ios-heart-outline" /></Link>
-                            <Link to="#favorites"><img src={logo} alt="Apple iMac 27 Retina" /></Link>
+                            <Link to="/about"><img src={logo} alt="Apple iMac 27 Retina" /></Link>
                             <div className="caption">
                                 <h2 className="h3">The next generation of Multi-Touch</h2>
                                 <label> 07.01.2017</label>
@@ -24,14 +24,14 @@ function RenderBlock() {
                                     you real-time feedback in the form of subtle taps from the all-new Taptic Engine.
                     </p>
                                 <hr className="offset-sm" />
-                                <Link to='#'>Test</Link>
+                                <Link to='/about'>Test</Link>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-6 col-md-6 item">
                         <div className="body">
                             <Link to="#favorites" className="favorites"><i className="ion-ios-heart-outline" /></Link>
-                            <Link to="#favorites"><img src={logo} alt="Apple iMac 27 Retina" /></Link>
+                            <Link to="/about"><img src={logo} alt="Apple iMac 27 Retina" /></Link>
                             <div className="caption">
                                 <h2 className="h3">MacBook Pro - brand new day for business.</h2>
                                 <label> 02.01.2017</label>
@@ -43,16 +43,10 @@ function RenderBlock() {
                                     for employees.
                     </p>
                                 <hr className="offset-sm" />
-                                <Link to="#">View article <i className="ion-ios-arrow-right" /></Link>
+                                <Link to="/about">View article <i className="ion-ios-arrow-right" /></Link>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="align-right align-center-xs">
-                    <hr className="offset-sm" />
-                    <a href="./blog/">
-                        <h5 className="upp">View all articels </h5>
-                    </a>
                 </div>
             </div>
         </section>

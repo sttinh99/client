@@ -47,7 +47,7 @@ function Cart() {
                 </tbody>
             </table>
             <div className='total'>
-                <h3>Total: {total}đ</h3>
+                <h3>Total: ${total}</h3>
                 <Link to='/checkout' className='check'>Checkout</Link>
             </div>
         </div>

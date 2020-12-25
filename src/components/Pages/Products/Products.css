@@ -1,5 +1,12 @@
 .no-care {
+    background: rgb(245 245 245);
     width: 80%;
+    padding-bottom: 100px;
+}
+.care {
+    padding-top: 20px;
+    background: rgb(245 245 245);
+    padding-bottom: 100px;
 }
 .products {
     width: 76%;
@@ -7,7 +14,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, 280px);
     grid-column-gap: 2px;
-    grid-row-gap: 1em;
 }
 .filter-n-sort {
     width: 75%;
@@ -15,7 +21,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
     margin-bottom: 30px;
 }
 .filter-n-sort .create {
