@@ -59,14 +59,16 @@
     font-weight: lighter;
     margin-left: 20px;
 }
-.form-action li:hover {
+.form-action ul li:hover {
     background: rgba(106, 200, 255, 0.74);
     transition: 0.4s;
     font-weight: lighter;
+    z-index: 1;
 }
 .user:hover .form-action {
     margin-top: 5px;
-    box-shadow: 0 0 3px 2px #ddd;
+    box-shadow: 0px 4px 10px rgba(31, 31, 31, 0.15);
+    -webkit-box-shadow: 0px 4px 10px rgba(31, 31, 31, 0.15);
     background-color: #fff;
     min-height: 10px;
     border-radius: 10px;
@@ -74,4 +76,5 @@
     visibility: visible;
     opacity: 1;
     transition: 0.4s;
+    z-index: 1;
 }

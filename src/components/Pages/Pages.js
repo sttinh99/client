@@ -48,10 +48,13 @@ function Pages() {
     return (
         <Switch>
             <Route path='/' exact>
-                {isAdmin ? <Dasboard /> : <Home />}
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Home /></div> : <Home />}
             </Route>
             <Route path='/home' exact>
-                {isAdmin ? <Dasboard /> : <Home />}
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Home /></div> : <Home />}
+            </Route>
+            <Route path='/dasboard' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Home /></div> : <NotFoundPage />}
             </Route>
             <Route path='/admin/users' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Users /></div> : <NotFoundPage />}
@@ -67,10 +70,10 @@ function Pages() {
                 <DetailProduct />
             </Route>
             <Route path='/about' exact>
-                <About />
+                {!isAdmin ? <About /> : <NotFoundPage />}
             </Route>
             <Route path='/contact' exact>
-                <Contact />
+                {!isAdmin ? <Contact /> : <NotFoundPage />}
             </Route>
             <Route path='/login' exact>
                 {/* {isLogged ?
@@ -81,10 +84,7 @@ function Pages() {
                 <Login />
             </Route>
             <Route path='/register'>
-                <Register />
-            </Route>
-            <Route path='/dasboard' exact>
-                {isAdmin ? <Dasboard /> : <NotFoundPage />}
+                {!isAdmin ? <Register /> : <NotFoundPage />}
             </Route>
             <Route path='/history' exact>
                 {
@@ -92,7 +92,7 @@ function Pages() {
                 }
             </Route>
             <Route path='/category' exact>
-                <div className='item' style={styleObject}><Dasboard /><Categories /></div>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Categories /></div> : <NotFoundPage />}
             </Route>
             <Route path='/history/:id' exact>
                 <ViewDetailOrder />

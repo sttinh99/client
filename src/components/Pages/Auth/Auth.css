@@ -1,8 +1,9 @@
 .login-page {
-    min-height: 500px;
+    min-height: 700px;
     display: flex;
     background-color: #fff;
     justify-content: center;
+    padding-bottom: 400px;
 }
 .login-page form {
     width: 500px;
@@ -13,7 +14,7 @@
     border-radius: 20px;
     background-color: rgb(252, 252, 252);
     position: relative;
-    top:100px;
+    top: 100px;
 }
 .login-page form label {
     font-weight: bold;
@@ -22,7 +23,7 @@
 .login-page form h2 {
     font-size: 40px;
     margin-bottom: 50px;
-    font-family: 'Langar', cursive;
+    font-family: "Langar", cursive;
 }
 .login-page form input {
     display: block;
@@ -52,12 +53,12 @@ input::placeholder {
     border-radius: 40px;
     color: #fff;
 }
-.row-auth small{
+.row-auth small {
     margin-top: 20px;
     text-align: center;
     color: rgb(206, 205, 205);
 }
-.row-auth button.register{
+.row-auth button.register {
     width: 100%;
 }
 .row-auth button:active {

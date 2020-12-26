@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 
@@ -14,10 +14,11 @@ function Checkout() {
     const [token] = state.token
     const [addresses] = state.UserAPI.addresses
     const [address, setAddress] = useState({});
+    let payments;
     //console.log(cart);
 
     const addToCart = async (cart) => {
-        console.log(cart, "af");
+        // console.log(cart, "af");
         await axios.post('/user/addcart', { cart },
             {
                 headers: { Authorization: token }
@@ -29,14 +30,18 @@ function Checkout() {
     const total = cart.reduce((prev, item) => {
         return prev + item.count * item.prices
     }, 0)
-    const orderSubmit = async () => {
+    const orderSubmit = async (payment) => {
+        console.log(payment, 'payemnt');
+        if (payment.paymentID) {
+            payments = "Paid"
+        }
         try {
             if (cart.length === 0) {
                 if (window.confirm('Ban chua mua san pham nao. Hay ghe tham cua hang?')) {
                     window.location.href = '/products'
                 }
             }
-            await axios.post('/checkout', { cart, address: addresses[0] }, {
+            await axios.post('/checkout', { cart, address: addresses[0], payments: payments }, {
                 headers: { Authorization: token }
             });
             setCart([]);
@@ -47,16 +52,16 @@ function Checkout() {
             alert(error.response.data.msg);
         }
     }
-    const tranSuccess = async (payment) => {
-        console.log(payment, 'ppm');
-        const { paymentID, address } = payment
-        await axios.post('/payment', { cart, address, paymentID }, {
-            headers: { Authorization: token }
-        });
-        setCart([]);
-        addToCart([]);
-        alert('Ban da order thanh cong');
-    }
+    // const tranSuccess = async (payment) => {
+    //     console.log(payment, 'ppm');
+    //     const { paymentID, address } = payment
+    //     await axios.post('/payment', { cart, address, paymentID }, {
+    //         headers: { Authorization: token }
+    //     });
+    //     setCart([]);
+    //     addToCart([]);
+    //     alert('Ban da order thanh cong');
+    // }
     if (cart.length === 0)
         return <>
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Order Empty</h2>

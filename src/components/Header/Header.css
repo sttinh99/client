@@ -40,7 +40,7 @@ header ul.guest li a {
     color: #000000;
     font-weight: 500;
 }
-header ul.guest li a:hover {
+header ul.guest li a {
     color: #000;
     font-weight: 600;
     transition: 0.4s;

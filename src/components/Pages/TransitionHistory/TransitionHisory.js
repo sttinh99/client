@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
-import { GlobalState } from '../../GlobalState'
+import { GlobalState } from '../../GlobalState';
 
-import axios from 'axios'
+import exportbill from '../../../images/export.svg';
 
 function TransitionHisory() {
     const state = useContext(GlobalState)
     const [history, setHistory] = state.UserAPI.history
-    const [isLogged] = state.UserAPI.isLogged
+    // const [isLogged] = state.UserAPI.isLogged
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
-    const [callback, setCallback] = state.UserAPI.callback
+    const [callback] = state.UserAPI.callback
 
     useEffect(() => {
         if (token) {
@@ -65,8 +66,10 @@ function TransitionHisory() {
                         <tr>
                             <th>TransID</th>
                             <th>Date Purchase</th>
-                            <th>View Detail</th>
                             <th>Status</th>
+                            <th>View Detail</th>
+                            {isAdmin ? <th>Payments</th> : null}
+                            {isAdmin ? <th>Export Bill</th> : null}
                         </tr>
                     </thead>
                     <tbody>
@@ -76,10 +79,12 @@ function TransitionHisory() {
                                     <tr key={item._id}>
                                         <td className='id-trans'>{item._id}</td>
                                         <td className='dateOrder'>{new Date(item.createdAt).toLocaleDateString()}</td>
+                                        <td>{item.status ? 'Confirmed' : 'Are Confirming'}</td>
                                         <td className='view-detail'>
                                             <Link to={`/history/${item._id}`}>View Detail</Link>
                                         </td>
-                                        <td>{item.status ? 'Confirmed' : 'Are Confirming'}</td>
+                                        {isAdmin ? <td>{item.payments}</td> : null}
+                                        {isAdmin ? <td><button className='ex-bill'><img src={exportbill} alt="exportbillx" /></button></td> : null}
                                     </tr>
                                 )
                             })
@@ -87,7 +92,7 @@ function TransitionHisory() {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     );
 }
 
