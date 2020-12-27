@@ -74,6 +74,28 @@ function UserAPI(token) {
         }
         getCity();
     }, [])
+    useEffect(() => {
+        if (token) {
+            const getHistory = async () => {
+                // console.log(isAdmin);
+                if (isAdmin) {
+                    const res = await axios.get('/checkout', {
+                        headers: { Authorization: token }
+                    })
+                    console.log(res.data.checkouts);
+                    setHistory(res.data.checkouts)
+                }
+                else {
+                    const res = await axios.get('/user/history', {
+                        headers: { Authorization: token }
+                    })
+                    console.log(res.data);
+                    setHistory(res.data)
+                }
+            }
+            getHistory();
+        }
+    }, [token, isAdmin, callback, setHistory])
     return {
         isLogged: [isLogged, setIsLogged],
         isAdmin: [isAdmin, setIsAdmin],

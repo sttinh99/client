@@ -22,6 +22,7 @@ import CreateProduct from './Admin/CreateProduct/CreateProduct'
 import { GlobalState } from '../GlobalState'
 import Checkout from './Cart/Checkout';
 import Dasboard from '../AdminDasboard/Dasboard';
+import Bill from '../Pages/Bill/Bill'
 
 function Pages() {
 
@@ -58,6 +59,9 @@ function Pages() {
             </Route>
             <Route path='/admin/users' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Users /></div> : <NotFoundPage />}
+            </Route>
+            <Route path='/bill' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Bill /></div> : <NotFoundPage />}
             </Route>
             <Route path='/products' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Products /></div> : <Products />}

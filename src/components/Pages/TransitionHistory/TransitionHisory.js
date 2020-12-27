@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
-import axios from 'axios';
 
 import { GlobalState } from '../../GlobalState';
 
@@ -8,34 +7,13 @@ import exportbill from '../../../images/export.svg';
 
 function TransitionHisory() {
     const state = useContext(GlobalState)
-    const [history, setHistory] = state.UserAPI.history
+    const [history] = state.UserAPI.history
     // const [isLogged] = state.UserAPI.isLogged
     const [isAdmin] = state.UserAPI.isAdmin
-    const [token] = state.token
-    const [callback] = state.UserAPI.callback
+    // const [token] = state.token
+    // const [callback] = state.UserAPI.callback
 
-    useEffect(() => {
-        if (token) {
-            const getHistory = async () => {
-                // console.log(isAdmin);
-                if (isAdmin) {
-                    const res = await axios.get('/checkout', {
-                        headers: { Authorization: token }
-                    })
-                    console.log(res.data.checkouts);
-                    setHistory(res.data.checkouts)
-                }
-                else {
-                    const res = await axios.get('/user/history', {
-                        headers: { Authorization: token }
-                    })
-                    console.log(res.data);
-                    setHistory(res.data)
-                }
-            }
-            getHistory();
-        }
-    }, [token, isAdmin, callback, setHistory])
+
 
     // const handleOnChange = async (item) => {
     //     try {
@@ -84,7 +62,7 @@ function TransitionHisory() {
                                             <Link to={`/history/${item._id}`}>View Detail</Link>
                                         </td>
                                         {isAdmin ? <td>{item.payments}</td> : null}
-                                        {isAdmin ? <td><button className='ex-bill'><img src={exportbill} alt="exportbillx" /></button></td> : null}
+                                        {isAdmin ? <td><Link to='/bill' className='ex-bill'><img src={exportbill} alt="exportbillx" /></Link></td> : null}
                                     </tr>
                                 )
                             })

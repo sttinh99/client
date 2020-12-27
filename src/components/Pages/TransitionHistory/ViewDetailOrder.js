@@ -10,24 +10,24 @@ function ViewDetailOrder() {
     const params = useParams()
 
     useEffect(() => {
-        if (params.id) {
+        if (params) {
             history.forEach(item => {
                 console.log(item);
                 if (item._id === params.id) setOrderDetails(item)
             });
         }
-    }, [params.id])
+    }, [params.id, history, params])
     if (orderDetails.length === 0) return <h2>Empty</h2>
     return (
         <div className="detail-order">
             <h2 style={{ "textAlign": "center" }}>Address Customer</h2>
             <div className="box-infor">
                 <div className='infor-user'>
-                    <lable>Name: </lable>
+                    <label>Name: </label>
                     <span>{orderDetails.address.name}, {orderDetails.address.phone}</span>
                 </div>
                 <div className='infor-products'>
-                    <lable>Address Recieve: </lable>
+                    <label>Address Recieve: </label>
                     <span>{orderDetails.address.inforAddress}, {orderDetails.address.ward}, {orderDetails.address.district}, {orderDetails.address.city}</span>
                 </div>
             </div>
