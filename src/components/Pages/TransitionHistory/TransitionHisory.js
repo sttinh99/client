@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 import { GlobalState } from '../../GlobalState';
 
 import exportbill from '../../../images/export.svg';
@@ -8,12 +8,9 @@ import exportbill from '../../../images/export.svg';
 function TransitionHisory() {
     const state = useContext(GlobalState)
     const [history] = state.UserAPI.history
-    // const [isLogged] = state.UserAPI.isLogged
     const [isAdmin] = state.UserAPI.isAdmin
-    // const [token] = state.token
-    // const [callback] = state.UserAPI.callback
-
-
+    const [token] = state.token
+    const [callback, setCallback] = state.UserAPI.callback
 
     // const handleOnChange = async (item) => {
     //     try {
@@ -27,9 +24,17 @@ function TransitionHisory() {
     //         alert(error.message)
     //     }
     // }
-    // const checkOrder = async (item) => {
-    //     console.log(x.status, 'x');
-    // }
+    const checkOrder = async (item) => {
+        try {
+            console.log(item._id);
+            await axios.post(`/checkout/${item._id}`, { status: true }, {
+                headers: { Authorization: token }
+            })
+            setCallback(!callback)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
     if (history.length === 0)
         return <>
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>History Empty</h2>
@@ -62,7 +67,7 @@ function TransitionHisory() {
                                             <Link to={`/history/${item._id}`}>View Detail</Link>
                                         </td>
                                         {isAdmin ? <td>{item.payments}</td> : null}
-                                        {isAdmin ? <td><Link to='/bill' className='ex-bill'><img src={exportbill} alt="exportbillx" /></Link></td> : null}
+                                        {isAdmin ? <td><Link to={`/bill/${item._id}`} className='ex-bill'><img onClick={() => checkOrder(item)} src={exportbill} alt="exportbillx" /></Link></td> : null}
                                     </tr>
                                 )
                             })

@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import { GlobalState } from '../../GlobalState'
 
-function RenderAddresses({ address, index }) {
+function RenderAddresses({ address, index, changeAddress }) {
     const state = useContext(GlobalState);
     const [token] = state.token
     const [addresses, setAddresses] = state.UserAPI.addresses
-    const [callback, setCallback] = state.UserAPI.callback
+
     const removeItem = () => {
         if (window.confirm('Do you want delete this item')) {
             addresses.splice(index, 1)
@@ -25,11 +25,11 @@ function RenderAddresses({ address, index }) {
         }
     }
     return (
-        <div className='render-address'>
-            <h3>Name: {address.name}</h3>
-            <p>Phone: {address.phone}</p>
-            <p>Địa Chỉ: {address.inforAddress},{address.ward}, {address.district}, {address.city}</p>
-            <p onClick={removeItem}>X</p>
+        <div className="render-address" onClick={changeAddress}>
+            <h3 className='name'>Name: {address.name}</h3>
+            <p className='phone'>Phone: {address.phone}</p>
+            <p className='address'>Địa Chỉ: {address.inforAddress},{address.ward}, {address.district}, {address.city}</p>
+            <p className='remove' onClick={removeItem}>X</p>
         </div>
     );
 }

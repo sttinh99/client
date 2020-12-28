@@ -60,13 +60,13 @@
     text-transform: capitalize;
     color: blue;
 }
-.box-detail .cart {
+.box-detail .cart-buy {
     height: 10%;
     background: #36acff;
     padding: 10px 40px;
     color: black;
 }
-.box-detail .cart:hover {
+.box-detail .cart-buy:hover {
     background: limegreen;
     transition: 0.3s;
 }
@@ -78,4 +78,7 @@
     text-transform: uppercase;
     color: #666666;
     font-weight: bold;
+}
+.boxx-detail {
+    padding-bottom: 400px;
 }

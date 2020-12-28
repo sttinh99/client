@@ -40,8 +40,8 @@ function Cart() {
                 </thead>
                 <tbody>
                     {
-                        cart.map(item => {
-                            return <RenderCart item={item} />
+                        cart.map((item, index) => {
+                            return <RenderCart item={item} key={index} />
                         })
                     }
                 </tbody>

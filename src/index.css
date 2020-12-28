@@ -15,6 +15,9 @@ code {
   margin: 0 auto;
   position: relative;
 }
+a:hover {
+  text-decoration: none !important;
+}
 a {
   text-decoration: none;
 }

@@ -4,12 +4,12 @@
     margin-bottom: 10px;
 }
 #invoice-POS {
-    box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid black;
     padding: 2mm !important;
     margin: 20px auto !important;
-    width: 30rem !important;
+    width: 40rem !important;
     background: #fff !important;
-    min-height: 590px;
+    min-height: 570px;
 }
 #invoice-POS ::selection {
     background: #f31544;
@@ -32,7 +32,7 @@
     line-height: 2em;
 }
 #invoice-POS p {
-    font-size: 0.7em;
+    font-size: 0.9em;
     color: #666;
     line-height: 1.2em;
 }
@@ -80,18 +80,27 @@
     border-collapse: collapse;
 }
 #invoice-POS .tabletitle {
-    font-size: 0.5em;
+    font-size: 0.5em !important;
     background: #eee;
+}
+#invoice-POS .tableitem {
+    font-size: 1em;
 }
 #invoice-POS .service {
     border-bottom: 1px solid #eee;
+    height: 50px;
 }
 #invoice-POS .item {
-    width: 24mm;
+    width: 50mm;
 }
 #invoice-POS .itemtext {
     font-size: 0.5em;
 }
 #invoice-POS #legalcopy {
     margin-top: 5mm;
+}
+#print-bill {
+    width: 100%;
+    min-height: 580px;
+    padding-bottom: 400px;
 }

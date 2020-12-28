@@ -9,15 +9,17 @@ function AdminProducts({ product, token }) {
     const [callback, setCallback] = state.ProductAPI.callback
     const deleteProduct = async () => {
         try {
-            const deleteImg = await axios.post('/images/delete', { public_id: product.images.public_id }, {
-                headers: { Authorization: token }
-            })
-            const deleteProduct = await axios.post(`/products/delete/${product._id}`, {
-                headers: { Authorization: token }
-            })
-            await deleteImg
-            await deleteProduct
-            setCallback(!callback)
+            if (window.confirm("Do you really deleted this product")) {
+                const deleteImg = await axios.post('/images/delete', { public_id: product.images.public_id }, {
+                    headers: { Authorization: token }
+                })
+                const deleteProduct = await axios.post(`/products/delete/${product._id}`, {
+                    headers: { Authorization: token }
+                })
+                await deleteImg
+                await deleteProduct
+                setCallback(!callback)
+            }
         } catch (error) {
             alert(error.response.data.msg)
         }

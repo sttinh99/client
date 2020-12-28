@@ -52,6 +52,20 @@ function ViewDetailOrder() {
                             <td className='total-item'>{item.count * item.prices}</td>
                         </tr>
                     })}
+                    <tr>
+                        <td />
+                        <td />
+                        <td />
+                        <td>Tax</td>
+                        <td>${orderDetails.tax}</td>
+                    </tr>
+                    <tr>
+                        <td />
+                        <td />
+                        <td />
+                        <td>deliveryCharges</td>
+                        <td>${orderDetails.deliveryCharges}</td>
+                    </tr>
                 </tbody>
             </table>
             <h3>Total:{orderDetails.total}</h3>

@@ -7,14 +7,14 @@ import RenderAddresses from '../../Pages/CreateAddress/RenderAddresses'
 
 import axios from 'axios'
 
-
 function Checkout() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.UserAPI.cart;
     const [token] = state.token
     const [addresses] = state.UserAPI.addresses
-    const [address, setAddress] = useState({});
+    const [address, setAddress] = useState(addresses[0]);
     let payments;
+    let deliveryCharges;
     //console.log(cart);
 
     const addToCart = async (cart) => {
@@ -26,10 +26,6 @@ function Checkout() {
 
     }
     //get address, phone
-
-    const total = cart.reduce((prev, item) => {
-        return prev + item.count * item.prices
-    }, 0)
     const orderSubmit = async (payment) => {
         console.log(payment, 'payemnt');
         if (payment.paymentID) {
@@ -41,16 +37,27 @@ function Checkout() {
                     window.location.href = '/products'
                 }
             }
-            await axios.post('/checkout', { cart, address: addresses[0], payments: payments }, {
+            await axios.post('/checkout', { cart, address: address, payments: payments, deliveryCharges, tax, total: total }, {
                 headers: { Authorization: token }
             });
             setCart([]);
             addToCart([]);
             alert('Ban da order thanh cong');
+            // history.push('/products')
             window.location.href = '/products'
         } catch (error) {
             alert(error.response.data.msg);
         }
+    }
+    const changeAddress = (item, index) => {
+        const chooseAddress = document.getElementsByClassName('choose')
+        for (let i = 0; i < chooseAddress.length; i++) {
+            if (chooseAddress[i].className === 'choose open') {
+                chooseAddress[i].classList.remove('open')
+            }
+        }
+        chooseAddress[index].classList.add('open');
+        setAddress(item);
     }
     // const tranSuccess = async (payment) => {
     //     console.log(payment, 'ppm');
@@ -67,15 +74,35 @@ function Checkout() {
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Order Empty</h2>
             <Link to='/products' className="shopping">Go to Shopping</Link>
         </>
-
+    const totalAllCart = cart.reduce((prev, item) => {
+        return prev + item.count * item.prices
+    }, 0)
+    const tax = parseFloat((totalAllCart * 0.1).toFixed(1))
+    if (address) {
+        if (address.city.toLowerCase() === 'tp hồ chí minh') {
+            deliveryCharges = 0;
+        }
+        else {
+            deliveryCharges = 2;
+        }
+    }
+    const total = totalAllCart + tax + deliveryCharges;
     return (
         <div className="check-out">
             <h2 className='out'>Checkout</h2>
             <div className="infor">
                 <div className='inf'>
-                    <h2>Delivery address</h2>
+                    <h2>Choose delivery address</h2>
                     {
-                        addresses.length === 0 ? <Link to='/address' className='create-address'>CreateAddress</Link> : <RenderAddresses address={addresses[0]} />
+                        addresses.length === 0 ? <Link to='/address' className='create-address'>CreateAddress</Link> : <>
+                            {
+                                addresses.map((address, index) => {
+                                    return <div className="choose">
+                                        <RenderAddresses address={address} changeAddress={() => changeAddress(address, index)} />
+                                    </div>
+                                })
+                            }
+                        </>
                     }
                 </div>
             </div>
@@ -85,9 +112,9 @@ function Checkout() {
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
-                            <th>prices</th>
                             <th>Quantity</th>
-                            <th>totalPrice</th>
+                            <th>Prices</th>
+                            <th>Total Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,15 +125,29 @@ function Checkout() {
                                         <img src={item.images} alt="..." />
                                     </td>
                                     <td className="title">{item.title}</td>
-                                    <td className="prices">${item.prices}</td>
                                     <td className="quantity">
                                         <span>{item.count}</span>
                                     </td>
+                                    <td className="prices">${item.prices}</td>
                                     <td className="total-prices">${item.count * item.prices}</td>
 
                                 </tr>
                             })
                         }
+                        <tr>
+                            <td />
+                            <td />
+                            <td />
+                            <td>Tax</td>
+                            <td>${tax}</td>
+                        </tr>
+                        <tr>
+                            <td />
+                            <td />
+                            <td />
+                            <td>deliveryCharges</td>
+                            <td>${deliveryCharges}</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div className='total'>
@@ -123,8 +164,8 @@ function Checkout() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 export default Checkout;

@@ -60,18 +60,36 @@ function Pages() {
             <Route path='/admin/users' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Users /></div> : <NotFoundPage />}
             </Route>
-            <Route path='/bill' exact>
+            <Route path='/bill/:id' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Bill /></div> : <NotFoundPage />}
             </Route>
             <Route path='/products' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Products /></div> : <Products />}
             </Route>
-
+            <Route path='/products/create' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><CreateProduct categories={categories} token={token} /></div>
+                    : <NotFoundPage />}
+            </Route>
+            <Route path='/products/create/:id' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><CreateProduct categories={categories} token={token} /></div>
+                    : <NotFoundPage />}
+            </Route>
+            <Route path='/history' exact>
+                {
+                    isAdmin ? <div className='item' style={styleObject}><Dasboard /><TransitionHistory /></div> : (isLogged ? <TransitionHistory /> : <Login />)
+                }
+            </Route>
+            <Route path='/category' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Categories /></div> : <NotFoundPage />}
+            </Route>
+            <Route path='/history/:id' exact>
+                <ViewDetailOrder />
+            </Route>
             <Route path='/address' exact>
                 {!isLogged ? <NotFoundPage /> : <CreateAddress />}
             </Route>
             <Route path='/products/detail/:id' exact>
-                <DetailProduct />
+                {!isAdmin ? <DetailProduct /> : <NotFoundPage />}
             </Route>
             <Route path='/about' exact>
                 {!isAdmin ? <About /> : <NotFoundPage />}
@@ -90,34 +108,16 @@ function Pages() {
             <Route path='/register'>
                 {!isAdmin ? <Register /> : <NotFoundPage />}
             </Route>
-            <Route path='/history' exact>
-                {
-                    isAdmin ? <div className='item' style={styleObject}><Dasboard /><TransitionHistory /></div> : (isLogged ? <TransitionHistory /> : <Login />)
-                }
-            </Route>
-            <Route path='/category' exact>
-                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Categories /></div> : <NotFoundPage />}
-            </Route>
-            <Route path='/history/:id' exact>
-                <ViewDetailOrder />
-            </Route>
             <Route path='/cart' exact>
-                {isLogged ? <Cart /> : <Login />}
+                {!isAdmin ? (isLogged ? <Cart /> : <Login />) : <NotFoundPage />}
+
             </Route>
             <Route path='/checkout' exact>
                 <Checkout />
             </Route>
-
-            <Route path='/products/create' exact>
-                {isAdmin ? <CreateProduct categories={categories} token={token} /> : <NotFoundPage />}
-            </Route>
-            <Route path='/products/create/:id' exact>
-                {isAdmin ? <CreateProduct categories={categories} token={token} /> : <NotFoundPage />}
-            </Route>
             <Route path='*'>
                 <NotFoundPage />
             </Route>
-
         </Switch>
     );
 }

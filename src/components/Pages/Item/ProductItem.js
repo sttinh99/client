@@ -2,21 +2,22 @@ import React from 'react';
 import BtnRender from './BtnRender'
 import axios from 'axios'
 
-function ProductItem({ product, isAdmin, token, callback, setCallback }) {
+function ProductItem({ product, isAdmin }) {
     //console.log(product);
     //console.log(product);
-    const deleteProduct = async () => {
-        try {
-            const deleteProduct = await axios.post(`/products/delete/${product._id}`, {
-                headers: { Authorization: token }
-            })
-            await deleteProduct
-            setCallback(!callback)
-            alert('res');
-        } catch (error) {
-            alert(error.response.data.msg)
-        }
-    }
+    // const deleteProduct = async () => {
+    //     // try {
+    //     //     const deleteProduct = await axios.post(`/products/delete/${product._id}`, {
+    //     //         headers: { Authorization: token }
+    //     //     })
+    //     //     await deleteProduct
+    //     //     alert("deleted product")
+    //     //     setCallback(!callback)
+    //     // } catch (error) {
+    //     //     alert(error.response.data.msg)
+    //     // }
+    //     console.log('hihihih');
+    // }
     if (product.quantity === 0 && !isAdmin) {
         return (
             <div className='product_card sold-out'>
@@ -39,7 +40,7 @@ function ProductItem({ product, isAdmin, token, callback, setCallback }) {
                 <p>{product.description}</p>
                 <span>Price: {product.prices}$</span>
             </div>
-            <BtnRender product={product} deleteProduct={deleteProduct} />
+            <BtnRender product={product} />
             <p>solded: {product.sold}</p>
         </div >
     );

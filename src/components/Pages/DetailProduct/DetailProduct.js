@@ -21,7 +21,7 @@ function DetailProduct() {
     console.log(detailProduct);
     if (detailProduct.length === 0) return null
     return (
-        <>
+        <div className='boxx-detail'>
             <div className="detail">
                 <img src={detailProduct.images.url} alt="" />
                 <div className="box-detail">
@@ -34,7 +34,7 @@ function DetailProduct() {
                         <p>Price: {detailProduct.prices}đ</p>
                         <span>{`quantity: ${detailProduct.quantity}`}</span>
                     </div>
-                    <Link to="/cart" className="cart" onClick={() => addCart(detailProduct)}>Buy Now</Link>
+                    <Link to="/cart" className="cart-buy" onClick={() => addCart(detailProduct)}>Buy Now</Link>
                 </div>
             </div>
             <div className="related-products">
@@ -51,7 +51,7 @@ function DetailProduct() {
                     }
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

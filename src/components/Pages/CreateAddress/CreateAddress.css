@@ -95,3 +95,13 @@
     border-radius: 10px;
     cursor: pointer;
 }
+.render-address .name {
+    width: 20%;
+    font-size: 20px;
+}
+.render-address .phone {
+    width: 12%;
+}
+.render-address .address {
+    width: 65%;
+}
