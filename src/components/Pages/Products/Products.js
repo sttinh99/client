@@ -6,13 +6,19 @@ import ProductItem from '../Item/ProductItem'
 import AdminProducts from '../../Admin/AdminProducts/AdminProducts'
 import Filter from '../../Filter/Filter'
 import Sort from '../../Sort/Sort'
+import Search from '../../Search/Search'
 
 function Products() {
     const state = useContext(GlobalState)
+    const [search, setSearch] = state.ProductAPI.search
     const [products] = state.ProductAPI.products
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
     const [callback, setCallback] = state.ProductAPI.callback
+
+    const handleOnChange = (e) => {
+        setSearch(e.target.value.toLowerCase())
+    }
 
     //console.log(products);
     return (
@@ -26,6 +32,7 @@ function Products() {
                 <div className="filter-sort">
                     <Filter />
                     <Sort />
+                    <Search search={search} handleOnChange={handleOnChange} />
                 </div>
 
             </div>

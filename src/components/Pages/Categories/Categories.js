@@ -2,10 +2,14 @@ import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { GlobalState } from '../../GlobalState'
 
+import Search from '../../Search/Search'
+
 function Categories() {
     const state = useContext(GlobalState);
+    const [search, setSearch] = state.CategoryAPI.search
     const [categories] = state.CategoryAPI.categories
     const [token] = state.token
+
     const [category, setCategory] = useState('');
     const [callback, setCallback] = state.CategoryAPI.callback
     const [onEdit, setOnEdit] = useState(false);
@@ -54,9 +58,12 @@ function Categories() {
         setCategory(name)
         setOnEdit(true)
     }
-
+    const handleOnChange = (e) => {
+        setSearch(e.target.value.toLowerCase())
+    }
     return (
         <div className="categories">
+            <Search search={search} handleOnChange={handleOnChange} />
             <form onSubmit={createOrUpdateCategory}>
                 <label htmlFor="category">Category:</label>
                 <input type="text" name="category" value={category}

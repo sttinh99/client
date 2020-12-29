@@ -9,7 +9,6 @@ import react from '../../images/react.svg'
 import v from '../../images/shopping-cart.svg'
 import uimg from "../../images/profile-user.svg";
 
-import Search from '../Search/Search'
 import ClientHeader from '../ClientHeader/ClientHeader'
 
 import { GlobalState } from '../GlobalState'
@@ -59,7 +58,6 @@ function Header() {
                 isLogged && !isAdmin && <ClientHeader uimg={uimg} logoutUser={logoutUser}
                     check={check} cart={cart} v={v} />
             }
-            <Search />
         </header >
     )
 }
