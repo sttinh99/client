@@ -37,8 +37,7 @@ function UserAPI(token) {
             return alert('please login to continue');
         };
         if (product.quantity === 0) {
-            window.location.href = '/products';
-            return alert('san pham da duoc ban het')
+            return alert('this product has been sold out')
         }
         const check = cart.every(item => {
             return item._id !== product._id

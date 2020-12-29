@@ -1,6 +1,7 @@
 .categories {
     width: 80%;
-    padding-bottom: 100px;
+    padding-bottom: 400px;
+    padding-top: 20px;
     min-height: 1000px;
 }
 .categories form {
@@ -60,4 +61,16 @@
     margin: 2px;
     padding: 10px 40px;
     background: rgb(235 67 67);
+}
+.categories .search {
+    margin-left: 5%;
+}
+.categories .search input {
+    margin-left: 5%;
+    height: 35px;
+}
+.categories .search .search-loupe {
+    width: 25px;
+    height: 25px;
+    right: 17px;
 }

@@ -8,6 +8,7 @@ import exportbill from '../../../images/export.svg';
 function TransitionHisory() {
     const state = useContext(GlobalState)
     const [history] = state.UserAPI.history
+    // console.log(history, 'dsjakdh');
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
     const [callback, setCallback] = state.UserAPI.callback
