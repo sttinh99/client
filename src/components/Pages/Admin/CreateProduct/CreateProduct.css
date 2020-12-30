@@ -6,7 +6,6 @@
     justify-content: space-around;
     margin-top: 100px;
     min-height: 100px;
-    align-items: center;
     padding-bottom: 400px;
 }
 .create-product .add-images {
@@ -74,6 +73,7 @@
     outline: none;
     padding: 5px 0px 5px 10px;
     width: 80%;
+    height: 35px;
 }
 .create-product form textarea {
     font-size: 20px;
@@ -88,6 +88,7 @@
     font-weight: lighter;
 }
 .create-product form select {
+    height: 35px;
     font-size: 15px;
     padding: 5px 0px 5px 10px;
     outline: none;
@@ -100,4 +101,34 @@
     padding: 15px 40px;
     background: rgb(163 255 166);
     margin-left: 82.5%;
+}
+.item-box {
+    display: flex;
+}
+.item-box .form-group.cpu {
+    width: 31%;
+    display: flex;
+    justify-content: space-between;
+}
+.item-box .form-group.ram {
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+}
+.item-box .form-group.screen {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+.item-box .form-group.vga {
+    display: flex;
+    justify-content: space-between;
+    width: 48%;
+    align-items: center;
+}
+.item-box .form-group.harddisk {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

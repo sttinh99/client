@@ -29,7 +29,7 @@ function DetailProduct() {
                         <h2>{detailProduct.title}</h2>
                         <h6>{detailProduct.category}</h6>
                     </div>
-                    <span className="infor">{detailProduct.content}</span>
+                    {/* <span className="infor">{detailProduct.content}</span> */}
                     <div className="row-price">
                         <p>Price: {detailProduct.prices}đ</p>
                         <span>{`quantity: ${detailProduct.quantity}`}</span>

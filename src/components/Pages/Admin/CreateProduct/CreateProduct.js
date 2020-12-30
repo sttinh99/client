@@ -12,9 +12,9 @@ const initialState = {
     description: '',
     quantity: 0,
     category: '',
-    content: ''
+    content: {}
 }
-
+let inforTT = '';
 function CreateProduct(props) {
     const state = useContext(GlobalState)
     const { categories } = props
@@ -29,7 +29,9 @@ function CreateProduct(props) {
         harddisk: '',
         opearatingSysterm: '',
         battery: '',
-        weight: ''
+        weight: '',
+        warranty: '',
+        brand: ''
     })
     const [ram, setRam] = useState({
         BUS: '',
@@ -51,7 +53,7 @@ function CreateProduct(props) {
     /* update Product */
     const [products] = state.ProductAPI.products
     const [onEdit, setOnEdit] = useState(false)
-    const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei']
+    const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei', "Acer"]
     const RAMBUS = ['2400MHz', '2666MHz', '3000MHz', '3200MHz', '1600MHz', '2800MHz', ' 3600MHz'];
     const RAMBrand = ['G.SKILL', 'KINGSTON', 'KINGMAX', 'CRUCIAL', 'ADATA', 'CORSAIR', 'GEIL', 'KLEVV', 'GIGABYTE'];
     const RAMCapacity = ['1 x 8GB', '1 x 4GB', '2 x 8GB', '1 x 16GB', '2 x 16GB', '2 x 4GB', '2 x 32GB'];
@@ -123,6 +125,7 @@ function CreateProduct(props) {
     const handleChangeInputComputer = (e) => {
         const { name, value } = e.target
         setcomputer({ ...computer, [name]: value });
+        setProduct({ ...product, content: computer })
     }
     const handleChangeInputRam = (e) => {
         const { name, value } = e.target
@@ -134,23 +137,29 @@ function CreateProduct(props) {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        //console.log(product.category);
         try {
-            if (product.category === 'laptop')
-                setProduct({ ...product, content: computer });
-            else if (product.category === 'ram')
-                setProduct({ ...product, content: ram });
-            else if (product.category === 'ram')
-                setProduct({ ...product, content: harddisk });
-            console.log(images, 'img');
+            // console.log(product.category, 'xxxxxxx');
+            if (product.category === 'laptop') {
+                inforTT = `${product.title} ( ${computer.cpu}|${computer.vga}|${computer.ram}|${computer.screen}|${computer.harddisk}|
+                    ${computer.opearatingSysterm}|${computer.battery}|${computer.weight}kg`
+            }
+            // else if (product.category === 'ram') {
+            //     setProduct({ ...product, content: ram });
+            // }
+            // else if (product.category === 'ram')
+            //     setProduct({ ...product, content: harddisk });
+            // console.log(images, 'img');
             if (!isAdmin) return alert('you are not admin')
             if (!images) return alert('no images upload')
             if (onEdit) {
-                await axios.post(`/products/update/${param.id}`, { ...product, images }, {
+                await axios.post(`/products/update/${param.id}`, { ...product, images, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
             else {
-                await axios.post('/products/create', { ...product, images }, {
+                console.log(product);
+                await axios.post('/products/create', { ...product, images, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
@@ -159,8 +168,7 @@ function CreateProduct(props) {
             setCallback(!callback)
             history.push("/products");
         } catch (error) {
-            console.log(error.response);
-            return alert(error.response)
+            alert(error.message)
         }
     }
     /*end create*/
@@ -192,27 +200,27 @@ function CreateProduct(props) {
                 <div className='form-group'>
                     <label htmlFor='brand'>Brand: </label>
                     {
-                        (product.category==='laptop'||product.category==='ram'||product.category==='harddisk')?
-                        <select name='brand' onChange={handleChangeInput}>
-                        <option defaultValue={(product.brand)}>{(product.brand) ? product.brand : "Choose"}</option>
-                        {
-                            (product.category === 'laptop') ?
-                                brandCollection.map((item, index) => {
-                                    return <option key={index}> {item}</option>
-                                }) : (product.category === 'ram') ?
-                                    RAMBrand.map((item, index) => {
-                                        return <option key={index}> {item}</option>
-                                    }) :
-                                    HarddiskBrand.map((item, index) => {
-                                        return <option key={index}> {item}</option>
-                                    })
+                        (product.category === 'laptop' || product.category === 'ram' || product.category === 'harddisk') ?
+                            <select name='brand' onChange={handleChangeInput}>
+                                <option defaultValue={(product.brand)}>{(product.brand) ? product.brand : "Choose"}</option>
+                                {
+                                    (product.category === 'laptop') ?
+                                        brandCollection.map((item, index) => {
+                                            return <option key={index}> {item}</option>
+                                        }) : (product.category === 'ram') ?
+                                            RAMBrand.map((item, index) => {
+                                                return <option key={index}> {item}</option>
+                                            }) :
+                                            HarddiskBrand.map((item, index) => {
+                                                return <option key={index}> {item}</option>
+                                            })
 
-                        }
-                    </select>
-                    :
-                    <input type='text' value={product.brand} onChange={handleChangeInput}/>
+                                }
+                            </select>
+                            :
+                            <input type='text' value={product.brand} onChange={handleChangeInput} />
                     }
-                   
+
                 </div>
                 <div className='form-group'>
                     <label htmlFor='warranty'>Warranty: </label>
@@ -225,7 +233,6 @@ function CreateProduct(props) {
 
                     </select>
                 </div>
-
                 <div className='form-group'>
                     <label htmlFor='series'>Series: </label>
                     <input type='text' id='series' name='series' value={product.series} onChange={handleChangeInput} />
@@ -234,8 +241,6 @@ function CreateProduct(props) {
                     <label htmlFor='title'>Title: </label>
                     <input type='text' id='title' name='title' placeholder='add title' value={product.title} onChange={handleChangeInput} />
                 </div>
-
-
                 <div className='form-group'>
                     <label htmlFor='prices'>Prices: </label>
                     <input type='text' id='prices' name='prices' placeholder='add prices' value={product.prices} onChange={handleChangeInput} />
@@ -244,60 +249,64 @@ function CreateProduct(props) {
                     (product.category === 'laptop') ?
                         (
                             <>
-                                <div className='form-group'>
-                                    <label htmlFor='cpu'>CPU: </label>
-                                    <select name='cpu' onChange={handleChangeInputComputer}>
-                                        <option defaultValue={product.content.cpu}>{(product.content) ? product.content.cpu : ""}</option>
-                                        {
-                                            cpuCollection.map((item, index) => {
-                                                return <option key={index} value={item}> {item}</option>
-                                            })
-                                        }
-                                    </select>
+                                <div className="item-box">
+                                    <div className='form-group cpu'>
+                                        <label htmlFor='cpu'>CPU: </label>
+                                        <select name='cpu' onChange={handleChangeInputComputer}>
+                                            <option defaultValue={product.content.cpu}>{(product.content) ? product.content.cpu : ""}</option>
+                                            {
+                                                cpuCollection.map((item, index) => {
+                                                    return <option key={index} value={item}> {item}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className='form-group ram'>
+                                        <label htmlFor='ram'>RAM: </label>
+                                        <select name='ram' onChange={handleChangeInputComputer}>
+                                            <option defaultValue={product.content.ram}>{(product.content) ? product.content.ram : ""}</option>
+                                            {
+                                                RAMCapacity.map((item, index) => {
+                                                    return <option key={index} value={item}> {item}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className='form-group screen'>
+                                        <label htmlFor='screen'>Screen: </label>
+                                        <select name='screen' onChange={handleChangeInputComputer}>
+                                            <option defaultValue={product.content.screen}>{(product.content) ? product.content.screen : ""}</option>
+                                            {
+                                                screenCollection.map((item, index) => {
+                                                    return <option key={index} value={item}> {item}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
-                                <div className='form-group'>
-                                    <label htmlFor='vga'>VGA: </label>
-                                    <select name='vga' onChange={handleChangeInputComputer}>
-                                        <option defaultValue={product.content.vga}>{(product.content) ? product.content.vga : ""}</option>
-                                        {
-                                            vgaCollection.map((item, index) => {
-                                                return <option key={index} value={item}> {item}</option>
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                                <div className='form-group'>
-                                    <label htmlFor='screen'>Screen: </label>
-                                    <select name='screen' onChange={handleChangeInputComputer}>
-                                        <option defaultValue={product.content.screen}>{(product.content) ? product.content.screen : ""}</option>
-                                        {
-                                            screenCollection.map((item, index) => {
-                                                return <option key={index} value={item}> {item}</option>
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                                <div className='form-group'>
-                                    <label htmlFor='ram'>RAM: </label>
-                                    <select name='ram' onChange={handleChangeInputComputer}>
-                                        <option defaultValue={product.content.ram}>{(product.content) ? product.content.ram : ""}</option>
-                                        {
-                                            RAMCapacity.map((item, index) => {
-                                                return <option key={index} value={item}> {item}</option>
-                                            })
-                                        }
-                                    </select>
-                                </div>
-                                <div className='form-group'>
-                                    <label htmlFor='harddisk'>Hard Disk: </label>
-                                    <select name='harddisk' onChange={handleChangeInputComputer}>
-                                        <option defaultValue={product.content.harddisk}>{(product.content) ? product.content.harddisk : ""}</option>
-                                        {
-                                            harddiskCollection.map((item, index) => {
-                                                return <option key={index} value={item}> {item}</option>
-                                            })
-                                        }
-                                    </select>
+                                <div className="item-box">
+                                    <div className='form-group vga'>
+                                        <label htmlFor='vga'>VGA: </label>
+                                        <select name='vga' onChange={handleChangeInputComputer}>
+                                            <option defaultValue={product.content.vga}>{(product.content) ? product.content.vga : ""}</option>
+                                            {
+                                                vgaCollection.map((item, index) => {
+                                                    return <option key={index} value={item}> {item}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className='form-group harddisk'>
+                                        <label htmlFor='harddisk'>Hard Disk: </label>
+                                        <select name='harddisk' onChange={handleChangeInputComputer}>
+                                            <option defaultValue={product.content.harddisk}>{(product.content) ? product.content.harddisk : ""}</option>
+                                            {
+                                                harddiskCollection.map((item, index) => {
+                                                    return <option key={index} value={item}> {item}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className='form-group'>
                                     <label htmlFor='oparatingSystem'>Oparating System: </label>
@@ -413,7 +422,7 @@ function CreateProduct(props) {
 
                                 </>
                                 : <>
-                                
+
                                 </>
                 }
                 <div className='form-group'>
