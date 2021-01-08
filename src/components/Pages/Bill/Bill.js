@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
 import html2canvas from "html2canvas";

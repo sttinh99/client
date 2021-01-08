@@ -27,7 +27,6 @@ function ClientHeader({ logoutUser, uimg, check, v, cart }) {
                 </div>
 
             </div>
-
         </>
     );
 }

@@ -16,10 +16,10 @@ function BtnRender({ product, deleteProduct }) {
             {isAdmin ?
                 <>
                     <Link id="btn_buy" to={`/products/create/${product._id}`} >
-                        <img src={edit}></img>
+                        <img src={edit} alt='...'></img>
                     </Link>
                     <Link id="btn_view" to="#" onClick={deleteProduct}>
-                        <img src={remove}></img>
+                        <img src={remove} alt='...'></img>
                     </Link>
                 </> :
                 <>

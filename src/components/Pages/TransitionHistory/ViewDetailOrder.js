@@ -23,8 +23,8 @@ function ViewDetailOrder() {
             <h2 style={{ "textAlign": "center" }}>Address Customer</h2>
             <div className="box-infor">
                 <div className='infor-user'>
-                    <label>Name: </label>
-                    <span>{orderDetails.address.name}, {orderDetails.address.phone}</span>
+                    <p>Name: {orderDetails.address.name}</p>
+                    <p>Phone: {orderDetails.address.phone}</p>
                 </div>
                 <div className='infor-products'>
                     <label>Address Recieve: </label>
@@ -68,7 +68,7 @@ function ViewDetailOrder() {
                     </tr>
                 </tbody>
             </table>
-            <h3>Total:{orderDetails.total}</h3>
+            <h3>Total: ${orderDetails.total}</h3>
         </div>
     );
 }

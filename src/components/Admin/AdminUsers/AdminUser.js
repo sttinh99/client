@@ -3,6 +3,7 @@ import { GlobalState } from '../../GlobalState'
 import axios from 'axios'
 
 import RenderUser from './RenderUser'
+import Loadding from '../../Loadding/Loadding'
 
 function AdminUser() {
     const state = useContext(GlobalState)
@@ -27,28 +28,31 @@ function AdminUser() {
         }
     }, [token])
     // console.log(users, 'xxx');
-    if (users.length === 0) return null
+    // if (users.length === 0) return null
     return (
         <div className='all-users'>
             <h2 className='title'>Quản lý người dùng</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Date Create</th>
-                        <th>Date Update</th>
-                        <th>Block Acount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        users.map((user) => {
-                            return <RenderUser user={user} />
-                        })
-                    }
-                </tbody>
-            </table>
+            {
+                users.length > 0 && <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date Create</th>
+                            <th>Date Update</th>
+                            <th>Block Acount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            users.map((user, index) => {
+                                return <RenderUser key={index} user={user} />
+                            })
+                        }
+                    </tbody>
+                </table>
+            }
+            {users.length === 0 && <Loadding />}
         </div>
     );
 }

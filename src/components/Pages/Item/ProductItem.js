@@ -18,7 +18,7 @@ function ProductItem({ product, isAdmin }) {
     //     // }
     //     console.log('hihihih');
     // }
-    if (product.quantity === 0 && !isAdmin) {
+    if ((product.quantity === 0 || product.isDelete === true) && !isAdmin) {
         return (
             <div className='product_card sold-out'>
                 <img src={product.images.url} alt="picturexxx" />

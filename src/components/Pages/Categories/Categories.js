@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { GlobalState } from '../../GlobalState'
+import Loadding from '../../Loadding/Loadding';
 
 import Search from '../../Search/Search'
 
@@ -86,6 +87,7 @@ function Categories() {
                     }))
                 }
             </div>
+            {categories.length === 0 && <Loadding />}
         </div >
     );
 }

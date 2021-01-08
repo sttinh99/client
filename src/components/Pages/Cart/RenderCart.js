@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { GlobalState } from '../../GlobalState'
 
 import axios from 'axios'
@@ -29,7 +29,7 @@ function RenderCart({ item }) {
                     item.count += 1;
                 }
                 else {
-                    alert(`Chi con ${product.quantity} san pham trong kho`)
+                    alert(`Only ${product.quantity} products left in stock`)
                 }
             }
         })
@@ -64,9 +64,9 @@ function RenderCart({ item }) {
             <td className="title">{item.title}</td>
             <td className="prices">${item.prices}</td>
             <td className="quantity">
-                <button onClick={() => reduceItem(item._id)}>-</button>
+                <button onClick={() => reduceItem(item._id)} className="btn-change">-</button>
                 <span>{item.count}</span>
-                <button onClick={() => augmentItem(item._id)}>+</button>
+                <button onClick={() => augmentItem(item._id)} className="btn-change">+</button>
             </td>
             <td className="total-prices">{item.count * item.prices}$</td>
             <td className="delete">

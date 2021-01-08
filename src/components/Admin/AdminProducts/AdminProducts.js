@@ -24,6 +24,9 @@ function AdminProducts({ product, token }) {
             alert(error.response.data.msg)
         }
     }
+    if ((product.isDelete === true)) {
+        return null
+    }
     return (
         <tr key={product._id}>
             <td className='images'>

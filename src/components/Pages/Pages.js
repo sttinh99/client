@@ -3,26 +3,30 @@ import { Switch, Route } from 'react-router-dom'
 
 import Login from './Auth/Login'
 import Register from './Auth/Register'
+import ForgotPassword from './Auth/ForgotPassword'
+import ResetPassword from './Auth/ResetPassword'
 
 import Home from './Home/Home'
 import Users from '../Admin/AdminUsers/AdminUser'
+import CreateAddress from './CreateAddress/CreateAddress'
+import CreateProduct from './Admin/CreateProduct/CreateProduct'
+
 import Products from './Products/Products'
 import About from './About/About'
 import Contact from './Contact/Contact'
 import Cart from './Cart/Cart'
-import CreateAddress from './CreateAddress/CreateAddress'
 import NotFoundPage from './NotFound/NotFound'
 import DetailProduct from './DetailProduct/DetailProduct'
 import TransitionHistory from './TransitionHistory/TransitionHisory'
 import ViewDetailOrder from './TransitionHistory/ViewDetailOrder'
 
 import Categories from './Categories/Categories'
-import CreateProduct from './Admin/CreateProduct/CreateProduct'
 
 import { GlobalState } from '../GlobalState'
 import Checkout from './Cart/Checkout';
 import Dasboard from '../AdminDasboard/Dasboard';
 import Bill from '../Pages/Bill/Bill'
+import ProductCategory from '../Pages/ProductCategory/ProductCategory'
 
 function Pages() {
 
@@ -91,6 +95,9 @@ function Pages() {
             <Route path='/products/detail/:id' exact>
                 {!isAdmin ? <DetailProduct /> : <NotFoundPage />}
             </Route>
+            <Route path='/products/category/:id' exact>
+                {!isAdmin ? <ProductCategory /> : <NotFoundPage />}
+            </Route>
             <Route path='/about' exact>
                 {!isAdmin ? <About /> : <NotFoundPage />}
             </Route>
@@ -108,9 +115,14 @@ function Pages() {
             <Route path='/register'>
                 {!isAdmin ? <Register /> : <NotFoundPage />}
             </Route>
+            <Route path='/forgot_password'>
+                {!isLogged ? <ForgotPassword /> : <NotFoundPage />}
+            </Route>
+            <Route path='/user/reset/:id'>
+                {!isLogged ? <ResetPassword /> : <NotFoundPage />}
+            </Route>
             <Route path='/cart' exact>
                 {!isAdmin ? (isLogged ? <Cart /> : <Login />) : <NotFoundPage />}
-
             </Route>
             <Route path='/checkout' exact>
                 <Checkout />

@@ -10,6 +10,8 @@ function RenderAddresses({ address, index, changeAddress }) {
     const removeItem = () => {
         if (window.confirm('Do you want delete this item')) {
             addresses.splice(index, 1)
+            // console.log(index);
+            // console.log(addresses);
             setAddresses([...addresses]);
             refreshAddress(addresses)
         }
@@ -25,7 +27,7 @@ function RenderAddresses({ address, index, changeAddress }) {
         }
     }
     return (
-        <div className="render-address" onClick={changeAddress}>
+        <div className="render-address" onClick={changeAddress} key={index}>
             <h3 className='name'>Name: {address.name}</h3>
             <p className='phone'>Phone: {address.phone}</p>
             <p className='address'>Địa Chỉ: {address.inforAddress},{address.ward}, {address.district}, {address.city}</p>

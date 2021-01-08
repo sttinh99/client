@@ -3,7 +3,7 @@
     display: flex;
     background-color: #fff;
     justify-content: center;
-    padding-bottom: 400px;
+    padding-bottom: 500px;
 }
 .login-page form {
     width: 500px;
@@ -52,15 +52,89 @@ input::placeholder {
     padding: 10px 30px;
     border-radius: 40px;
     color: #fff;
-}
-.row-auth small {
-    margin-top: 20px;
-    text-align: center;
-    color: rgb(206, 205, 205);
+    margin-bottom: 10px;
 }
 .row-auth button.register {
     width: 100%;
 }
 .row-auth button:active {
     background: #2e8a76;
+}
+/*Forgot Password*/
+.forgot {
+    width: 100%;
+    margin-top: 60px;
+}
+.forgot h2 {
+    text-align: center;
+    font-family: cursive;
+    font-size: 50px;
+}
+.forgot form {
+    width: 80%;
+    margin: auto;
+}
+.forgot form label {
+    font-size: 20px;
+}
+.forgot form input {
+    width: 300px;
+    margin-left: 10px;
+    height: 35px;
+    padding: 10px 0 5px 15px;
+    border-radius: 20px;
+    border: 1px solid;
+}
+.forgot form .row-auth {
+    width: 150px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*reset password*/
+.reset-password {
+    width: 100%;
+    margin-top: 60px;
+}
+.reset-password h2 {
+    text-align: center;
+    font-family: cursive;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+.reset-password form {
+    width: 80%;
+    margin: auto;
+}
+.reset-password form .box-reset label {
+    width: 25%;
+    font-size: 15px;
+}
+.reset-password form .box-reset {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    width: 45%;
+}
+.reset-password form label {
+    font-size: 20px;
+}
+.reset-password form input {
+    width: 300px;
+    margin-left: 10px;
+    height: 35px;
+    padding: 10px 0 5px 15px;
+    border-radius: 20px;
+    border: 1px solid;
+}
+.reset-password form .row-auth {
+    width: 250px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.reset-password form .row-auth button {
+    width: ;
 }

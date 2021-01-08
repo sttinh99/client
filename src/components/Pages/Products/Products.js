@@ -7,20 +7,31 @@ import AdminProducts from '../../Admin/AdminProducts/AdminProducts'
 import Filter from '../../Filter/Filter'
 import Sort from '../../Sort/Sort'
 import Search from '../../Search/Search'
+import Pagination from '../../Pagination/Pagination'
+import Loadding from '../../Loadding/Loadding';
 
 function Products() {
     const state = useContext(GlobalState)
     const [search, setSearch] = state.ProductAPI.search
-    const [products] = state.ProductAPI.products
+    const [page, setPage] = state.ProductAPI.page
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
+    const [products] = state.ProductAPI.products
     const [callback, setCallback] = state.ProductAPI.callback
-
     const handleOnChange = (e) => {
-        setSearch(e.target.value.toLowerCase())
+        setSearch(e.target.value.toLowerCase());
     }
-
+    const handlePageChange = (page) => {
+        setPage(page)
+    }
     //console.log(products);
+    if (products.length === 0) {
+
+        return <div>
+            <Loadding />
+            {setPage(1)}
+        </div>
+    }
     return (
         <div className={isAdmin ? 'no-care' : "care"}>
             <div className="filter-n-sort">
@@ -34,24 +45,25 @@ function Products() {
                     <Sort />
                     <Search search={search} handleOnChange={handleOnChange} />
                 </div>
-
             </div>
-
-            {
-                !isAdmin ?
+            {products.length === 0 && <Loadding />}
+            {products.length > 0 &&
+                (!isAdmin ?
                     <div className='products'>
+                        {/* {products.length === 0 && <Loadding />} */}
                         {
                             products.map(product => {
                                 //console.log(product);
-                                if (product.isDelete === true) {
-                                    return null;
-                                }
+                                // if (product.isDelete === true) {
+                                //     return null;
+                                // }
                                 return <ProductItem key={product._id} product={product} isAdmin={isAdmin}
                                     token={token} callback={callback} setCallback={setCallback} />
                             })
                         }
                     </div> :
                     <div className='products-admin'>
+                        {/* {products.length === 0 && <Loadding />} */}
                         <table>
                             <thead>
                                 <tr>
@@ -67,10 +79,10 @@ function Products() {
                             <tbody>
                                 {
                                     products.map(product => {
-                                        //console.log(product);
-                                        if (product.isDelete === true) {
-                                            return null;
-                                        }
+                                        // console.log(product);
+                                        // if (product.isDelete === true) {
+                                        //     return null;
+                                        // }
                                         return <AdminProducts key={product._id} product={product} isAdmin={isAdmin}
                                             token={token} callback={callback} setCallback={setCallback} />
                                     })
@@ -78,7 +90,8 @@ function Products() {
                             </tbody>
                         </table>
                     </div>
-            }
+                )}
+            <Pagination page={page} handlePageChange={handlePageChange} products={products} />
         </div>
     );
 }

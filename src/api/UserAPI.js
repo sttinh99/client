@@ -61,9 +61,26 @@ function UserAPI(token) {
                     images: product.images.url
                 }]
             }, { headers: { Authorization: token } })
+            return alert("added to cart");
         }
         else {
-            return alert('This product has been added to cart');
+            const takeCart = cart.find(item => product._id === item._id)
+            // console.log(takeCart);
+            console.log(takeCart.count, product.quantity);
+            if (takeCart.count + 1 > product.quantity) return alert(`Only ${product.quantity} products left in stock`)
+            cart.map(item => {
+                if (item._id === product._id) {
+                    item.count += 1;
+                }
+                return item;
+            })
+            // console.log(cart);
+            setCart(cart);
+            await axios.post('/user/addcart', {
+                cart: cart
+            }, { headers: { Authorization: token } })
+            return alert("added to cart");
+            // return alert('This product has been added to cart');
         }
     }
     useEffect(() => {
@@ -81,14 +98,14 @@ function UserAPI(token) {
                     const res = await axios.get('/checkout', {
                         headers: { Authorization: token }
                     })
-                    console.log(res.data.checkouts);
+                    // console.log(res.data.checkouts);
                     setHistory(res.data.checkouts)
                 }
                 else {
                     const res = await axios.get('/user/history', {
                         headers: { Authorization: token }
                     })
-                    console.log(res.data);
+                    // console.log(res.data);
                     setHistory(res.data)
                 }
             }

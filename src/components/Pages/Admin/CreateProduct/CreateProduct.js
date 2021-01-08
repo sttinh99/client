@@ -21,7 +21,7 @@ function CreateProduct(props) {
     const [token] = state.token;
     const [isAdmin] = state.UserAPI.isAdmin
     const [product, setProduct] = useState(initialState);
-    const [computer, setcomputer] = useState({
+    const [computer, setComputer] = useState({
         cpu: '',
         vga: '',
         ram: '',
@@ -29,18 +29,14 @@ function CreateProduct(props) {
         harddisk: '',
         opearatingSysterm: '',
         battery: '',
-        weight: '',
-        warranty: '',
-        brand: ''
+        weight: ''
     })
     const [ram, setRam] = useState({
         BUS: '',
-        capacity: '',
-        generation: '',
+        generation: ''
     })
-    const [harddisk, setHarddisk] = useState({
+    const [harddisk, setDisk] = useState({
         type: '',
-        capacity: '',
         gate: '',
         size: ''
     })
@@ -124,16 +120,18 @@ function CreateProduct(props) {
     }
     const handleChangeInputComputer = (e) => {
         const { name, value } = e.target
-        setcomputer({ ...computer, [name]: value });
-        setProduct({ ...product, content: computer })
+        setComputer({ ...computer, [name]: value });
+        setProduct({ ...product, content: { ...computer, [name]: value } });
     }
     const handleChangeInputRam = (e) => {
         const { name, value } = e.target
         setRam({ ...ram, [name]: value });
+        setProduct({ ...product, content: { ...ram, [name]: value } });
     }
     const handleChangeInputDisk = (e) => {
         const { name, value } = e.target
-        setHarddisk({ ...harddisk, [name]: value });
+        setDisk({ ...harddisk, [name]: value });
+        setProduct({ ...product, content: { ...harddisk, [name]: value } });
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -142,14 +140,17 @@ function CreateProduct(props) {
             // console.log(product.category, 'xxxxxxx');
             if (product.category === 'laptop') {
                 inforTT = `${product.title} ( ${computer.cpu}|${computer.vga}|${computer.ram}|${computer.screen}|${computer.harddisk}|
-                    ${computer.opearatingSysterm}|${computer.battery}|${computer.weight}kg`
+                    ${computer.opearatingSysterm}|${computer.battery}|${computer.weight}`
             }
-            // else if (product.category === 'ram') {
-            //     setProduct({ ...product, content: ram });
-            // }
-            // else if (product.category === 'ram')
-            //     setProduct({ ...product, content: harddisk });
-            // console.log(images, 'img');
+            else if (product.category === 'ram') {
+                inforTT = `${product.title} (${ram.BUS}|${ram.capacity}|${ram.generation})`
+            }
+            else if (product.category === 'harddisk') {
+                inforTT = `${product.title} (${harddisk.type}|${harddisk.size}|${harddisk.gate}|${harddisk.capacity})`
+            }
+            else {
+                inforTT = product.title
+            }
             if (!isAdmin) return alert('you are not admin')
             if (!images) return alert('no images upload')
             if (onEdit) {
@@ -158,7 +159,6 @@ function CreateProduct(props) {
                 })
             }
             else {
-                console.log(product);
                 await axios.post('/products/create', { ...product, images, title: inforTT }, {
                     headers: { Authorization: token }
                 })
@@ -218,7 +218,7 @@ function CreateProduct(props) {
                                 }
                             </select>
                             :
-                            <input type='text' value={product.brand} onChange={handleChangeInput} />
+                            <input type='text' id='brand' name='brand' value={product.brand} onChange={handleChangeInput} />
                     }
 
                 </div>
@@ -380,7 +380,6 @@ function CreateProduct(props) {
                                             <option defaultValue={product.content.type}>{(product.content) ? product.content.type : ""}</option>
                                             <option value="SSD">SSD</option>
                                             <option value="HDD">HDD</option>
-
                                         </select>
                                     </div>
                                     <div className='form-group'>
@@ -392,7 +391,6 @@ function CreateProduct(props) {
                                                     return <option key={index} value={item}> {item}</option>
                                                 })
                                             }
-
                                         </select>
                                     </div>
                                     <div className='form-group'>
@@ -408,7 +406,7 @@ function CreateProduct(props) {
                                         </select>
                                     </div>
                                     <div className='form-group'>
-                                        <label htmlFor='size'>Connect Gate: </label>
+                                        <label htmlFor='size'>Size: </label>
                                         <select name='size' onChange={handleChangeInputDisk}>
                                             <option defaultValue={product.content.size}>{(product.content) ? product.content.size : ""}</option>
                                             <option value='2.5"'>2.5"</option>

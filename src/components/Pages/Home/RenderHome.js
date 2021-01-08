@@ -1,44 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
+
 
 
 function RenderHome({ items }) {
     const state = useContext(GlobalState)
     const addCart = state.UserAPI.addCart;
+    const [categories] = state.CategoryAPI.categories
+
     if (items.length === 0) return null
     return (
         <section className="products-home">
-            <div className="container">
-                <h2 className="h2 upp align-center">{items[0].category}</h2>
-                <hr className="offset-lg" />
-                <div className="row">
+            <div className="box-products">
+                <h2 className="text">{items[0].category + `s`} Hot</h2>
+                <div className="render-items">
                     {
+
                         items.map(item =>
-                            <div className="col-sm-6 col-md-4 product" key={item._id}>
-                                <div className="body">
-                                    <Link to="#favorites" className="favorites"><i className="ion-ios-heart-outline" /></Link>
-                                    <Link to="#favorites"><img src={item.images.url} alt="Apple iMac 27 Retina" /></Link>
-                                    <div className="content align-center">
-                                        <p className="price">${item.prices}</p>
-                                        <h2 className="h3">{item.title}</h2>
-                                        <hr className="offset-sm" />
-                                        <Link to={`/products/detail/${item._id}`}><button className="btn btn-link"> <i className="ion-android-open" /> Details</button></Link>
-                                        <Link to='#'>
-                                            <button className="btn btn-primary btn-sm rounded" onClick={() => addCart(item)}> <i className="ion-bag" /> Add to cart</button>
-                                        </Link>
+                            <div className="product-item" key={item._id}>
+                                <img src={item.images.url} alt="Apple iMac 27 Retina" />
+                                <div className="content">
+                                    <p className="price">${item.prices}</p>
+                                    <h2 className="h3">{item.title}</h2>
+                                    <p className="des">{item.description}</p>
+                                    <div className="add-cart">
+                                        <Link to={`/products/detail/${item._id}`} className="view-detail"> Details</Link>
+                                        <button onClick={() => addCart(item)} className="addcart"> Add to cart</button>
                                     </div>
                                 </div>
+                                <p className='solded'>solded: {item.sold}</p>
                             </div>
                         )
                     }
                 </div>
-                <div className="align-right align-center-xs">
-                    <hr className="offset-sm" />
-                    <Link to='/products'><h5 className="upp">View all tablets </h5></Link>
-                </div>
             </div>
-        </section>
+            <div className="align-right align-center-xs">
+                <hr className="offset-sm" />
+            </div>
+            {categories.length > 0 && <Link to={`/products/category/${categories.find(item => item.name === items[0].category)._id}`}><h5 className="upp">View all tablets </h5></Link>}
+        </section >
     );
 }
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
 import "../About/About.css"
 
 import logo from '../../../images/bg2.jpg'
@@ -12,7 +14,7 @@ function About() {
                     <div className="title">
                         <h2>Welcome to our website</h2>
                     </div>
-                    <p>This is <strong>EarthyBlue</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty
+                    <p>This is <strong>EarthyBlue</strong>, a free, fully standards-compliant CSS template designed by <Link href="http://templated.co" rel="nofollow">TEMPLATED</Link>. The photos in this template are from <Link href="http://fotogrph.com/"> Fotogrph</Link>. This free template is released under the <Link href="http://templated.co/license">Creative Commons Attribution</Link> license, so you're pretty
               much
               free to do whatever you want with it (even use it commercially) provided you give us credit for it.
               Have
@@ -30,7 +32,7 @@ function About() {
                         <p>Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac
                         suscipit
                 mauris. Proin eu wisi suscipit nulla suscipit interdum.</p>
-                        <a href="#" className="button">Learn More</a>
+                        <Link href="#" className="button">Learn More</Link>
                     </div>
                     <div id="tbox2">
                         <div className="title">
@@ -39,7 +41,7 @@ function About() {
                         <p>Proin eu wisi suscipit nulla suscipit interdum. Nullam non wisi a sem semper suscipit eleifend.
                         Donec
                 mattis libero eget urna. Duis velit ac mauris.</p>
-                        <a href="#" className="button">Learn More</a>
+                        <Link href="#" className="button">Learn More</Link>
                     </div>
                     <div id="tbox3">
                         <div className="title">
@@ -48,36 +50,36 @@ function About() {
                         <p>Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla
                         suscipit
                 interdum. Nullam non wisi a sem suscipit eleifend.</p>
-                        <a href="#" className="button">Learn More</a>
+                        <Link href="#" className="button">Learn More</Link>
                     </div>
                 </div>
                 <div id="portfolio" className="container">
                     <div className="column1">
-                        <div className="box"> <a href="#"><img src={about} alt="" className="image image-full" /></a>
+                        <div className="box"> <Link href="#"><img src={about} alt="" className="image image-full" /></Link>
                             <h3>Vestibulum venenatis</h3>
                             <p>Fermentum nibh augue praesent a lacus at urna congue rutrum.</p>
-                            <a href="#" className="button button-small">Etiam posuere</a>
+                            <Link href="#" className="button button-small">Etiam posuere</Link>
                         </div>
                     </div>
                     <div className="column2">
-                        <div className="box"> <a href="#"><img src={about} alt="" className="image image-full" /></a>
+                        <div className="box"> <Link href="#"><img src={about} alt="" className="image image-full" /></Link>
                             <h3>Praesent scelerisque</h3>
                             <p>Vivamus fermentum nibh in augue praesent urna congue rutrum.</p>
-                            <a href="#" className="button button-small">Etiam posuere</a>
+                            <Link href="#" className="button button-small">Etiam posuere</Link>
                         </div>
                     </div>
                     <div className="column3">
-                        <div className="box"> <a href="#"><img src={about} alt="" className="image image-full" /></a>
+                        <div className="box"> <Link href="#"><img src={about} alt="" className="image image-full" /></Link>
                             <h3>Donec dictum metus</h3>
                             <p>Vivamus fermentum nibh in augue praesent urna congue rutrum.</p>
-                            <a href="#" className="button button-small">Etiam posuere</a>
+                            <Link href="#" className="button button-small">Etiam posuere</Link>
                         </div>
                     </div>
                     <div className="column4">
-                        <div className="box"> <a href="#"><img src={about} alt="" className="image image-full" /></a>
+                        <div className="box"> <Link href="#"><img src={about} alt="" className="image image-full" /></Link>
                             <h3>Mauris vulputate dolor</h3>
                             <p>Rutrum fermentum nibh in augue praesent urna congue rutrum.</p>
-                            <a href="#" className="button button-small">Etiam posuere</a>
+                            <Link href="#" className="button button-small">Etiam posuere</Link>
                         </div>
                     </div>
                 </div>

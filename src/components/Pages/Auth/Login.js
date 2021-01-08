@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+// import Loadding from '../../Loadding/Loadding';
 
 function Login() {
     const [user, setUser] = useState({
@@ -18,7 +19,7 @@ function Login() {
             localStorage.setItem('firstLogin', true)
             window.location.href = '/'
         } catch (error) {
-            //console.log(error.response);
+            console.log(error);
             alert(error.response.data.msg)
         }
     }
@@ -32,12 +33,11 @@ function Login() {
                 <input id="password" type='password' name='password' required placeholder='Enter Your Password...' value={user.password} onChange={onChangeInput} />
                 <div className='row-auth'>
                     <button type='submit'>Login</button>
-                    <small> Register Without Account </small>
-                    <Link to='/register'>
-                        <button className="register">Register</button></Link>
+                    <Link to='/register'><button className="register">Register</button></Link>
+                    <Link to='/forgot_password'>Forgot Password</Link>
                 </div>
             </form>
-        </div>
+        </div >
     );
 }
 

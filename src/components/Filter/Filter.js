@@ -4,11 +4,12 @@ import { GlobalState } from '../GlobalState'
 function Filter() {
     const state = useContext(GlobalState)
     const [category, setCategory] = state.ProductAPI.category
-
     const [categories] = state.CategoryAPI.categories
+    const [page, setPage] = state.ProductAPI.page
 
     const handleChangeCategory = (e) => {
         setCategory(e.target.value)
+        setPage(1);
     }
 
     return (

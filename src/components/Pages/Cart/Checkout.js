@@ -12,9 +12,10 @@ function Checkout() {
     const [cart, setCart] = state.UserAPI.cart;
     const [token] = state.token
     const [addresses] = state.UserAPI.addresses
-    const [address, setAddress] = useState(addresses[0]);
+    const [address, setAddress] = useState("");
+    const [callback, setCallback] = state.ProductAPI.callback
     let payments;
-    let deliveryCharges;
+    let deliveryCharges = 0;
     //console.log(cart);
 
     const addToCart = async (cart) => {
@@ -31,9 +32,11 @@ function Checkout() {
         if (payment.paymentID) {
             payments = "Paid"
         }
+        if (!address) return alert("You are not choose address");
+        if (!deliveryCharges) return alert("You are not choose address");
         try {
             if (cart.length === 0) {
-                if (window.confirm('Ban chua mua san pham nao. Hay ghe tham cua hang?')) {
+                if (window.confirm('Your are have 0 items, Go to shopping')) {
                     window.location.href = '/products'
                 }
             }
@@ -42,6 +45,7 @@ function Checkout() {
             });
             setCart([]);
             addToCart([]);
+            setCallback(!callback)
             alert('Ban da order thanh cong');
             // history.push('/products')
             window.location.href = '/products'
@@ -98,7 +102,7 @@ function Checkout() {
                             {
                                 addresses.map((address, index) => {
                                     return <div className="choose">
-                                        <RenderAddresses address={address} changeAddress={() => changeAddress(address, index)} />
+                                        <RenderAddresses key={index} address={address} index={index} changeAddress={() => changeAddress(address, index)} />
                                     </div>
                                 })
                             }

@@ -2,7 +2,6 @@ import React from 'react';
 import "./dasboard.css";
 import axios from 'axios'
 import logo from "../../images/logo.svg";
-import img from "../../images/profile-user.svg";
 import { Link } from 'react-router-dom';
 export default function Dasboard() {
     const logoutUser = async () => {

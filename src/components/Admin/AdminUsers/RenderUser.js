@@ -1,7 +1,7 @@
 import React from 'react';
 
 function RenderUser({ user }) {
-    console.log(user);
+    // console.log(user);
     return (
         <tr>
             <td>{user.name}</td>

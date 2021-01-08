@@ -4,7 +4,8 @@ import axios from 'axios'
 
 import './Header.css'
 
-import logo from '../../logo.svg'
+
+import Search from '../Search/Search'
 import react from '../../images/react.svg'
 import v from '../../images/shopping-cart.svg'
 import uimg from "../../images/profile-user.svg";
@@ -58,6 +59,7 @@ function Header() {
                 isLogged && !isAdmin && <ClientHeader uimg={uimg} logoutUser={logoutUser}
                     check={check} cart={cart} v={v} />
             }
+            <Search />
         </header >
     )
 }

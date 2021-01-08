@@ -3,6 +3,7 @@ import axios from 'axios';
 import { GlobalState } from '../../GlobalState'
 
 import RenderAddresses from './RenderAddresses'
+import Loadding from '../../Loadding/Loadding';
 
 const initialState = {
     name: '',
@@ -21,8 +22,9 @@ function Address() {
     const [address, setAddress] = useState(initialState)
     const [city, setCity] = useState('')
     const [district, setDistrict] = useState('')
+    const [ward, setWard] = useState('')
     const [districts, setDistricts] = useState([])
-    const [ward, setWard] = useState([])
+    const [wards, setWards] = useState([])
 
     const [onDisplay, setOndisplay] = useState(false)
 
@@ -49,7 +51,7 @@ function Address() {
             const id = getOneDistrict.ID
             const getCity = async () => {
                 const res = await axios.get(`https://thongtindoanhnghiep.co/api/district/${id}/ward`);
-                setWard(res.data)
+                setWards(res.data)
             }
             getCity();
         }
@@ -62,25 +64,41 @@ function Address() {
         const { name, value } = e.target
         setAddress({ ...address, [name]: value })
         setCity(value)
+        setDistricts([])
+        setWards([])
     }
     const handleChangeDistrict = (e) => {
         const { name, value } = e.target
         setAddress({ ...address, [name]: value })
         setDistrict(value)
+        setWards([])
+    }
+    const handleChangeWard = (e) => {
+        const { name, value } = e.target
+        setAddress({ ...address, [name]: value })
+        setWard(value)
     }
     const createOrUpdateAddress = async (e) => {
         e.preventDefault();
+        if (!address.name || !address.phone || !address.email || (!city || city === "Select a City") ||
+            (!district || district === "Select a District") || (!ward || ward === "Select a Ward"))
+            return alert("Please fill out the form completely")
         try {
             await axios.post(`/user/address`, { ...address }, {
                 headers: { Authorization: token }
             })
-            setAddress(initialState)
+            setDistricts([]);
+            setWards([]);
+            setCity("")
+            setDistrict("")
+            setWard("")
+            setAddress(initialState);
         } catch (error) {
             return alert(error.response.data.msg)
         }
         setCallback(!callback)
         className = 'create-address';
-        alert("add address")
+        return alert("add address")
     }
     const showModal = () => {
         className += ' show'
@@ -99,8 +117,11 @@ function Address() {
             <h3 className='new-address' onClick={showModal}>+ Add new address</h3>
             <div className='display-addresses'>
                 {
+                    address.length === 0 && <Loadding />
+                }
+                {
                     addresses.map((address, index) => {
-                        return <RenderAddresses address={address} key={index} />
+                        return <RenderAddresses address={address} key={index} index={index} />
                     })
                 }
             </div>
@@ -142,10 +163,10 @@ function Address() {
                                     })
                                 }
                             </select>
-                            <select name='ward' onChange={handleChangeInput}>
+                            <select name='ward' onChange={handleChangeWard}>
                                 <option>Select a Ward</option>
                                 {
-                                    ward.map((ward) => {
+                                    wards.map((ward) => {
                                         return <option key={ward.ID} id={ward.ID}> {ward.Title}</option>
                                     })
                                 }

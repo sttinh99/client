@@ -4,11 +4,11 @@ import axios from 'axios'
 import { GlobalState } from '../../GlobalState';
 
 import exportbill from '../../../images/export.svg';
+import Loadding from '../../Loadding/Loadding';
 
 function TransitionHisory() {
     const state = useContext(GlobalState)
     const [history] = state.UserAPI.history
-    // console.log(history, 'dsjakdh');
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
     const [callback, setCallback] = state.UserAPI.callback
@@ -36,11 +36,28 @@ function TransitionHisory() {
             alert(error.message)
         }
     }
-    if (history.length === 0)
-        return <>
-            <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>History Empty</h2>
-            <Link to='/products' className="shopping">Go to Shopping</Link>
-        </>
+    const dropOrderChange = async (item) => {
+        if (window.confirm("Do you want cancel this order")) {
+            if (!item.status) {
+                console.log(item);
+                try {
+                    await axios.delete(`/checkout/delete/${item._id}`, {
+                        headers: { Authorization: token }
+                    })
+                    alert("Canceled this order")
+                    setCallback(!callback)
+                } catch (error) {
+                    alert(error.message)
+                }
+            }
+            else return alert("error.message")
+        }
+    }
+    // if (history.length === 0)
+    //     return <>
+    //         <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>History Empty</h2>
+    //         <Link to='/products' className="shopping">Go to Shopping</Link>
+    //     </>
     return (
         <div className='bill'>
             <div className='trans-history'>
@@ -52,7 +69,7 @@ function TransitionHisory() {
                             <th>Date Purchase</th>
                             <th>Status</th>
                             <th>View Detail</th>
-                            {isAdmin ? <th>Payments</th> : null}
+                            {isAdmin ? <th>Payments</th> : <th>Protocol</th>}
                             {isAdmin ? <th>Export Bill</th> : null}
                         </tr>
                     </thead>
@@ -67,7 +84,10 @@ function TransitionHisory() {
                                         <td className='view-detail'>
                                             <Link to={`/history/${item._id}`}>View Detail</Link>
                                         </td>
-                                        {isAdmin ? <td>{item.payments}</td> : null}
+                                        {isAdmin ? <td>{item.payments}</td> : <td>{
+                                            item.status ? <button disabled style={{ "background": "#b1acaca6", "padding": "5px 10px" }}>Received</button> :
+                                                <button style={{ "background": "rgb(255 0 0 / 72%)", "padding": "5px 20px" }} onClick={() => dropOrderChange(item)}>Cancel</button>
+                                        }</td>}
                                         {isAdmin ? <td><Link to={`/bill/${item._id}`} className='ex-bill'><img onClick={() => checkOrder(item)} src={exportbill} alt="exportbillx" /></Link></td> : null}
                                     </tr>
                                 )
@@ -76,6 +96,7 @@ function TransitionHisory() {
                     </tbody>
                 </table>
             </div>
+            {history.length === 0 && <Loadding />}
         </div >
     );
 }

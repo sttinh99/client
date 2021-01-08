@@ -36,6 +36,11 @@
     color: red;
     font-size: 30px;
 }
+.cart-empty {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
 .shopping {
     background: #79f6ea61;
     padding: 15px;
@@ -90,7 +95,7 @@ tbody tr td.prices {
     width: 10%;
 }
 tbody tr td.quantity {
-    width: 8%;
+    width: 10%;
 }
 tbody tr td.sold {
     width: 8%;
@@ -173,6 +178,7 @@ tbody tr td.images img {
     border-radius: 13px;
     background: #ffc439;
     color: #111;
+    outline: none;
 }
 .total .choose-payment .home .paypal {
     display: block;
@@ -200,4 +206,18 @@ tbody tr td.images img {
 .render-address p {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.quantity .btn-change {
+    padding: 0 6px 0 6px;
+    width: 30px;
+    height: 30px;
+    margin: 0 6px 0 6px;
+    font-weight: bold;
+    outline: none;
+    background: wheat;
+    border-radius: 50%;
+    transition: 0.6s;
+}
+.quantity .btn-change:hover {
+    background: cyan;
 }

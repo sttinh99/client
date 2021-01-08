@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
+import Loadding from '../../Loadding/Loadding';
 // import PaypalButton from './PaypalButton'
 import RenderCart from './RenderCart'
 
@@ -21,10 +22,10 @@ function Cart() {
         getTotal();
     }, [cart])
     if (cart.length === 0)
-        return <>
+        return <div className="cart-empty">
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Cart Empty</h2>
             <Link to='/products' className="shopping">Go to Shopping</Link>
-        </>
+        </div>
     return (
         <div className="cart-box">
             <table>
