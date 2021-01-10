@@ -43,7 +43,7 @@ function Products() {
                 <div className="filter-sort">
                     <Filter />
                     <Sort />
-                    <Search search={search} handleOnChange={handleOnChange} />
+                    {/* <Search search={search} handleOnChange={handleOnChange} /> */}
                 </div>
             </div>
             {products.length === 0 && <Loadding />}
