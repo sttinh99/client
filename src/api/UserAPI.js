@@ -10,6 +10,7 @@ function UserAPI(token) {
     const [addresses, setAddresses] = useState([])
     const [cities, setCities] = useState([])
     const [users, setUsers] = useState([]);
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         // console.log(token, 'tk');
@@ -21,6 +22,7 @@ function UserAPI(token) {
                     });
                     //console.log(res.data.user.role);
                     setIsLogged(true);
+                    setUser(res.data.user)
                     setAddresses(res.data.user.addresses)
                     res.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
                     setCart(res.data.user.cart);
@@ -121,7 +123,8 @@ function UserAPI(token) {
         history: [history, setHistory],
         callback: [callback, setCallback],
         cities: [cities, setCities],
-        users: [users, setUsers]
+        users: [users, setUsers],
+        user: [user, setUser]
     }
 }
 

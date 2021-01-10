@@ -19,6 +19,7 @@ function Header() {
     const [isLogged] = state.UserAPI.isLogged
     const [isAdmin] = state.UserAPI.isAdmin
     const [cart] = state.UserAPI.cart
+    const [user, setUser] = state.UserAPI.user
     //console.log(state);
     //console.log(cart);
 
@@ -57,7 +58,7 @@ function Header() {
                 </ul>}
             {
                 isLogged && !isAdmin && <ClientHeader uimg={uimg} logoutUser={logoutUser}
-                    check={check} cart={cart} v={v} />
+                    check={check} cart={cart} v={v} user={user} />
             }
             <Search />
         </header >

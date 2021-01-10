@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function ClientHeader({ logoutUser, uimg, check, v, cart }) {
+function ClientHeader({ logoutUser, uimg, check, v, cart, user }) {
     return (
         <>
             <div className="client">
@@ -18,8 +18,8 @@ function ClientHeader({ logoutUser, uimg, check, v, cart }) {
             </div>
             <div className='user'>
                 <img src={uimg} alt="" className="user-img" />
-                <div className="user-content">Trương Quang Tịnh
-                <ul className='form-action'>
+                <div className="user-content">{user.name}
+                    <ul className='form-action'>
                         <li><Link to="/address">List Addresses</Link></li>
                         <li><Link to="/history">Transaction History</Link></li>
                         <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
