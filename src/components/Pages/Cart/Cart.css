@@ -36,11 +36,6 @@
     color: red;
     font-size: 30px;
 }
-.cart-empty {
-    width: 80%;
-    margin: auto;
-    margin-top: 50px;
-}
 .shopping {
     background: #79f6ea61;
     padding: 15px;
@@ -113,12 +108,15 @@ tbody tr td.images img {
     background: #f7f7ff;
 }
 .check-out h2.out {
+    text-transform: uppercase;
     text-align: center;
-    padding: 40px;
+    padding: 20px 0 57px 0;
     height: 50px;
-    margin-bottom: 20px;
     background-color: #fff;
     box-shadow: 0 0 3px 2px #ddd;
+    font-size: 30px;
+    font-weight: 200;
+    font-family: cursive;
 }
 .check-out .infor {
     width: 80%;
@@ -161,9 +159,10 @@ tbody tr td.images img {
     padding-left: 20px;
 }
 .total .choose-payment {
-    width: 40%;
+    width: 30%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .total .choose-payment label {
     font-weight: bold;
@@ -214,10 +213,45 @@ tbody tr td.images img {
     margin: 0 6px 0 6px;
     font-weight: bold;
     outline: none;
-    background: wheat;
+    /* background: wheat; */
     border-radius: 50%;
     transition: 0.6s;
+    border: 1px solid;
 }
 .quantity .btn-change:hover {
     background: cyan;
+}
+.cart-empty img {
+    display: block;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+.cart-empty {
+    width: 80%;
+    margin: auto;
+    padding-bottom: 300px;
+}
+.cart-empty .shopping {
+    transition: 0.5s;
+    border-radius: 10px;
+    color: black;
+}
+.cart-empty .shopping:hover {
+    background: lime;
+}
+.choose-payment hr {
+    height: 50px;
+    visibility: visible;
+    border: 1px solid;
+}
+input.discount {
+    width: 300px;
+    height: 40px;
+    outline: none;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.total.x {
+    justify-content: flex-end !important;
 }

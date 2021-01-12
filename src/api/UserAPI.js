@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
+const perPage = 10; //x
+
 function UserAPI(token) {
     const [isLogged, setIsLogged] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
@@ -11,6 +13,7 @@ function UserAPI(token) {
     const [cities, setCities] = useState([])
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState({})
+    const [page, setPage] = useState(1)
 
     useEffect(() => {
         // console.log(token, 'tk');
@@ -21,6 +24,11 @@ function UserAPI(token) {
                         headers: { Authorization: token }
                     });
                     //console.log(res.data.user.role);
+                    console.log(res.data.user, 'user');
+                    if (res.data.user.isBlock === true) {
+                        window.location.href = '/login'
+                        return alert("This account was blocked")
+                    }
                     setIsLogged(true);
                     setUser(res.data.user)
                     setAddresses(res.data.user.addresses)
@@ -94,6 +102,8 @@ function UserAPI(token) {
     }, [])
     useEffect(() => {
         if (token) {
+            const start = (page - 1) * perPage;
+            const end = (page * perPage);
             const getHistory = async () => {
                 // console.log(isAdmin);
                 if (isAdmin) {
@@ -101,19 +111,18 @@ function UserAPI(token) {
                         headers: { Authorization: token }
                     })
                     // console.log(res.data.checkouts);
-                    setHistory(res.data.checkouts)
+                    setHistory((res.data.checkouts).slice(start, end))
                 }
                 else {
                     const res = await axios.get('/user/history', {
                         headers: { Authorization: token }
                     })
-                    // console.log(res.data);
-                    setHistory(res.data)
+                    setHistory((res.data).slice(start, end))
                 }
             }
             getHistory();
         }
-    }, [token, isAdmin, callback, setHistory])
+    }, [token, isAdmin, callback, setHistory, page])
     return {
         isLogged: [isLogged, setIsLogged],
         isAdmin: [isAdmin, setIsAdmin],
@@ -124,7 +133,8 @@ function UserAPI(token) {
         callback: [callback, setCallback],
         cities: [cities, setCities],
         users: [users, setUsers],
-        user: [user, setUser]
+        user: [user, setUser],
+        page: [page, setPage],
     }
 }
 

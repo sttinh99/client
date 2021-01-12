@@ -7,6 +7,8 @@ import RenderAddresses from '../../Pages/CreateAddress/RenderAddresses'
 
 import axios from 'axios'
 
+import gotoshoping from '../../../images/shopping.png'
+
 function Checkout() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.UserAPI.cart;
@@ -46,7 +48,7 @@ function Checkout() {
             setCart([]);
             addToCart([]);
             setCallback(!callback)
-            alert('Ban da order thanh cong');
+            alert('You have successfully ordered');
             // history.push('/products')
             window.location.href = '/products'
         } catch (error) {
@@ -74,10 +76,11 @@ function Checkout() {
     //     alert('Ban da order thanh cong');
     // }
     if (cart.length === 0)
-        return <>
+        return <div className="cart-empty">
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Order Empty</h2>
+            <img src={gotoshoping} alt="..." />
             <Link to='/products' className="shopping">Go to Shopping</Link>
-        </>
+        </div>
     const totalAllCart = cart.reduce((prev, item) => {
         return prev + item.count * item.prices
     }, 0)
@@ -154,8 +157,11 @@ function Checkout() {
                         </tr>
                     </tbody>
                 </table>
+                <div className='total x'>
+                    <input type="text" placeholder="Your Discount Code" className="discount" />
+                </div >
                 <div className='total'>
-                    <h3>Total: ${total}</h3>
+                    <h3>Grand Total: ${total}</h3>
                     <div className='choose-payment'>
                         <div className='home'>
                             <label>Payment at home</label>

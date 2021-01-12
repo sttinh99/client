@@ -9,7 +9,30 @@ function AdminUser() {
     const state = useContext(GlobalState)
     const [token] = state.token
     const [users, setUsers] = useState([])
+    const [callback, setCallback] = state.UserAPI.callback
 
+    const handleOnChangeAccount = async (user) => {
+        if (user.isBlock === true) {
+            if (window.confirm("Are you sure you want to open this account")) {
+                await axios.post(`/user/block/${user._id}`, { isBlock: !user.isBlock }, {
+                    headers: { Authorization: token }
+                })
+                setCallback(!callback);
+                return alert("Opened Account");
+            }
+        }
+        if (user.isBlock === false) {
+            if (window.confirm("Are you sure you want to delete this account")) {
+
+                await axios.post(`/user/block/${user._id}`, { isBlock: !user.isBlock }, {
+                    headers: { Authorization: token }
+                })
+                localStorage.removeItem('firstLogin')
+                setCallback(!callback);
+                return alert("Blocked Account");
+            }
+        }
+    }
     useEffect(() => {
         // console.log(token, 'tk');
         if (token) {
@@ -26,12 +49,12 @@ function AdminUser() {
             }
             getAllUser();
         }
-    }, [token])
+    }, [token, callback])
     // console.log(users, 'xxx');
     // if (users.length === 0) return null
     return (
         <div className='all-users'>
-            <h2 className='title'>Quản lý người dùng</h2>
+            <h2 className='title'>Users Management</h2>
             {
                 users.length > 0 && <table>
                     <thead>
@@ -46,7 +69,8 @@ function AdminUser() {
                     <tbody>
                         {
                             users.map((user, index) => {
-                                return <RenderUser key={index} user={user} />
+                                if (user.role === 1) return null
+                                return <RenderUser key={index} user={user} token={token} handleOnChangeAccount={() => handleOnChangeAccount(user)} />
                             })
                         }
                     </tbody>

@@ -9,7 +9,15 @@
 }
 button.block-account {
     background: #ff5c5c;
-    font-weight: 300;
+    font-weight: 600;
+    width: 200px;
+    padding: 10px 20px;
+    margin: 10px;
+}
+button.open-account {
+    background: #48bd3e;
+    font-weight: 600;
+    width: 200px;
     padding: 10px 20px;
     margin: 10px;
 }

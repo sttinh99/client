@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
+import gotoshoping from '../../../images/shopping.png'
 import Loadding from '../../Loadding/Loadding';
 // import PaypalButton from './PaypalButton'
 import RenderCart from './RenderCart'
@@ -24,6 +25,7 @@ function Cart() {
     if (cart.length === 0)
         return <div className="cart-empty">
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Cart Empty</h2>
+            <img src={gotoshoping} alt="..." />
             <Link to='/products' className="shopping">Go to Shopping</Link>
         </div>
     return (

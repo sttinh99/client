@@ -5,11 +5,13 @@ import { GlobalState } from '../../GlobalState';
 
 import exportbill from '../../../images/export.svg';
 import Loadding from '../../Loadding/Loadding';
+import Pagination from '../../Pagination/Pagination'
 
 function TransitionHisory() {
     const state = useContext(GlobalState)
     const [history] = state.UserAPI.history
     const [isAdmin] = state.UserAPI.isAdmin
+    const [page, setPage] = state.UserAPI.page
     const [token] = state.token
     const [callback, setCallback] = state.UserAPI.callback
 
@@ -25,6 +27,9 @@ function TransitionHisory() {
     //         alert(error.message)
     //     }
     // }
+    const handlePageChange = (page) => {
+        setPage(page)
+    }
     const checkOrder = async (item) => {
         try {
             console.log(item._id);
@@ -97,6 +102,7 @@ function TransitionHisory() {
                 </table>
             </div>
             {history.length === 0 && <Loadding />}
+            <Pagination page={page} handlePageChange={handlePageChange} products={history} />
         </div >
     );
 }

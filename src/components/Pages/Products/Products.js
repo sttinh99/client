@@ -18,9 +18,9 @@ function Products() {
     const [token] = state.token
     const [products] = state.ProductAPI.products
     const [callback, setCallback] = state.ProductAPI.callback
-    const handleOnChange = (e) => {
-        setSearch(e.target.value.toLowerCase());
-    }
+    // const handleOnChange = (e) => {
+    //     setSearch(e.target.value.toLowerCase());
+    // }
     const handlePageChange = (page) => {
         setPage(page)
     }
