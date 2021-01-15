@@ -29,12 +29,6 @@ function Home() {
                 <div className="box-header">
                     <Carousel />
                     <div className="category-sp">
-
-                        {/* <li ><Link to={`/products/laptop`}><img src={laptop} alt="..." /> laptop</Link></li>
-                    <li ><Link to={`/products/ram`}><img src={ram} alt="..." /> ram</Link></li>
-                    <li ><Link to={`/products/harddisk`}><img src={harddisk} alt="..." /> harddisk</Link></li>
-                    <li ><Link to={`/products/headphone`}><img src={headphone} alt="..." /> headphone</Link></li>
-                    <li ><Link to={`/products/mouse`}><img src={mouse} alt="..." /> mouse</Link></li> */}
                         <ul>
                             <li style={{ "background": "rgb(243 238 238)" }}>Product Portfolio</li>
                             {
@@ -46,6 +40,7 @@ function Home() {
                     </div>
                 </div>
                 <div className="hot-products">
+                    <p className="overview">A few types of best-selling products</p>
                     <div className="hot-laptops"><RenderHome items={hotLaptops.slice(0, 5)} /></div>
                     <div className="hot-mouses"><RenderHome items={hotMouses.slice(0, 5)} /></div>
                     <div className="hot-headphone"><RenderHome items={hotHeadphones.slice(0, 5)} /></div>

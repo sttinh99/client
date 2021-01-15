@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Carousel } from 'react-bootstrap'
 
 import './Carousel.css'
@@ -8,11 +8,11 @@ import imageslide1 from '../../../images/bg2.jpg'
 import imageslide2 from '../../../images/bg3.jpg'
 
 function ControlledCarousel() {
-    const [index, setIndex] = useState(0);
+    // const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
+    // const handleSelect = (selectedIndex, e) => {
+    //     setIndex(selectedIndex);
+    // };
 
     return (
         <Carousel>

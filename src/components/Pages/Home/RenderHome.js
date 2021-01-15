@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
@@ -13,7 +13,7 @@ function RenderHome({ items }) {
     return (
         <section className="products-home">
             <div className="box-products">
-                <h2 className="text">{items[0].category + `s`} Hot</h2>
+                <h2 className="text">{items[0].category + `s`}</h2>
                 <div className="render-items">
                     {
 
@@ -38,7 +38,7 @@ function RenderHome({ items }) {
             <div className="align-right align-center-xs">
                 <hr className="offset-sm" />
             </div>
-            {categories.length > 0 && <Link to={`/products/category/${categories.find(item => item.name === items[0].category)._id}`}><h5 className="upp">View all tablets </h5></Link>}
+            {categories.length > 0 && <Link to={`/products/category/${categories.find(item => item.name === items[0].category)._id}`}><h5 className="upp">View all {items[0].category}s</h5></Link>}
         </section >
     );
 }

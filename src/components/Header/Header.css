@@ -80,4 +80,59 @@ header img.user-img {
     font-weight: 500;
 }
 /*import ClientHeader*/
+.notify {
+    position: absolute;
+    right: 100px;
+    cursor: pointer;
+}
+.notify img {
+    width: 40px;
+    height: 40px;
+}
+.notify div.on {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -4px;
+    left: 25px;
+    padding: 0px 5px;
+    background: red;
+    border-radius: 50%;
+    font-weight: bold;
+}
+.notify:hover img {
+    animation-name: example;
+    animation-duration: 0.6s;
+    animation-iteration-count: 10;
+}
+.notify .create-address {
+    display: none !important;
+    transition: 0.6s;
+}
+.notify .create-address.show p {
+    position: absolute;
+    width: 245px;
+    right: -94px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    top: 50px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid black;
+    transition: 0.6s;
+}
+.notify .create-address.show {
+    display: block !important;
+}
+@keyframes example {
+    0% {
+    }
+    50% {
+        transform: rotate(15deg);
+    }
+    100% {
+        transform: rotate(-15deg);
+    }
+}
 @import "../ClientHeader/ClientHeader.css";

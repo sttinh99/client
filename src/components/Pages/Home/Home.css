@@ -62,7 +62,10 @@
     margin: auto;
 }
 .products-home .box-products .text {
-    text-transform: capitalize;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
 }
 .products-home .box-products .render-items {
     width: 100%;
@@ -133,4 +136,15 @@
 }
 .products-home .content .addcart:hover {
     background: black;
+}
+p.overview {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.upp {
+    font-size: 30px;
+    font-family: fantasy;
 }

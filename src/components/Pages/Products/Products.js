@@ -6,13 +6,13 @@ import ProductItem from '../Item/ProductItem'
 import AdminProducts from '../../Admin/AdminProducts/AdminProducts'
 import Filter from '../../Filter/Filter'
 import Sort from '../../Sort/Sort'
-import Search from '../../Search/Search'
+// import Search from '../../Search/Search'
 import Pagination from '../../Pagination/Pagination'
-import Loadding from '../../Loadding/Loadding';
+// import Loadding from '../../Loadding/Loadding';
 
 function Products() {
     const state = useContext(GlobalState)
-    const [search, setSearch] = state.ProductAPI.search
+    // const [search, setSearch] = state.ProductAPI.search
     const [page, setPage] = state.ProductAPI.page
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
@@ -28,7 +28,9 @@ function Products() {
     if (products.length === 0) {
 
         return <div>
-            <Loadding />
+            <div>
+                <p style={{ "textAlign": "center" }}>No matching products found</p>
+            </div>
             {setPage(1)}
         </div>
     }
@@ -46,7 +48,6 @@ function Products() {
                     {/* <Search search={search} handleOnChange={handleOnChange} /> */}
                 </div>
             </div>
-            {products.length === 0 && <Loadding />}
             {products.length > 0 &&
                 (!isAdmin ?
                     <div className='products'>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 import gotoshoping from '../../../images/shopping.png'
-import Loadding from '../../Loadding/Loadding';
+// import Loadding from '../../Loadding/Loadding';
 // import PaypalButton from './PaypalButton'
 import RenderCart from './RenderCart'
 

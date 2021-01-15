@@ -27,6 +27,7 @@ import Checkout from './Cart/Checkout';
 import Dasboard from '../AdminDasboard/Dasboard';
 import Bill from '../Pages/Bill/Bill'
 import ProductCategory from '../Pages/ProductCategory/ProductCategory'
+import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 
 function Pages() {
 
@@ -37,6 +38,7 @@ function Pages() {
     const state = useContext(GlobalState);
     const [isLogged] = state.UserAPI.isLogged;
     const [isAdmin] = state.UserAPI.isAdmin;
+    const [user] = state.UserAPI.user
     const token = state.token
     const [categories] = state.CategoryAPI.categories;
 
@@ -90,7 +92,10 @@ function Pages() {
                 <ViewDetailOrder />
             </Route>
             <Route path='/address' exact>
-                {!isLogged ? <NotFoundPage /> : <CreateAddress />}
+                {isAdmin || !isLogged ? <NotFoundPage /> : <CreateAddress />}
+            </Route>
+            <Route path='/changepassword' exact>
+                {isAdmin || !isLogged ? <NotFoundPage /> : <ChangePassword user={user} />}
             </Route>
             <Route path='/products/detail/:id' exact>
                 {!isAdmin ? <DetailProduct /> : <NotFoundPage />}

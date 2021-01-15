@@ -22,6 +22,7 @@ function ClientHeader({ logoutUser, uimg, check, v, cart, user }) {
                     <ul className='form-action'>
                         <li><Link to="/address">List Addresses</Link></li>
                         <li><Link to="/history">Transaction History</Link></li>
+                        <li><Link to={`/changepassword`}>Change Password</Link></li>
                         <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
                     </ul>
                 </div>

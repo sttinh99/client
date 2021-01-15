@@ -1,6 +1,6 @@
 import React from 'react';
 import BtnRender from './BtnRender'
-import axios from 'axios'
+// import axios from 'axios'
 
 function ProductItem({ product, isAdmin }) {
     //console.log(product);

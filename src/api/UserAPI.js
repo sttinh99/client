@@ -24,7 +24,6 @@ function UserAPI(token) {
                         headers: { Authorization: token }
                     });
                     //console.log(res.data.user.role);
-                    console.log(res.data.user, 'user');
                     if (res.data.user.isBlock === true) {
                         window.location.href = '/login'
                         return alert("This account was blocked")

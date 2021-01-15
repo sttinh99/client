@@ -168,7 +168,7 @@ function CreateProduct(props) {
             setCallback(!callback)
             history.push("/products");
         } catch (error) {
-            alert(error.message)
+            alert(error.response.data.msg)
         }
     }
     /*end create*/
@@ -243,7 +243,7 @@ function CreateProduct(props) {
                 </div>
                 <div className='form-group'>
                     <label htmlFor='prices'>Prices: </label>
-                    <input type='text' id='prices' name='prices' placeholder='add prices' value={product.prices} onChange={handleChangeInput} />
+                    <input type='number' id='prices' name='prices' placeholder='add prices' value={product.prices} onChange={handleChangeInput} />
                 </div>
                 {
                     (product.category === 'laptop') ?
@@ -429,7 +429,7 @@ function CreateProduct(props) {
                 </div>
                 <div className='form-group'>
                     <label htmlFor='quantity'>quantity: </label>
-                    <input type='text' id='quantity' name='quantity' placeholder='add quantity' value={product.quantity} onChange={handleChangeInput} />
+                    <input type='number' id='quantity' name='quantity' placeholder='add quantity' value={product.quantity} onChange={handleChangeInput} />
                 </div>
                 <button type='submit'>Save</button>
             </form>

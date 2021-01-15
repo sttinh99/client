@@ -35,7 +35,7 @@ function Checkout() {
             payments = "Paid"
         }
         if (!address) return alert("You are not choose address");
-        if (!deliveryCharges) return alert("You are not choose address");
+        //if (!deliveryCharges) return alert("You are not choose address");
         try {
             if (cart.length === 0) {
                 if (window.confirm('Your are have 0 items, Go to shopping')) {

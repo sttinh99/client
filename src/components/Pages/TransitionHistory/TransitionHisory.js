@@ -58,11 +58,9 @@ function TransitionHisory() {
             else return alert("error.message")
         }
     }
-    // if (history.length === 0)
-    //     return <>
-    //         <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>History Empty</h2>
-    //         <Link to='/products' className="shopping">Go to Shopping</Link>
-    //     </>
+    // if (history.length === 0) {
+    //     setPage(1)
+    // }
     return (
         <div className='bill'>
             <div className='trans-history'>
