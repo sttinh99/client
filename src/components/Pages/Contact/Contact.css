@@ -18,6 +18,15 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
+.text-contact {
+    font-size: 30px;
+    font-family: auto;
+}
+.map-iframe {
+    width: 500px;
+    height: 300px;
+    border: 0;
+}
 
 .row-space {
     -webkit-box-pack: justify;
@@ -438,9 +447,13 @@ input[type="date" i] {
      #TITLE
      ========================================================================== */
 .title {
-    margin-bottom: 37px;
+    margin-bottom: 10px;
 }
-
+.card-body .title {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: blue;
+}
 /* ==========================================================================
      #CARD
      ========================================================================== */

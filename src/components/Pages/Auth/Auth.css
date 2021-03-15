@@ -96,6 +96,7 @@ input::placeholder {
 .reset-password {
     width: 100%;
     margin-top: 60px;
+    padding-bottom: 400px;
 }
 .reset-password h2 {
     text-align: center;

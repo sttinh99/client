@@ -7,7 +7,7 @@ import axios from 'axios'
 function RenderCart({ item }) {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.UserAPI.cart;
-    const [products] = state.ProductAPI.products;
+    const [allproducts] = state.ProductAPI.allproducts;
     const [token] = state.token
     const addToCart = async (cart) => {
         try {
@@ -20,7 +20,9 @@ function RenderCart({ item }) {
         }
     }
     const augmentItem = (id) => {
-        let product = products.find(item => {
+        let product = allproducts.find(item => {
+            console.log(id, "id");
+            console.log(item._id);
             return item._id === id;
         })
         cart.forEach(item => {

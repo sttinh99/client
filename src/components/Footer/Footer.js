@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './Footer.css'
 
+import facebook from '../../images/facebook.svg'
+import instagram from '../../images/instagram.svg'
+import twitter from '../../images/twitter.svg'
+import github from '../../images/github.svg'
+
 function Footer() {
     return (
         <footer className="site-footer">
@@ -9,27 +14,22 @@ function Footer() {
                 <div className="row">
                     <div className="col-sm-12 col-md-6">
                         <h6>About</h6>
-                        <p className="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+                        <p className="text-justify">Address <i>Số 1 Võ Văn Ngân, Linh Chiểu, Thủ Đức, TPHCM</i> <p>© 1997 - 2020 Two Members Trading - Service Joint Stock Company</p>
+                        Certificate of business registration: 0304998358 by Sở KH-ĐT TP.HCM cấp lần đầu ngày 30 tháng 05 năm 2007</p>
                     </div>
-                    <div className="col-xs-6 col-md-3">
-                        <h6>Categories</h6>
+                    <div className="col-xs-6">
+                        <h6>Main Address:</h6>
                         <ul className="footer-links">
-                            <li><Link to="#">C</Link></li>
-                            <li><Link to="#">UI Design</Link></li>
-                            <li><Link to="#">PHP</Link></li>
-                            <li><Link to="#">Java</Link></li>
-                            <li><Link to="#">Android</Link></li>
-                            <li><Link to="#">Templates</Link></li>
+                            <li>Số 1 Võ Văn Ngân, Linh Chiểu, Thủ Đức, TPHCM</li>
                         </ul>
-                    </div>
-                    <div className="col-xs-6 col-md-3">
-                        <h6>Quick Links</h6>
-                        <ul className="footer-links">
-                            <li><Link to="#">About Us</Link></li>
-                            <li><Link to="#">About Us</Link></li>
-                            <li><Link to="#">Contribute</Link></li>
-                            <li><Link to="#">Privacy Policy</Link></li>
-                            <li><Link to="#">Sitemap</Link></li>
+                        <h6>Open time:</h6>
+                        <ul className="footer-links xxx">
+                            <li>Monday: <span>7:00am - 17:00pm</span></li>
+                            <li>Tuesday: <span>7:00am - 17:00pm</span></li>
+                            <li>Wednesday: <span>7:00am - 17:00pm</span></li>
+                            <li>Thursday:<span>7:00am - 17:00pm</span></li>
+                            <li>Friday: <span>7:00am - 17:00pm</span></li>
+                            <li>Saturday: <span>7:00am - 17:00pm</span></li>
                         </ul>
                     </div>
                 </div>
@@ -44,11 +44,10 @@ function Footer() {
                     </div>
                     <div className="col-md-4 col-sm-6 col-xs-12">
                         <ul className="social-icons">
-                            <Link to="#"><i className="fa fa-facebook" /></Link>
-                            <Link to="#"><i className="fa fa-facebook" /></Link>
-                            <Link to="#"><i className="fa fa-facebook" /></Link>
-                            <Link to="#"><i className="fa fa-facebook" /></Link>
-                            <Link to="#"><i className="fa fa-facebook" /></Link>
+                            <Link to="https://www.facebook.com"><img src={facebook} alt="..." /></Link>
+                            <Link to="https://www.instagram.com"><img src={instagram} alt="..." /></Link>
+                            <Link to="https://twitter.com"><img src={twitter} alt="..." /></Link>
+                            <Link to="https://github.com"><img src={github} alt="..." /></Link>
                         </ul>
                     </div>
                 </div>

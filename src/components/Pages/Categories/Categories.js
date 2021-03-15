@@ -78,7 +78,7 @@ function Categories() {
                             <div key={category._id}>
                                 <div className="category" key={category._id}>
                                     <p>{category.name}</p>
-                                    <button onClick={() => editCategory(category._id, category.name)}>edit</button>
+                                    {/* <button onClick={() => editCategory(category._id, category.name)}>edit</button> */}
                                     <button onClick={() => deleteCategory(category._id)}>delete</button>
                                 </div>
                                 <hr></hr>

@@ -133,6 +133,15 @@
 .social-icons a.dribbble:hover {
     background-color: #ea4c89;
 }
+.social-icons img {
+    width: 40px;
+    height: 40px;
+}
+ul.footer-links.xxx li {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
 @media (max-width: 767px) {
     .social-icons li.title {
         display: block;

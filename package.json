@@ -11,6 +11,7 @@
     "chart.js": "^2.9.4",
     "html2canvas": "1.0.0-rc.5",
     "jspdf": "1.5.3",
+    "ngrok": "^3.4.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-chartjs-2": "^2.11.1",

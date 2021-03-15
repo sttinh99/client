@@ -21,7 +21,7 @@
 .box-detail {
     max-width: 600px;
     width: 100%;
-    height: 600px;
+    height: 650px;
     margin: 20px;
 }
 .box-detail .row-dt {
@@ -134,4 +134,9 @@ tbody tr th {
 .content .infor {
     color: blue;
     margin-bottom: 5px;
+}
+.box-detail h3.warranty {
+    font-size: 20px;
+    text-align: end;
+    text-transform: capitalize;
 }
