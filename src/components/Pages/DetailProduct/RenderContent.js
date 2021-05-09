@@ -16,4 +16,4 @@ function RenderContent({ desItem, componentItem }) {
     );
 }
 
-export default RenderContent;
+export default React.memo(RenderContent);

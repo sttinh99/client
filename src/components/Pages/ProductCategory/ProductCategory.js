@@ -76,4 +76,4 @@ function ProductCategory() {
     );
 }
 
-export default ProductCategory;
+export default React.memo(ProductCategory);

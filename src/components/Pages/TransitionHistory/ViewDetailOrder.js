@@ -47,18 +47,11 @@ function ViewDetailOrder() {
                         return <tr key={item._id}>
                             <td className='title'>{item.title}</td>
                             <td className='img'><img src={item.images} alt='images' /></td>
-                            <td className='prices'>{item.prices}</td>
+                            <td className='prices'>{item.prices.toFixed(2)}</td>
                             <td className='count'>{item.count}</td>
-                            <td className='total-item'>{item.count * item.prices}</td>
+                            <td className='total-item'>{(item.count * item.prices).toFixed(2)}</td>
                         </tr>
                     })}
-                    <tr>
-                        <td />
-                        <td />
-                        <td />
-                        <td>Tax</td>
-                        <td>${orderDetails.tax}</td>
-                    </tr>
                     <tr>
                         <td />
                         <td />
@@ -68,9 +61,9 @@ function ViewDetailOrder() {
                     </tr>
                 </tbody>
             </table>
-            <h3>Total: ${orderDetails.total}</h3>
+            <h3>Total: ${orderDetails.total.toFixed(2)}</h3>
         </div>
     );
 }
 
-export default ViewDetailOrder;
+export default React.memo(ViewDetailOrder);

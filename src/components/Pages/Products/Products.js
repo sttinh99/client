@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+// import socketIOClient from 'socket.io-client';
 
 import { GlobalState } from '../../GlobalState'
 import ProductItem from '../Item/ProductItem'
@@ -9,6 +11,8 @@ import Sort from '../../Sort/Sort'
 // import Search from '../../Search/Search'
 import Pagination from '../../Pagination/Pagination'
 // import Loadding from '../../Loadding/Loadding';
+// const ENDPOINT = "http://localhost:3000";
+// const socket = socketIOClient(ENDPOINT);
 
 function Products() {
     const state = useContext(GlobalState)
@@ -17,16 +21,24 @@ function Products() {
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
     const [products] = state.ProductAPI.products
-    const [callback, setCallback] = state.ProductAPI.callback
+    const [callback, setCallback] = state.ProductAPI.callback;
     // const handleOnChange = (e) => {
     //     setSearch(e.target.value.toLowerCase());
     // }
     const handlePageChange = (page) => {
         setPage(page)
     }
-    //console.log(products);
-    if (products.length === 0) {
+    // useEffect(() => {
+    //     socket.on("add-product", (data) => {
+    //         const changeCallback = () => {
 
+    //             setCallback(!data.callback);
+    //         }
+    //         console.log(callback, "acs");
+    //         changeCallback();
+    //     })
+    // }, [callback])
+    if (products.length === 0) {
         return <div>
             <div>
                 <p style={{ "textAlign": "center" }}>No matching products found</p>
@@ -97,4 +109,4 @@ function Products() {
     );
 }
 
-export default Products;
+export default React.memo(Products);

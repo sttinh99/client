@@ -27,7 +27,7 @@ function ProductItem({ product, isAdmin }) {
                     <p>{product.description}</p>
                     <span>Price: {product.prices}$</span>
                 </div>
-                Đã Hết Hàng
+                Sold out
                 <p>solded: {product.sold}</p>
             </div >
         );
@@ -38,7 +38,15 @@ function ProductItem({ product, isAdmin }) {
             <div className="product_box">
                 <h2 title={product.title}>{product.title}</h2>
                 <p>{product.description}</p>
-                <span>Price: {product.prices}$</span>
+                {
+                    product.discount > 0 ?
+                        <div className="discount-product">
+                            <span>${product.prices - (product.prices * product.discount) / 100}</span>
+                            <strike>${product.prices}</strike>
+                        </div> :
+                        <span>${product.prices}</span>
+                }
+
             </div>
             <BtnRender product={product} />
             <p>solded: {product.sold}</p>
@@ -47,4 +55,4 @@ function ProductItem({ product, isAdmin }) {
 
 }
 
-export default ProductItem;
+export default React.memo(ProductItem);

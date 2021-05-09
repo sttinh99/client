@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+// import socketIOClient from 'socket.io-client';
 import bell from '../../images/bell.svg'
 
 import './Header.css'
 
+import sound from '../../sound/nofication.wav'
 
 import Search from '../Search/Search'
 import react from '../../images/react.svg'
@@ -17,40 +19,56 @@ import ClientHeader from '../ClientHeader/ClientHeader'
 import { GlobalState } from '../GlobalState'
 
 let className = 'create-address'
+// const ENDPOINT = "http://localhost:3000";
 
+// const socket = socketIOClient(ENDPOINT);
 function Header() {
     const state = useContext(GlobalState)
     const [isLogged] = state.UserAPI.isLogged
     const [isAdmin] = state.UserAPI.isAdmin
     const [cart] = state.UserAPI.cart
     const [user] = state.UserAPI.user
-    const [history] = state.UserAPI.history
+    // const [history] = state.UserAPI.history
     const [onDisplay, setOndisplay] = useState(false)
+
+    const [text, setText] = useState("Check Order")
+    const [check1, setCheck1] = useState(false)
+
     //console.log(state);
     //console.log(cart);
-
+    // useEffect(() => {
+    //     socket.on("server-sent-data", (data) => {
+    //         console.log(data);
+    //         setText(data);
+    //         setCheck1(true);
+    //     })
+    // }, [])
     const check = () => {
         if (!isLogged) {
             window.location.href = '/login'
             return alert('please login to continue');
         }
     }
-    const x = history.filter(item => item.status === false)
+    // const x = history.filter(item => item.status === false)
     const logoutUser = async () => {
         await axios.get('/user/logout');
         localStorage.removeItem('firstLogin')
         window.location.href = '/login'
     }
+    const checkOrder = () => {
+        window.location.href = "/history"
+    }
     const showModelNotify = () => {
         if (className === 'create-address') {
             className = 'create-address show'
-            console.log(2);
+            // console.log(2);
         }
         else if (className === 'create-address show') {
             className = 'create-address'
-            console.log(1);
+            // console.log(1);
         }
         setOndisplay(!onDisplay)
+        setCheck1(false);
     }
     return (
         <header>
@@ -79,14 +97,19 @@ function Header() {
             {
                 isAdmin && <div className="notify" onClick={showModelNotify}>
                     <img src={bell} alt="..." />
-                    {x.length > 0 && <div className="on"></div>}
+                    {check1 && <div className="on">
+                        <audio autoPlay>
+                            <source src={sound}></source>
+                        </audio>
+                    </div>}
                     <div className={className}>
-                        <p><Link to='/history'>You have {x.length} unconfirmed orders</Link></p>
+                        <p onClick={checkOrder}>{text}</p>
                     </div>
+
                 </div>
             }
             <Search />
         </header >
     )
 }
-export default Header
+export default React.memo(Header);

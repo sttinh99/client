@@ -62,7 +62,7 @@ function DetailProduct() {
                             </div>
                     }
                     <div className="row-price">
-                        <p>Price: ${detailProduct.prices}</p>
+                        {detailProduct.discount > 0 ? <p>Price: ${detailProduct.prices - (detailProduct.prices * detailProduct.discount) / 100}</p> : <p>Price: ${detailProduct.prices}</p>}
                     </div>
                     {detailProduct.isDelete === true ? <p>Sold out</p> :
                         <Link to="/cart" className="cart-buy" onClick={() => addCart(detailProduct)}>Buy Now</Link>}
@@ -88,4 +88,4 @@ function DetailProduct() {
     );
 }
 
-export default DetailProduct;
+export default React.memo(DetailProduct);

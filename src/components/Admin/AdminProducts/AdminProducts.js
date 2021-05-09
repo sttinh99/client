@@ -3,7 +3,11 @@ import React, { useContext } from 'react';
 import { GlobalState } from '../../GlobalState'
 import BtnRender from '../../Pages/Item/BtnRender'
 
+// import socketIOClient from 'socket.io-client';
 
+
+// const ENDPOINT = "http://localhost:3000";
+// const socket = socketIOClient(ENDPOINT);
 function AdminProducts({ product, token }) {
     const state = useContext(GlobalState)
     const [callback, setCallback] = state.ProductAPI.callback
@@ -18,7 +22,10 @@ function AdminProducts({ product, token }) {
                 })
                 // await deleteImg
                 await deleteProduct
-                setCallback(!callback)
+                await setCallback(!callback)
+                // console.log(callback);
+                await alert(deleteProduct.data.msg)
+                // await socket.emit("add-product", { callback });
             }
         } catch (error) {
             alert(error.response.data.msg)
@@ -44,4 +51,4 @@ function AdminProducts({ product, token }) {
     )
 }
 
-export default AdminProducts;
+export default React.memo(AdminProducts);

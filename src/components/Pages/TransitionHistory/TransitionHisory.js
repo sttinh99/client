@@ -49,8 +49,9 @@ function TransitionHisory() {
                     await axios.delete(`/checkout/delete/${item._id}`, {
                         headers: { Authorization: token }
                     })
-                    alert("Canceled this order")
-                    setCallback(!callback)
+
+                    await setCallback(!callback)
+                    await alert("Canceled this order")
                 } catch (error) {
                     alert(error.message)
                 }
@@ -105,4 +106,4 @@ function TransitionHisory() {
     );
 }
 
-export default TransitionHisory;
+export default React.memo(TransitionHisory);

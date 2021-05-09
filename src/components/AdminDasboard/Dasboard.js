@@ -31,6 +31,9 @@ export default function Dasboard() {
                     <img src={logo} alt="..." /><Link to='/history' style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>HISTORY ORDER</Link>
                 </div>
                 <div className="item">
+                    <img src={logo} alt="..." /><Link to='/discounts' style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>DISCOUNTS</Link>
+                </div>
+                <div className="item">
                     <img src={logo} alt="..." /><Link to='/logout' onClick={logoutUser} style={{ color: "#fff", fontSize: "18px", fontWeight: "300" }}>LOGOUT</Link>
                 </div>
             </div>

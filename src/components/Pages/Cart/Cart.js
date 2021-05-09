@@ -50,10 +50,10 @@ function Cart() {
                 </tbody>
             </table>
             <div className='total'>
-                <h3>Total: ${total}</h3>
+                <h3>Total: ${total.toFixed(2)}</h3>
                 <Link to='/checkout' className='check'>Checkout</Link>
             </div>
         </div>
     );
 }
-export default Cart;
+export default React.memo(Cart);

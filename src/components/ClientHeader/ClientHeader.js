@@ -32,4 +32,4 @@ function ClientHeader({ logoutUser, uimg, check, v, cart, user }) {
     );
 }
 
-export default ClientHeader;
+export default React.memo(ClientHeader);

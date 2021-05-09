@@ -22,7 +22,6 @@ function RenderCart({ item }) {
     const augmentItem = (id) => {
         let product = allproducts.find(item => {
             console.log(id, "id");
-            console.log(item._id);
             return item._id === id;
         })
         cart.forEach(item => {
@@ -70,7 +69,7 @@ function RenderCart({ item }) {
                 <span>{item.count}</span>
                 <button onClick={() => augmentItem(item._id)} className="btn-change">+</button>
             </td>
-            <td className="total-prices">{item.count * item.prices}$</td>
+            <td className="total-prices">{(item.count * item.prices).toFixed(2)}$</td>
             <td className="delete">
                 <button className="drop-item" onClick={() => removeItem(item._id)}>X</button>
             </td>
@@ -78,4 +77,4 @@ function RenderCart({ item }) {
     );
 }
 
-export default RenderCart;
+export default React.memo(RenderCart);

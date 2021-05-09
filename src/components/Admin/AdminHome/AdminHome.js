@@ -19,7 +19,7 @@ function AdminHome() {
     gidoll.map((item, index) => {
         data.push({ x: index, y: item.total })
     })
-    console.log(data);
+    // console.log(data);
     return (
         <div className="chart">
             <XYPlot height={400} width={400}>

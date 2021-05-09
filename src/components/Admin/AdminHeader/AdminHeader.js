@@ -1,8 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+
+
 
 function AdminHeader({ logoutUser, user }) {
     let className = 'dis'
+
     const click = () => {
         if (className === 'dis') {
             className += ' hihi'
@@ -26,6 +30,7 @@ function AdminHeader({ logoutUser, user }) {
                     <li><Link to='/category'>Categories</Link></li>
                     <li><Link to="/history">History Order</Link></li>
                     <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
+                    <p>{text}</p>
                 </ul>
             </div>
         </header>

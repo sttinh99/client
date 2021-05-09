@@ -81,4 +81,4 @@ function AdminUser() {
     );
 }
 
-export default AdminUser;
+export default React.memo(AdminUser);

@@ -43,4 +43,4 @@ function RenderHome({ items }) {
     );
 }
 
-export default RenderHome;
+export default React.memo(RenderHome);

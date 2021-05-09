@@ -56,3 +56,11 @@
     height: 40px;
     padding: 5px 10px 5px;
 }
+.discount-product {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+.discount-product strike {
+    opacity: 0.8;
+}

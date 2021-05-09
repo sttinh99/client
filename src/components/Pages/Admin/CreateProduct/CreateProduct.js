@@ -2,7 +2,12 @@ import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom'
 import { GlobalState } from '../../../GlobalState'
+// import socketIOClient from 'socket.io-client';
 
+
+// const ENDPOINT = "http://localhost:3000";
+
+// const socket = socketIOClient(ENDPOINT);
 const initialState = {
     title: '',
     brand: '',
@@ -17,6 +22,9 @@ const initialState = {
 let inforTT = '';
 function CreateProduct(props) {
     const state = useContext(GlobalState)
+    const [products] = state.ProductAPI.products
+    const [allproducts, setAllproducts] = state.ProductAPI.allproducts
+
     const { categories } = props
     const [token] = state.token;
     const [isAdmin] = state.UserAPI.isAdmin
@@ -47,7 +55,6 @@ function CreateProduct(props) {
     const param = useParams();
 
     /* update Product */
-    const [products] = state.ProductAPI.products
     const [onEdit, setOnEdit] = useState(false)
     const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei', "Acer"]
     const RAMBUS = ['2400MHz', '2666MHz', '3000MHz', '3200MHz', '1600MHz', '2800MHz', ' 3600MHz'];
@@ -67,12 +74,13 @@ function CreateProduct(props) {
         'AMD Radeon 610', 'AMD Radeon R5 520', 'NVIDIA GeForce RTX 2080',
         'AMD Radeon RX 550X', 'AMD Radeon RX 560X', 'AMD Radeon RX 5500M', 'R19M-M18-50 (R625)', 'NVIDIA GeForce MX450', 'AMD Radeon R7 M530']
     const capacity = ['1TB', '2TB', '4TB', '500GB', '120GB', '250GB', '256GB', '128GB', '3TB', '6TB', '512GB']
+
     useEffect(() => {
         if (param.id) {
             setOnEdit(true)
             products.forEach(product => {
                 if (product._id === param.id) {
-                    console.log(product);
+                    // console.log(product);
                     setProduct(product)
                     setImages(product.images)
                 }
@@ -89,7 +97,7 @@ function CreateProduct(props) {
         e.preventDefault();
         try {
             const file = e.target.files[0]
-            console.log(file);
+            // console.log(file);
             // console.log(file);
             if (!file) return alert('file not exists')
             let formData = new FormData()
@@ -97,7 +105,7 @@ function CreateProduct(props) {
             const res = await axios.post('/images/upload', formData, {
                 headers: { 'content-type': 'multipart/form-data', Authorization: token }
             })
-            console.log(res, 'res');
+            // console.log(res, 'res');
             setImages(res.data)
         } catch (error) {
             return alert(error.response.data.msg)
@@ -109,7 +117,7 @@ function CreateProduct(props) {
             await axios.post('/images/delete', { public_id: images.public_id }, {
                 headers: { Authorization: token }
             })
-            setImages(false)
+            await setImages(false);
         } catch (error) {
             alert(error.response.data.msg)
         }
@@ -163,10 +171,12 @@ function CreateProduct(props) {
                     headers: { Authorization: token }
                 })
             }
+            await setAllproducts([...allproducts, product]);
             // setImages(false)
             // setProduct(initialState)
-            setCallback(!callback)
-            history.push("/products");
+            await setCallback(!callback)
+            // await socket.emit("add-product", { callback });
+            await history.push("/products");
         } catch (error) {
             alert(error.response.data.msg)
         }

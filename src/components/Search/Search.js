@@ -22,4 +22,4 @@ function Search({ search, handleOnChange }) {
     );
 }
 
-export default Search;
+export default React.memo(Search);

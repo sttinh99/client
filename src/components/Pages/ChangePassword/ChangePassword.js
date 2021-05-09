@@ -71,4 +71,4 @@ function ChangePassword({ user }) {
     );
 }
 
-export default ChangePassword;
+export default React.memo(ChangePassword);

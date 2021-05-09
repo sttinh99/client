@@ -83,12 +83,6 @@ function Bill() {
                                     <tr className="tabletitle">
                                         <td />
                                         <td />
-                                        <td className="Rate"><h2>tax</h2></td>
-                                        <td className="payment"><h2>{bill.tax}</h2></td>
-                                    </tr>
-                                    <tr className="tabletitle">
-                                        <td />
-                                        <td />
                                         <td className="Rate"><h2>Delivery Charges</h2></td>
                                         <td className="payment"><h2>{bill.deliveryCharges}</h2></td>
                                     </tr>

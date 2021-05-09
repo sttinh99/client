@@ -1,0 +1,39 @@
+.block-discount {
+    width: 100%;
+    padding-bottom: 400px;
+    padding-top: 20px;
+    min-height: 1000px;
+}
+.div-discount {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.div-discount form {
+    width: 25%;
+}
+.div-discount .display-discount {
+    width: 80%;
+}
+.block-discount h2 {
+    font-size: 30px;
+    text-align: center;
+    font-weight: 400;
+}
+.form-discount {
+    width: 80%;
+    margin: auto;
+}
+.form-discount div {
+    width: 80%;
+    padding: 3px 0 0 3rem;
+}
+.form-discount input {
+    outline: none;
+}
+.form-discount label {
+    width: 100px;
+}
+.form-discount select {
+    outline: none;
+}

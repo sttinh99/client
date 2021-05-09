@@ -187,4 +187,4 @@ function Address() {
     );
 }
 
-export default Address;
+export default React.memo(Address);

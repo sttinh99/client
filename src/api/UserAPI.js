@@ -41,6 +41,10 @@ function UserAPI(token) {
         }
     }, [token, callback])
     const addCart = async (product) => {
+        if (product.discount > 0) {
+            product.prices = product.prices - (product.prices * product.discount) / 100;
+            console.log(product)
+        }
         if (!isLogged) {
             window.location.href = '/login';
             return alert('please login to continue');

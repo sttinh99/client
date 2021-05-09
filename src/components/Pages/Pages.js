@@ -12,6 +12,7 @@ import CreateAddress from './CreateAddress/CreateAddress'
 import CreateProduct from './Admin/CreateProduct/CreateProduct'
 
 import Products from './Products/Products'
+import Discounts from './Discounts/Discounts'
 import About from './About/About'
 import Contact from './Contact/Contact'
 import Cart from './Cart/Cart'
@@ -41,6 +42,7 @@ function Pages() {
     const [user] = state.UserAPI.user
     const token = state.token
     const [categories] = state.CategoryAPI.categories;
+    // const [discounts] = state.DiscountAPI.discounts
 
 
     // const notLogin = (isLogged) => {
@@ -87,6 +89,9 @@ function Pages() {
             </Route>
             <Route path='/category' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Categories /></div> : <NotFoundPage />}
+            </Route>
+            <Route path='/discounts' exact>
+                {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Discounts /></div> : <NotFoundPage />}
             </Route>
             <Route path='/history/:id' exact>
                 <ViewDetailOrder />
