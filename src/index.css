@@ -5,7 +5,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+body {
+  top: 0px !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -28,6 +30,19 @@ button {
   border: none;
   outline: none;
   background: transparent;
+  cursor: pointer;
+}
+.goog-te-banner-frame {
+  display: none;
+}
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget {
+  color: transparent !important;
+}
+.goog-te-combo {
+  outline: none;
   cursor: pointer;
 }
 @import "bootstrap/dist/css/bootstrap.min.css";

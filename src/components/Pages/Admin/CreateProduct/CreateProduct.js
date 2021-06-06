@@ -28,6 +28,8 @@ function CreateProduct(props) {
     const { categories } = props
     const [token] = state.token;
     const [isAdmin] = state.UserAPI.isAdmin
+    const socket = state.socket;
+
     const [product, setProduct] = useState(initialState);
     const [computer, setComputer] = useState({
         cpu: '',
@@ -175,7 +177,7 @@ function CreateProduct(props) {
             // setImages(false)
             // setProduct(initialState)
             await setCallback(!callback)
-            // await socket.emit("add-product", { callback });
+            await socket.emit("add-product", callback);
             await history.push("/products");
         } catch (error) {
             alert(error.response.data.msg)

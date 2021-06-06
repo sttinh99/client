@@ -3,14 +3,19 @@ import React, { useContext } from 'react';
 import { GlobalState } from '../../GlobalState'
 import BtnRender from '../../Pages/Item/BtnRender'
 
-// import socketIOClient from 'socket.io-client';
-
-
-// const ENDPOINT = "http://localhost:3000";
-// const socket = socketIOClient(ENDPOINT);
 function AdminProducts({ product, token }) {
     const state = useContext(GlobalState)
+    const socket = state.socket
     const [callback, setCallback] = state.ProductAPI.callback
+
+    // useEffect(() => {
+    //     if (socket) {
+    //         socket.on("add-product", (data) => {
+    //             setCallback(data);
+    //         })
+    //     }
+    // }, [socket])
+
     const deleteProduct = async () => {
         try {
             if (window.confirm("Do you really deleted this product")) {
@@ -25,7 +30,7 @@ function AdminProducts({ product, token }) {
                 await setCallback(!callback)
                 // console.log(callback);
                 await alert(deleteProduct.data.msg)
-                // await socket.emit("add-product", { callback });
+                socket.emit("add-product", callback);
             }
         } catch (error) {
             alert(error.response.data.msg)

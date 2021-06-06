@@ -10,40 +10,55 @@ import Filter from '../../Filter/Filter'
 import Sort from '../../Sort/Sort'
 // import Search from '../../Search/Search'
 import Pagination from '../../Pagination/Pagination'
+import { set } from 'mongoose';
 // import Loadding from '../../Loadding/Loadding';
 // const ENDPOINT = "http://localhost:3000";
 // const socket = socketIOClient(ENDPOINT);
 
 function Products() {
     const state = useContext(GlobalState)
+    console.log(state);
     // const [search, setSearch] = state.ProductAPI.search
     const [page, setPage] = state.ProductAPI.page
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
     const [products] = state.ProductAPI.products
     const [callback, setCallback] = state.ProductAPI.callback;
+    const socket = state.socket;
     // const handleOnChange = (e) => {
     //     setSearch(e.target.value.toLowerCase());
     // }
     const handlePageChange = (page) => {
         setPage(page)
     }
-    // useEffect(() => {
-    //     socket.on("add-product", (data) => {
-    //         const changeCallback = () => {
-
-    //             setCallback(!data.callback);
-    //         }
-    //         console.log(callback, "acs");
-    //         changeCallback();
-    //     })
-    // }, [callback])
+    useEffect(() => {
+        if (socket) {
+            socket.on("add-product", (data) => {
+                setCallback(!data);
+            })
+        }
+    }, [socket])
+    useEffect(() => {
+        if (socket) {
+            socket.on("deleteDiscount", (data) => {
+                setCallback(!data);
+            })
+        }
+    }, [socket])
     if (products.length === 0) {
-        return <div>
-            <div>
-                <p style={{ "textAlign": "center" }}>No matching products found</p>
+        return <div className={isAdmin ? 'no-care' : "care"}>
+            <div className="filter-n-sort">
+                <div className='create'>
+                    {
+                        isAdmin && <Link to="/products/create">Create Products</Link>
+                    }
+                </div>
+                <div className="filter-sort">
+                    <Filter />
+                    <Sort />
+
+                </div>
             </div>
-            {setPage(1)}
         </div>
     }
     return (

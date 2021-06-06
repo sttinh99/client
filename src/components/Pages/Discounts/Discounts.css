@@ -37,3 +37,6 @@
 .form-discount select {
     outline: none;
 }
+.display-discount button {
+    outline: none;
+}

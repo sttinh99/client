@@ -42,20 +42,9 @@ function Pages() {
     const [user] = state.UserAPI.user
     const token = state.token
     const [categories] = state.CategoryAPI.categories;
-    // const [discounts] = state.DiscountAPI.discounts
-
-
-    // const notLogin = (isLogged) => {
-    //     setTimeout(() => {
-    //         if (!isLogged) {
-    //             if (window.confirm('Bạn phải đăng nhập để tiếp tục'))
-    //                 window.location.href = '/login'
-    //             else window.location.href = '/'
-    //         };
-    //     }, 3000);
-    // }
     return (
         <Switch>
+            {/* Admin */}
             <Route path='/' exact>
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Home /></div> : <Home />}
             </Route>
@@ -94,13 +83,9 @@ function Pages() {
                 {isAdmin ? <div className='item' style={styleObject}><Dasboard /><Discounts /></div> : <NotFoundPage />}
             </Route>
             <Route path='/history/:id' exact>
-                <ViewDetailOrder />
-            </Route>
-            <Route path='/address' exact>
-                {isAdmin || !isLogged ? <NotFoundPage /> : <CreateAddress />}
-            </Route>
-            <Route path='/changepassword' exact>
-                {isAdmin || !isLogged ? <NotFoundPage /> : <ChangePassword user={user} />}
+                {
+                    isAdmin ? <div className='item' style={styleObject}><Dasboard /><ViewDetailOrder /></div> : (isLogged ? <ViewDetailOrder /> : <Login />)
+                }
             </Route>
             <Route path='/products/detail/:id' exact>
                 {!isAdmin ? <DetailProduct /> : <NotFoundPage />}
@@ -114,28 +99,32 @@ function Pages() {
             <Route path='/contact' exact>
                 {!isAdmin ? <Contact /> : <NotFoundPage />}
             </Route>
-            <Route path='/login' exact>
-                {/* {isLogged ?
-                    <Route path='/' exact>
-                        <Home />
-                    </Route>
-                    : <Login />} */}
-                <Login />
-            </Route>
             <Route path='/register'>
                 {!isAdmin ? <Register /> : <NotFoundPage />}
             </Route>
+            <Route path='/cart' exact>
+                {!isAdmin ? (isLogged ? <Cart /> : <Login />) : <NotFoundPage />}
+            </Route>
+            {/* Admin isLogged */}
+            <Route path='/address' exact>
+                {isAdmin || !isLogged ? <NotFoundPage /> : <CreateAddress />}
+            </Route>
+            <Route path='/changepassword' exact>
+                {isAdmin || !isLogged ? <NotFoundPage /> : <ChangePassword user={user} />}
+            </Route>
+            {/* isLogged */}
             <Route path='/forgot_password'>
                 {!isLogged ? <ForgotPassword /> : <NotFoundPage />}
             </Route>
             <Route path='/user/reset/:id'>
                 {!isLogged ? <ResetPassword /> : <NotFoundPage />}
             </Route>
-            <Route path='/cart' exact>
-                {!isAdmin ? (isLogged ? <Cart /> : <Login />) : <NotFoundPage />}
-            </Route>
+            {/* Khacs */}
             <Route path='/checkout' exact>
                 <Checkout />
+            </Route>
+            <Route path='/login' exact>
+                <Login />
             </Route>
             <Route path='*'>
                 <NotFoundPage />

@@ -28,6 +28,7 @@ function Header() {
     const [isAdmin] = state.UserAPI.isAdmin
     const [cart] = state.UserAPI.cart
     const [user] = state.UserAPI.user
+    const socket = state.socket
     // const [history] = state.UserAPI.history
     const [onDisplay, setOndisplay] = useState(false)
 
@@ -36,13 +37,15 @@ function Header() {
 
     //console.log(state);
     //console.log(cart);
-    // useEffect(() => {
-    //     socket.on("server-sent-data", (data) => {
-    //         console.log(data);
-    //         setText(data);
-    //         setCheck1(true);
-    //     })
-    // }, [])
+    useEffect(() => {
+        if (socket) {
+            socket.on("server-sent-data", (data) => {
+                console.log(data);
+                setText(data);
+                setCheck1(true);
+            })
+        }
+    }, [socket])
     const check = () => {
         if (!isLogged) {
             window.location.href = '/login'

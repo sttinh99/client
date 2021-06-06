@@ -32,6 +32,9 @@ function Footer() {
                             <li>Saturday: <span>7:00am - 17:00pm</span></li>
                         </ul>
                     </div>
+                    <div className="select-language">
+                        <div id="google_translate_element"></div>
+                    </div>
                 </div>
                 <hr />
             </div>

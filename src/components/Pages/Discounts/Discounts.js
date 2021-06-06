@@ -17,6 +17,7 @@ function Discount() {
     const [date, setDate] = useState('')
     const [token] = state.token
     const [callback, setCallback] = state.DiscountAPI.callback
+    const socket = state.socket;
     const handleChangeCategory = (e) => {
         setCategory(e.target.value)
     }
@@ -32,9 +33,11 @@ function Discount() {
             const res = await axios.post(`/discounts/create`, { discount, category, date }, {
                 headers: { Authorization: token }
             })
-            console.log(res)
+            alert(res.data.msg)
+            setCallback(!callback)
+            socket.emit("deleteDiscount", callback)
         } catch (error) {
-
+            alert(error.response.data.msg);
         }
     }
     return (
@@ -77,7 +80,7 @@ function Discount() {
                         <button type='submit'>Create</button>
                     </div>
                 </form>
-                <RenderDiscount discounts={discounts} token={token} callback={callback} setCallback={setCallback} />
+                <RenderDiscount discounts={discounts} token={token} callback={callback} setCallback={setCallback} socket={socket} />
             </div>
         </div>
     );

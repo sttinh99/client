@@ -5,6 +5,8 @@ import { GlobalState } from '../../GlobalState'
 import RenderAddresses from './RenderAddresses'
 import Loadding from '../../Loadding/Loadding';
 
+import allAddresses from '../../../assets/addresses/address.json'
+
 const initialState = {
     name: '',
     phone: '',
@@ -28,34 +30,24 @@ function Address() {
 
     const [onDisplay, setOndisplay] = useState(false)
 
-
     useEffect(() => {
-        const getOneCity = cities.find(item => {
-            return city === item.Title
+        const getOneCity = allAddresses.find(item => {
+            return city === item.Name
         })
         //getNameCity để lấy ID
         if (getOneCity) {
-            const id = getOneCity.ID
-            const getCity = async () => {
-                const res = await axios.get(`https://thongtindoanhnghiep.co/api/city/${id}/district`);
-                setDistricts(res.data)
-            }
-            getCity();
+            console.log(getOneCity.Districts);
+            setDistricts(getOneCity.Districts)
         }
-    }, [city, cities])
+    }, [city])
     useEffect(() => {
         const getOneDistrict = districts.find(item => {
-            return district === item.Title
+            return district === item.Name
         })
         if (getOneDistrict) {
-            const id = getOneDistrict.ID
-            const getCity = async () => {
-                const res = await axios.get(`https://thongtindoanhnghiep.co/api/district/${id}/ward`);
-                setWards(res.data)
-            }
-            getCity();
+            setWards(getOneDistrict.Wards)
         }
-    }, [district, districts])
+    }, [district])
     const handleChangeInput = (e) => {
         const { name, value } = e.target
         setAddress({ ...address, [name]: value })
@@ -149,8 +141,8 @@ function Address() {
                                 <select name='city' onChange={handleChangeCity}>
                                     <option>Select a City</option>
                                     {
-                                        cities.map((city) => {
-                                            return <option key={city.ID} id={city.ID}> {city.Title}</option>
+                                        allAddresses.map((city) => {
+                                            return <option key={city.Id} id={city.id}> {city.Name}</option>
                                         })
                                     }
                                 </select>
@@ -159,7 +151,7 @@ function Address() {
                                 <option>Select a District</option>
                                 {
                                     districts.map((district) => {
-                                        return <option key={district.ID} id={district.ID}> {district.Title}</option>
+                                        return <option key={district.Id} id={district.Id}> {district.Name}</option>
                                     })
                                 }
                             </select>
@@ -167,7 +159,7 @@ function Address() {
                                 <option>Select a Ward</option>
                                 {
                                     wards.map((ward) => {
-                                        return <option key={ward.ID} id={ward.ID}> {ward.Title}</option>
+                                        return <option key={ward.Id} id={ward.Id}> {ward.Name}</option>
                                     })
                                 }
                             </select>

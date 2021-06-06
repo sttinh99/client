@@ -97,13 +97,6 @@ function UserAPI(token) {
         }
     }
     useEffect(() => {
-        const getCity = async () => {
-            const res = await axios.get('https://thongtindoanhnghiep.co/api/city');
-            setCities(res.data.LtsItem)
-        }
-        getCity();
-    }, [])
-    useEffect(() => {
         if (token) {
             const start = (page - 1) * perPage;
             const end = (page * perPage);

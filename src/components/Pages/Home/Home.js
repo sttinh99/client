@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import axios from 'axios'
+
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
@@ -23,6 +25,18 @@ function Home() {
     const [hotMouses] = state.ProductAPI.hotMouses;
     const [hotHeadphones] = state.ProductAPI.hotHeadphones;
     const [categories] = state.CategoryAPI.categories
+    const [discounts] = state.DiscountAPI.discounts
+    console.log(discounts);
+    useEffect(() => {
+        console.log(discounts);
+        if (discounts) {
+            discounts.map(async (item) => {
+                if ((new Date(item.to) - new Date()) <= 0) {
+                    await axios.delete(`/discounts/delete/${item._id}`)
+                }
+            })
+        }
+    }, [discounts])
     return (
         <>
             {!isAdmin ? <div className="user-home">

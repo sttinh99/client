@@ -7,7 +7,6 @@ function DiscountAPI() {
     useEffect(() => {
         const getDiscounts = async () => {
             const res = await axios.get(`/discounts`);
-            console.log(res.data)
             setDiscounts(res.data.allDiscounts)
             //setResult(res.data.result)
         }

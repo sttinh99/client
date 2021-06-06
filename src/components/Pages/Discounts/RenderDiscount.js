@@ -1,16 +1,18 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function RenderDiscount({ discounts, token, callback, setCallback }) {
-    console.log(discounts, '^^');
+function RenderDiscount({ discounts, token, callback, setCallback, socket }) {
+
     const removeDiscount = async (id) => {
         try {
-            const res = await axios.delete(`/discounts/delete/${id}`, {
-                headers: { Authorization: token }
-            })
-            console.log(res.data.msg)
-            alert("Delete Discount");
-            setCallback(callback);
+            if (window.confirm("You are sure delete this discount")) {
+                const res = await axios.delete(`/discounts/delete/${id}`, {
+                    headers: { Authorization: token }
+                })
+                alert(res.data.msg);
+                setCallback(!callback);
+                await socket.emit("deleteDiscount", callback);
+            }
         } catch (error) {
             return alert(error.response.data.msg)
         }
@@ -29,15 +31,18 @@ function RenderDiscount({ discounts, token, callback, setCallback }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {discounts.map((item, index) =>
-                        <tr key={index}>
+                    {discounts.map((item, index) => {
+                        return <tr key={index}>
                             <td>{item._id}</td>
                             <td>{item.category}</td>
                             <td>{item.discount}%</td>
                             <td>{new Date(item.from).toLocaleDateString()}</td>
                             <td>{new Date(item.to).toLocaleDateString()}</td>
-                            <td><button onClick={() => removeDiscount(item._id)}>X</button></td>
+                            <td>
+                                <button onClick={() => removeDiscount(item._id)}>X</button>
+                            </td>
                         </tr>
+                    }
                     )}
                 </tbody>
             </table>

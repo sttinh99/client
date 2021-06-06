@@ -22,6 +22,8 @@ function Checkout() {
     const [address, setAddress] = useState("");
     const [callback, setCallback] = state.ProductAPI.callback;
 
+    const socket = state.socket;
+
     let payments;
     let deliveryCharges = 0;
 
@@ -56,7 +58,7 @@ function Checkout() {
             await addToCart([]);
             await setCallback(!callback)
             await alert('You have successfully ordered');
-            // await socket.emit("client-sent-data", { msg: "You have a new order" });
+            socket.emit("client-sent-data", { msg: "You have a new order" });
             await history.push('/products');
             await (window.location.href = "/products");
         } catch (error) {
