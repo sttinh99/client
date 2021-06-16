@@ -80,7 +80,7 @@ function Discount() {
                         <button type='submit'>Create</button>
                     </div>
                 </form>
-                <RenderDiscount discounts={discounts} token={token} callback={callback} setCallback={setCallback} socket={socket} />
+                <RenderDiscount discounts={discounts.filter(item => item.isDelete === false)} token={token} callback={callback} setCallback={setCallback} socket={socket} />
             </div>
         </div>
     );
