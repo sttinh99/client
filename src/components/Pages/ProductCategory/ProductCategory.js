@@ -24,7 +24,7 @@ function ProductCategory() {
     const param = useParams()
 
     const handlePageChange = (page) => {
-        console.log(page, 'page');
+        // console.log(page, 'page');
         setPage(page)
     }
 

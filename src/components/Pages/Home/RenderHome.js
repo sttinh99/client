@@ -16,12 +16,18 @@ function RenderHome({ items }) {
                 <h2 className="text">{items[0].category + `s`}</h2>
                 <div className="render-items">
                     {
-
                         items.map(item =>
                             <div className="product-item" key={item._id}>
                                 <img src={item.images.url} alt="Apple iMac 27 Retina" />
                                 <div className="content">
-                                    <p className="price">${item.prices}</p>
+                                    {
+                                        item.discount > 0 ?
+                                            <div className="discount-product">
+                                                <span>${item.prices - (item.prices * item.discount) / 100}</span>
+                                                <strike>${item.prices}</strike>
+                                            </div> :
+                                            <span>${item.prices}</span>
+                                    }
                                     <h2 className="h3">{item.title}</h2>
                                     <p className="des">{item.description}</p>
                                     <div className="add-cart">

@@ -79,7 +79,7 @@ function UserAPI(token) {
         else {
             const takeCart = cart.find(item => product._id === item._id)
             // console.log(takeCart);
-            console.log(takeCart.count, product.quantity);
+            //console.log(takeCart.count, product.quantity);
             if (takeCart.count + 1 > product.quantity) return alert(`Only ${product.quantity} products left in stock`)
             cart.map(item => {
                 if (item._id === product._id) {

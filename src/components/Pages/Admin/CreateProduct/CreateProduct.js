@@ -149,14 +149,14 @@ function CreateProduct(props) {
         try {
             // console.log(product.category, 'xxxxxxx');
             if (product.category === 'laptop') {
-                inforTT = `${product.title} ( ${computer.cpu}|${computer.vga}|${computer.ram}|${computer.screen}|${computer.harddisk}|
+                inforTT = `${product.title} ${computer.cpu}|${computer.vga}|${computer.ram}|${computer.screen}|${computer.harddisk}|
                     ${computer.opearatingSysterm}|${computer.battery}|${computer.weight}`
             }
             else if (product.category === 'ram') {
-                inforTT = `${product.title} (${ram.BUS}|${ram.capacity}|${ram.generation})`
+                inforTT = `${product.title} ${ram.BUS}|${ram.capacity}|${ram.generation}`
             }
             else if (product.category === 'harddisk') {
-                inforTT = `${product.title} (${harddisk.type}|${harddisk.size}|${harddisk.gate}|${harddisk.capacity})`
+                inforTT = `${product.title} ${harddisk.type}|${harddisk.size}|${harddisk.gate}|${harddisk.capacity}`
             }
             else {
                 inforTT = product.title
@@ -164,18 +164,18 @@ function CreateProduct(props) {
             if (!isAdmin) return alert('you are not admin')
             if (!images) return alert('no images upload')
             if (onEdit) {
+                inforTT = inforTT.split('|').join('') || '';
                 await axios.post(`/products/update/${param.id}`, { ...product, images, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
             else {
+                inforTT = inforTT.split('|').join('');
                 await axios.post('/products/create', { ...product, images, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
             await setAllproducts([...allproducts, product]);
-            // setImages(false)
-            // setProduct(initialState)
             await setCallback(!callback)
             await socket.emit("add-product", callback);
             await history.push("/products");

@@ -78,6 +78,9 @@
     width: 76%;
     margin: auto;
 }
+.not-found-products {
+    text-align: center;
+}
 /*Products-Item*/
 @import url("../Item/ProductItem.css");
 /*Render Products in Admin*/
