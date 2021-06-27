@@ -13,7 +13,7 @@ function ViewDetailOrder() {
     useEffect(() => {
         if (params) {
             history.forEach(item => {
-                console.log(item);
+                console.log(item, 'dá');
                 if (item._id === params.id) setOrderDetails(item)
             });
         }
@@ -22,15 +22,19 @@ function ViewDetailOrder() {
     return (
         <div className={isAdmin ? 'no-care' : "care"}>
             <div className="detail-order">
-                <h2 style={{ "textAlign": "center" }}>Address Customer</h2>
+                <h2 style={{ "textAlign": "center" }}>View Detail History</h2>
                 <div className="box-infor">
                     <div className='infor-user'>
                         <p>Name: {orderDetails.address.name}</p>
                         <p>Phone: {orderDetails.address.phone}</p>
                     </div>
                     <div className='infor-products'>
-                        <label>Address Recieve: </label>
+                        <span>Address Recieve: </span>
                         <span>{orderDetails.address.inforAddress}, {orderDetails.address.ward}, {orderDetails.address.district}, {orderDetails.address.city}</span>
+                    </div>
+                    <div className="date-purchased">
+                        <label>Date Purchased: </label>
+                        <span>{new Date(orderDetails.createdAt).toLocaleDateString()}</span>
                     </div>
                 </div>
                 <h2 style={{ "textAlign": "center" }}>View Detail</h2>
@@ -49,9 +53,9 @@ function ViewDetailOrder() {
                             return <tr key={item._id}>
                                 <td className='title'>{item.title}</td>
                                 <td className='img'><img src={item.images} alt='images' /></td>
-                                <td className='prices'>{item.prices.toFixed(2)}</td>
+                                <td className='prices'>{item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                                 <td className='count'>{item.count}</td>
-                                <td className='total-item'>{(item.count * item.prices).toFixed(2)}</td>
+                                <td className='total-item'>{(item.count * item.prices).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                             </tr>
                         })}
                         <tr>
@@ -63,7 +67,7 @@ function ViewDetailOrder() {
                         </tr>
                     </tbody>
                 </table>
-                <h3>Total: ${orderDetails.total.toFixed(2)}</h3>
+                <h3>Total: ${orderDetails.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h3>
             </div>
         </div>);
 }

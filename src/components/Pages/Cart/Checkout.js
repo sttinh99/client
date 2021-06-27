@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import PaypalButton from './PaypalButton'
 import RenderAddresses from '../../Pages/CreateAddress/RenderAddresses'
+import allAddresses from '../../../assets/addresses/address.json'
 
 import axios from 'axios'
 
@@ -95,11 +96,10 @@ function Checkout() {
         return prev + item.count * item.prices
     }, 0)
     if (address) {
-        if (address.city.toLowerCase() === 'tp hồ chí minh') {
-            deliveryCharges = 0;
-        }
-        else {
-            deliveryCharges = 2;
+        if (address) {
+            let getCity = allAddresses.find(item => item.Name == address.city)
+            deliveryCharges = getCity.ShipCod
+            console.log(getCity);
         }
     }
     const total = totalAllCart + deliveryCharges;
@@ -144,8 +144,8 @@ function Checkout() {
                                     <td className="quantity">
                                         <span>{item.count}</span>
                                     </td>
-                                    <td className="prices">${item.prices}</td>
-                                    <td className="total-prices">${(item.count * item.prices).toFixed(2)}</td>
+                                    <td className="prices">${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
+                                    <td className="total-prices">${(item.count * item.prices).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
 
                                 </tr>
                             })
@@ -163,7 +163,7 @@ function Checkout() {
                     <input type="text" placeholder="Your Discount Code" className="discount" />
                 </div >
                 <div className='total'>
-                    <h3>Grand Total: ${total.toFixed(2)}</h3>
+                    <h3>Grand Total: ${total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h3>
                     <div className='choose-payment'>
                         <div className='home'>
                             <label>Payment at home</label>

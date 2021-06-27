@@ -63,13 +63,13 @@ function RenderCart({ item }) {
                 <img src={item.images} alt="..." />
             </td>
             <td className="title">{item.title}</td>
-            <td className="prices">${item.prices}</td>
+            <td className="prices">${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
             <td className="quantity">
                 <button onClick={() => reduceItem(item._id)} className="btn-change">-</button>
                 <span>{item.count}</span>
                 <button onClick={() => augmentItem(item._id)} className="btn-change">+</button>
             </td>
-            <td className="total-prices">{(item.count * item.prices).toFixed(2)}$</td>
+            <td className="total-prices">{(item.count * item.prices).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}$</td>
             <td className="delete">
                 <button className="drop-item" onClick={() => removeItem(item._id)}>X</button>
             </td>

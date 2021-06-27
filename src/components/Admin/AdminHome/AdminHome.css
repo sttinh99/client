@@ -1,10 +1,22 @@
 .admin-home {
     min-height: 800px;
     padding-bottom: 400px;
+    margin-top: 2rem;
+    /* width: 100%; */
 }
-.chart {
-    padding-bottom: 400px;
-    min-height: 600px;
-    width: 100%;
-    padding-left: 50px;
+.admin-home .title {
+    text-align: center;
+}
+.admin-home .chart {
+    display: flex;
+    justify-content: space-evenly;
+}
+.admin-home .block-chart {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.admin-home .block-pie {
+    width: 20%;
 }

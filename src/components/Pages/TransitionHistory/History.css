@@ -57,3 +57,7 @@ tbody tr td.img img {
 .ex-bill img {
     width: 20px;
 }
+.date-purchased {
+    width: 90%;
+    margin: auto;
+}

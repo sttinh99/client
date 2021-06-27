@@ -1,0 +1,13 @@
+.form-input {
+    width: 56%;
+}
+.form-input button {
+    display: block;
+    text-align: end;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgb(54, 141, 255);
+    margin-top: 10px;
+    border-radius: 10px;
+}

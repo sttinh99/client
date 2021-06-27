@@ -6,7 +6,6 @@ function NotFound() {
     return (
         <div className='notfound-page'>
             <Link to='/home'>
-                <h2>Click to Home</h2>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12 col-md-12 mt-5 mb-5">

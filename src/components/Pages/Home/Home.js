@@ -31,6 +31,7 @@ function Home() {
         console.log(discounts);
         if (discounts) {
             discounts.map(async (item) => {
+                console.log(new Date(item.to) - new Date());
                 if ((new Date(item.to) - new Date()) <= 0) {
                     await axios.delete(`/discounts/delete/${item._id}`)
                 }
@@ -39,7 +40,7 @@ function Home() {
         setLoading(true)
     }, [discounts])
     return (
-        <div>
+        <div className="home-page">
             {
                 !loading ? <Loadding /> : <>
                     {!isAdmin ? <div className="user-home">

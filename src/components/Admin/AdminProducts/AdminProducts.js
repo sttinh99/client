@@ -46,7 +46,7 @@ function AdminProducts({ product, token }) {
             </td>
             <td className="title">{product.title}</td>
             <td className="quantity">{product.quantity}</td>
-            <td className="prices">{product.prices}$</td>
+            <td className="prices">{product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}$</td>
             <td className="category">{product.category}</td>
             <td className="sold">{product.sold}</td>
             <td className="update-or-drop">

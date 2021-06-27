@@ -33,7 +33,8 @@ import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 function Pages() {
 
     const styleObject = {
-        display: 'flex'
+        display: 'flex',
+        backgroundColor: 'rgb(245 245 245)'
     }
 
     const state = useContext(GlobalState);

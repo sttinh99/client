@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
 
@@ -8,6 +8,12 @@ function RenderHome({ items }) {
     const state = useContext(GlobalState)
     const addCart = state.UserAPI.addCart;
     const [categories] = state.CategoryAPI.categories
+
+    const history = useHistory();
+
+    const clickDetail = (id) => {
+        history.push(`/products/detail/${id}`);
+    }
 
     if (items.length === 0) return null
     return (
@@ -18,13 +24,13 @@ function RenderHome({ items }) {
                     {
                         items.map(item =>
                             <div className="product-item" key={item._id}>
-                                <img src={item.images.url} alt="Apple iMac 27 Retina" />
+                                <img src={item.images.url} alt="Apple iMac 27 Retina" onClick={() => clickDetail(item._id)} />
                                 <div className="content">
                                     {
                                         item.discount > 0 ?
                                             <div className="discount-product">
-                                                <span>${item.prices - (item.prices * item.discount) / 100}</span>
-                                                <strike>${item.prices}</strike>
+                                                <span>${(item.prices - (item.prices * item.discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+                                                <strike>${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</strike>
                                             </div> :
                                             <span>${item.prices}</span>
                                     }
@@ -41,9 +47,7 @@ function RenderHome({ items }) {
                     }
                 </div>
             </div>
-            <div className="align-right align-center-xs">
-                <hr className="offset-sm" />
-            </div>
+
             {categories.length > 0 && <Link to={`/products/category/${categories.find(item => item.name === items[0].category)._id}`}><h5 className="upp">View all {items[0].category}s</h5></Link>}
         </section >
     );

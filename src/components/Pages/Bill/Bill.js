@@ -52,9 +52,10 @@ function Bill() {
                         <div className="info">
                             <h2>Contact Info</h2>
                             <p>
-                                Address : {bill.address.inforAddress} {bill.address.ward} {bill.address.district} {bill.address.city}<br />
-                            Email   : {bill.address.email}<br />
-                            Phone   : {bill.address.phone}<br />
+                                Address      : {bill.address.inforAddress} {bill.address.ward} {bill.address.district} {bill.address.city}<br />
+                                Email        : {bill.address.email}<br />
+                                Phone        : {bill.address.phone}<br />
+                                Date Purchase: {new Date(bill.createdAt).toLocaleDateString()}
                             </p>
                         </div>
                     </div>{/*End Invoice Mid*/}
@@ -84,7 +85,7 @@ function Bill() {
                                         <td />
                                         <td />
                                         <td className="Rate"><h2>Delivery Charges</h2></td>
-                                        <td className="payment"><h2>{bill.deliveryCharges}</h2></td>
+                                        <td className="payment"><h2>${bill.deliveryCharges}</h2></td>
                                     </tr>
                                     <tr className="tabletitle">
                                         <td />

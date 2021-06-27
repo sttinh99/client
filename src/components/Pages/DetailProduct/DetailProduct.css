@@ -55,6 +55,13 @@
     min-width: 80%;
     padding: 20px 0 20px;
 }
+.box-detail p.sold-out {
+    font-weight: bold;
+    font-size: 50px;
+    background: -webkit-linear-gradient(45deg, rgb(22, 22, 22), #d363b7, #c7ccca);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .row-price {
     height: 10%;
     display: flex;
@@ -62,15 +69,16 @@
 }
 .row-price p {
     text-transform: capitalize;
-    color: #777;
+    color: rgb(31, 30, 30);
+    font-weight: bold;
     font-size: 20px;
     transition: 0.4s;
 }
-.row-price p:hover {
+/* .row-price p:hover {
     color: black;
     font-weight: 900;
     font-size: 20px;
-}
+} */
 .row-price span {
     text-transform: capitalize;
     color: blue;
@@ -139,4 +147,43 @@ tbody tr th {
     font-size: 20px;
     text-align: end;
     text-transform: capitalize;
+}
+.comments-products {
+    width: 80%;
+    margin: auto;
+    margin-top: 2rem;
+}
+.comments-products h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+}
+.boxx-detail .comments,
+.show-comment {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.boxx-detail .show-comment {
+    margin-bottom: 1rem;
+}
+.boxx-detail .load-and-hide-cmt {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 3rem;
+}
+.load-and-hide-cmt button {
+    outline: none;
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: black;
+}
+.load-and-hide-cmt button:hover {
+    text-decoration: underline;
+}
+.show-detail {
+    text-transform: uppercase;
 }

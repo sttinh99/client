@@ -7,8 +7,8 @@ function RenderContent({ desItem, componentItem }) {
                 desItem.map((item, index) => {
                     //console.log(limitRelated);
                     return <tr key={index}>
-                        <td>{item}</td>
                         <td>{componentItem[index]}</td>
+                        <td>{item}</td>
                     </tr>
                 })
             }

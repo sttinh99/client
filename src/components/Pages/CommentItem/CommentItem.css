@@ -1,0 +1,49 @@
+.comment-item {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+}
+.comment-item .avt-user {
+    width: 4%;
+}
+.comment-item .cmt {
+    width: 52%;
+}
+.comment-item .cmt .block-cmt {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    background: #f5f5fa;
+    color: black;
+    word-break: break-word;
+}
+.comment-item .cmt p.username {
+    font-weight: bold;
+}
+.comment-item .cmt .time-rpl {
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    color: rgb(170, 170, 170);
+}
+.time-rpl .reply {
+    cursor: pointer;
+}
+.time-rpl .reply:hover,
+.show-reply:hover {
+    color: rgb(82, 77, 77);
+}
+.form-reply {
+    width: 100%;
+}
+.form-reply .content-rpl {
+    width: 100%;
+    display: flex;
+}
+.form-reply .sb-avatar {
+    width: 7% !important;
+}
+.reply-comment .block-yourname {
+    display: flex;
+}

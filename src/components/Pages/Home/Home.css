@@ -1,3 +1,6 @@
+.home-page {
+    width: 100%;
+}
 .user-home {
     padding-bottom: 400px;
 }
@@ -13,7 +16,7 @@
 .user-home .category-sp ul {
     background: #fefefe;
     border-radius: 10px;
-    width: 180px;
+    width: 229px;
 }
 .user-home .category-sp ul li {
     padding: 10px 20px;
@@ -21,6 +24,7 @@
     border-radius: 10px;
     font-weight: bold;
     transition: 0.4s;
+    font-size: 20px;
 }
 .user-home .category-sp ul li:hover {
     background: #d4d4d4;
@@ -47,11 +51,12 @@
 }
 .hot-laptops,
 .hot-mouses,
-.hot-headphones {
+.hot-headphone {
     padding: 10px 20px;
     width: 100%;
-    box-shadow: 0px 4px 10px rgba(31, 31, 31, 0.15);
+    box-shadow: 0px 4px 10px rgba(19, 16, 16, 0.452);
     margin-top: 20px;
+    border-radius: 20px;
 }
 /*Render Home*/
 .products-home {
@@ -77,6 +82,8 @@
     height: 450px;
     box-shadow: 0px 4px 10px rgba(31, 31, 31, 0.15);
     transition: 0.4s;
+    border-radius: 20px;
+    overflow: hidden;
 }
 .products-home .render-items .product-item:hover {
     -webkit-transform: translateY(-6px);
@@ -103,7 +110,7 @@
     height: 43px;
 }
 .products-home .content h2.h3 {
-    height: 32%;
+    height: 31%;
     text-transform: capitalize;
     overflow: hidden;
     color: blue;

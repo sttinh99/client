@@ -8,6 +8,7 @@
     position: relative;
     transition: 0.4s;
     z-index: 0;
+    border-radius: 20px;
 }
 .product_card:hover {
     -webkit-transform: translateY(-6px);
@@ -30,7 +31,7 @@
     height: 100px;
 }
 .product_card .product_box h2 {
-    height: 53%;
+    height: 52%;
     text-transform: capitalize;
     overflow: hidden;
     color: blue;
@@ -57,7 +58,7 @@
     padding: 5px 10px 5px;
 }
 .discount-product {
-    width: 40%;
+    width: 60%;
     display: flex;
     justify-content: space-between;
 }
