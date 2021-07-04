@@ -56,22 +56,27 @@ function ProductCategory() {
     // }
     return (
         <>
-            {loadding ? <Loadding /> : <div className="category-items">
+            <div className="category-items">
                 <div className="related-products">
-                    {/* <Search search={searchItem} handleOnChange={handleOnChange} /> */}
                     <h2>{category.name}</h2>
-                    <div className="products">
-                        {
-                            allItems.map(product => {
-                                //console.log(limitRelated);
-                                return <ProductItem key={product._id} product={product} />
-                            })
-                        }
-                    </div>
+                    {
+                        allItems.length === 0 ? <div>
+                            <p style={{ textAlign: "center" }}>Not found Products</p>
+                        </div> : <div className="products">
+                            {
+                                allItems.map(product => {
+                                    //console.log(limitRelated);
+                                    return <ProductItem key={product._id} product={product} />
+                                })
+                            }
+                        </div>
+                    }
                 </div>
                 {/* <Pagination page={page} handlePageChange={handlePageChange} products={products} /> */}
+
                 <Pagination handlePageChange={handlePageChange} products={allItems} page={page} />
-            </div>}
+
+            </div>
         </>
     );
 }

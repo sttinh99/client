@@ -19,17 +19,17 @@ function TransitionHisory() {
     const handlePageChange = (page) => {
         setPage(page)
     }
-    const checkOrder = async (item) => {
-        try {
-            console.log(item._id);
-            await axios.post(`/checkout/${item._id}`, { status: true }, {
-                headers: { Authorization: token }
-            })
-            setCallback(!callback)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
+    // const checkOrder = async (item) => {
+    //     try {
+    //         console.log(item._id);
+    //         await axios.post(`/checkout/${item._id}`, { status: true }, {
+    //             headers: { Authorization: token }
+    //         })
+    //         setCallback(!callback)
+    //     } catch (error) {
+    //         alert(error.message)
+    //     }
+    // }
     const dropOrderChange = async (item) => {
         if (window.confirm("Do you want cancel this order")) {
             if (!item.status) {
@@ -82,7 +82,7 @@ function TransitionHisory() {
                                                 item.status ? <button disabled style={{ "background": "#b1acaca6", "padding": "5px 10px" }}>Received</button> :
                                                     <button style={{ "background": "rgb(255 0 0 / 72%)", "padding": "5px 20px" }} onClick={() => dropOrderChange(item)}>Cancel</button>
                                             }</td>}
-                                            {isAdmin ? <td><Link to={`/bill/${item._id}`} className='ex-bill'><img onClick={() => checkOrder(item)} src={exportbill} alt="exportbillx" /></Link></td> : null}
+                                            {isAdmin ? <td><Link to={`/bill/${item._id}`} className='ex-bill'><img src={exportbill} alt="exportbillx" /></Link></td> : null}
                                         </tr>
                                     )
                                 })
@@ -97,3 +97,4 @@ function TransitionHisory() {
 }
 
 export default React.memo(TransitionHisory);
+// onClick={() => checkOrder(item)}

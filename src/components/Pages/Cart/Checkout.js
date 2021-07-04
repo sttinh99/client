@@ -61,7 +61,6 @@ function Checkout() {
             await alert('You have successfully ordered');
             socket.emit("client-sent-data", { msg: "You have a new order" });
             await history.push('/products');
-            await (window.location.href = "/products");
         } catch (error) {
             alert(error.response.data.msg);
         }

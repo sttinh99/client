@@ -1,0 +1,16 @@
+.rating i {
+    color: rgb(238, 42, 91);
+    margin: 5px 0;
+    padding-right: 0px;
+    cursor: pointer;
+}
+.rating .star {
+    position: relative;
+}
+.rating .star-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 79px;
+    overflow: hidden;
+}

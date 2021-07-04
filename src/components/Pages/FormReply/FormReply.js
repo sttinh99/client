@@ -20,7 +20,7 @@ function FormReply({ id, socket, name, setReply, send, myname, user_id, setHideR
     const contentRef = useRef()
     const commentSubmit = () => {
         const content = contentRef.current.innerHTML
-        if (contentRef.current.textContent.trim().length < 10) {
+        if (contentRef.current.textContent.trim().length < 1) {
             return alert("Comment is not valid");
         }
         const createAt = new Date().toISOString()
@@ -43,7 +43,6 @@ function FormReply({ id, socket, name, setReply, send, myname, user_id, setHideR
                     background: '#fff',
                     borderRadius: '10px',
                     display: "inline",
-                    boxShadow: '-5px 5px 16px -5px'
                 }}
                     suppressContentEditableWarning={true}
                 > </div>

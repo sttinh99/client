@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
 import html2canvas from "html2canvas";
 import jsPdf from "jspdf";
-
+import axios from 'axios'
 import './Bill.css';
 
 function Bill() {
     const state = useContext(GlobalState);
     const [history] = state.UserAPI.history;
+    const [token] = state.token
     const [bill, setBill] = useState([]);
     const params = useParams()
     useEffect(() => {
@@ -29,15 +30,21 @@ function Bill() {
             const imgData = canvas.toDataURL("image/png");
             const pdf = new jsPdf();
             pdf.addImage(imgData, "JPEG", -115, 40);
-            pdf.save(`${new Date().toISOString()}.pdf`);
+            pdf.save(`${params.id}.pdf`);
         });
     };
-
+    const notifyUser = async () => {
+        await axios.post(`/checkout/${params.id}`, { status: true }, {
+            headers: { Authorization: token }
+        })
+    }
     return (
-
         <div className="invoice-box">
             <button id="print" onClick={printPDF}>
                 PRINT
+            </button>
+            <button onClick={notifyUser}>
+                Send
             </button>
             <div id='print-bill'>
                 <div id="invoice-POS">

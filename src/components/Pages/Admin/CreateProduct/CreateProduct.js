@@ -61,7 +61,7 @@ function CreateProduct(props) {
     const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei', "Acer"]
     const RAMBUS = ['2400MHz', '2666MHz', '3000MHz', '3200MHz', '1600MHz', '2800MHz', ' 3600MHz'];
     const RAMBrand = ['G.SKILL', 'KINGSTON', 'KINGMAX', 'CRUCIAL', 'ADATA', 'CORSAIR', 'GEIL', 'KLEVV', 'GIGABYTE'];
-    const RAMCapacity = ['1 x 8GB', '1 x 4GB', '2 x 8GB', '1 x 16GB', '2 x 16GB', '2 x 4GB', '2 x 32GB'];
+    const RAMCapacity = ['4GB', '8GB', '16GB', '32GB'];
     const RAMGeneration = ['DDR4', 'DDR3', 'DDR3L'];
     const HarddiskBrand = ['WD', 'SEAGATE', 'SAMSUNG', 'ORICO', 'TRANSCEND', 'KINGSTON', 'LACIE', 'CRUCIAL', 'GIGABYTE']
     const batteryCollection = ['2 Cell', '3 Cell', '4 Cell'];
@@ -432,13 +432,12 @@ function CreateProduct(props) {
 
                                 </>
                                 : <>
-
+                                    <div className='form-group'>
+                                        <label htmlFor='description'>description: </label>
+                                        <textarea type='text' id='description' name='description' placeholder='add description' value={product.description} onChange={handleChangeInput} />
+                                    </div>
                                 </>
                 }
-                <div className='form-group'>
-                    <label htmlFor='description'>description: </label>
-                    <textarea type='text' id='description' name='description' placeholder='add description' value={product.description} onChange={handleChangeInput} />
-                </div>
                 <div className='form-group'>
                     <label htmlFor='quantity'>quantity: </label>
                     <input type='number' id='quantity' name='quantity' placeholder='add quantity' value={product.quantity} onChange={handleChangeInput} />

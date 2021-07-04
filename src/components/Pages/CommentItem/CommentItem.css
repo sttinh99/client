@@ -18,8 +18,12 @@
     color: black;
     word-break: break-word;
 }
-.comment-item .cmt p.username {
+.comment-item .cmt .username {
+    display: flex;
+}
+.comment-item .cmt .username p {
     font-weight: bold;
+    margin-right: 10px;
 }
 .comment-item .cmt .time-rpl {
     padding-left: 10px;
@@ -46,4 +50,7 @@
 }
 .reply-comment .block-yourname {
     display: flex;
+}
+.block-yourname p.username {
+    font-weight: bold;
 }

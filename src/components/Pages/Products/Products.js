@@ -11,7 +11,6 @@ import Pagination from '../../Pagination/Pagination'
 
 function Products() {
     const state = useContext(GlobalState)
-    console.log(state);
     const [page, setPage] = state.ProductAPI.page
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token

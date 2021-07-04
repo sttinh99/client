@@ -18,6 +18,7 @@ import Contact from './Contact/Contact'
 import Cart from './Cart/Cart'
 import NotFoundPage from './NotFound/NotFound'
 import DetailProduct from './DetailProduct/DetailProduct'
+import Compare from './Compare/Compare'
 import TransitionHistory from './TransitionHistory/TransitionHisory'
 import ViewDetailOrder from './TransitionHistory/ViewDetailOrder'
 
@@ -27,6 +28,7 @@ import { GlobalState } from '../GlobalState'
 import Checkout from './Cart/Checkout';
 import Dasboard from '../AdminDasboard/Dasboard';
 import Bill from '../Pages/Bill/Bill'
+import RenderBill from '../Pages/Bill/RenderBill'
 import ProductCategory from '../Pages/ProductCategory/ProductCategory'
 import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 
@@ -90,6 +92,9 @@ function Pages() {
             </Route>
             <Route path='/products/detail/:id' exact>
                 {!isAdmin ? <DetailProduct /> : <NotFoundPage />}
+            </Route>
+            <Route path='/compare/:id' exact>
+                {!isAdmin ? <Compare /> : <NotFoundPage />}
             </Route>
             <Route path='/products/category/:id' exact>
                 {!isAdmin ? <ProductCategory /> : <NotFoundPage />}

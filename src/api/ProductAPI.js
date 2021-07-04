@@ -15,20 +15,14 @@ function ProductAPI() {
     const [hotHeadphones, setHotHeadphone] = useState([]);
 
     useEffect(() => {
-        const start = (page - 1) * perPage;
-        const end = (page * perPage);
         const getProducts = async () => {
-            const res = await axios.get(`/products?${category}&${sort}&title[regex]=${search}`);
-            setProducts((res.data.products).slice(start, end))
+            const res = await axios.get(`/products?page=${page}&${category}&${sort}&title[regex]=${search}`);
+            setProducts(res.data.products)
             setResult(res.data.result)
         }
         getProducts();
     }, [callback, category, search, sort, page, callback])
     useEffect(() => {
-        const getAllProducts = async () => {
-            const res = await axios.get('/products')
-            setAllproducts((res.data.products))
-        }
         const getLaptops = async () => {
             const res = await axios.get(`/products?category=laptop&sort=-sold`)
             setHotLaptop(takeProductsHot(res.data.products))
@@ -44,8 +38,14 @@ function ProductAPI() {
         getLaptops();
         getMouses();
         getHeadphone();
+    }, [callback])
+    useEffect(() => {
+        const getAllProducts = async () => {
+            const res = await axios('/products/all')
+            setAllproducts(res.data.products)
+        }
         getAllProducts();
-    }, [page, callback])
+    }, [])
     return {
         products: [products, setProducts],
         callback: [callback, setCallback],

@@ -5,6 +5,7 @@ import moment from 'moment'
 import FormReply from '../FormReply/FormReply';
 
 import './CommentItem.css'
+import Rating from '../Rating/Rating';
 
 function CommentItem({ comment, id, socket, name, idProduct }) {
     const [reply, setReply] = useState(false);
@@ -25,7 +26,12 @@ function CommentItem({ comment, id, socket, name, idProduct }) {
             </div>
             <div className="cmt">
                 <div className="block-cmt">
-                    <p className="username">{comment.username}</p>
+                    <div className="username">
+                        <p>{comment.username}</p>
+                        {
+                            comment.rating !== 0 && <Rating product={comment} />
+                        }
+                    </div>
                     <p className="comment" dangerouslySetInnerHTML={{ __html: comment.content }} />
                 </div>
                 <div className="time-rpl">

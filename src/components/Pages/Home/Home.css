@@ -83,6 +83,7 @@
     box-shadow: 0px 4px 10px rgba(31, 31, 31, 0.15);
     transition: 0.4s;
     border-radius: 20px;
+    background-color: white;
     overflow: hidden;
 }
 .products-home .render-items .product-item:hover {
@@ -108,9 +109,11 @@
 }
 .products-home .content p.des {
     height: 43px;
+    overflow: hidden;
 }
 .products-home .content h2.h3 {
-    height: 31%;
+    min-height: 22%;
+    max-height: 31%;
     text-transform: capitalize;
     overflow: hidden;
     color: blue;
@@ -154,4 +157,7 @@ p.overview {
 .upp {
     font-size: 30px;
     font-family: fantasy;
+}
+.products-home .box-products .product-item img {
+    object-fit: contain;
 }
