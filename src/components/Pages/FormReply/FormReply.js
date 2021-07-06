@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Avatar from 'react-avatar';
 
 function FormReply({ id, socket, name, setReply, send, myname, user_id, setHideReply }) {

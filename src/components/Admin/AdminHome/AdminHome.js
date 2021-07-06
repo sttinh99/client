@@ -16,6 +16,7 @@ function AdminHome() {
     let labels = [];
     let datas = [];
     let obj = {};
+    console.log(checked);
     useEffect(() => {
         const getAllHis = async () => {
             const res = await axios.get('/checkout', {
@@ -30,7 +31,7 @@ function AdminHome() {
             setProducts(res2.data.products)
         }
         getAllHis();
-    }, [])
+    }, [token])
     // const confirmed = checked.filter(item => item.status === true)
     // if (confirmed) {
     //     confirmed.map((item) => {
@@ -39,11 +40,11 @@ function AdminHome() {
     //     })
     // }
     if (categories) {
-        categories.map((category) => {
+        categories.forEach((category) => {
             let key = category.name;
             let x = 0;
             if (products) {
-                products.map((product) => {
+                products.forEach((product) => {
                     if (product.category === category.name) {
                         x += product.sold;
                     }

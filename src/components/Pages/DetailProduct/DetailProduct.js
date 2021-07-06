@@ -178,7 +178,7 @@ function DetailProduct() {
                     </div>
             }
             <div className="related-products">
-                <h2>Products Related</h2>
+                <h2>Related Products</h2>
                 <div className="products">
                     {
                         allproducts.map(product => {

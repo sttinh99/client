@@ -6,7 +6,7 @@ function Filter() {
     const [category, setCategory] = state.ProductAPI.category
     const [categories] = state.CategoryAPI.categories
     const [page, setPage] = state.ProductAPI.page
-
+    console.log(page);
     const handleChangeCategory = (e) => {
         setCategory(e.target.value)
         setPage(1);

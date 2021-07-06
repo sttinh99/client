@@ -61,3 +61,6 @@ tbody tr td.img img {
     width: 90%;
     margin: auto;
 }
+.date-purchased label {
+    margin-bottom: 0px;
+}

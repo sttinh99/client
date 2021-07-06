@@ -6,7 +6,7 @@ import './Comments.css'
 function Comments({ id, socket, name, idProduct, rating, token }) {
     const contentRef = useRef()
     const commentSubmit = async () => {
-        if (!rating || rating == 0) {
+        if (!rating || rating === 0) {
             return alert("Please vote rate. Thanks");
         }
         const content = contentRef.current.innerHTML

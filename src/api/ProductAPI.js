@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-const perPage = 10; //x
 function ProductAPI() {
     const [products, setProducts] = useState([])
     const [callback, setCallback] = useState(false)

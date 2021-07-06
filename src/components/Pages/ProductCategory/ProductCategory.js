@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
 import ProductItem from '../Item/ProductItem'
-import Loadding from '../../Loadding/Loadding'
+// import Loadding from '../../Loadding/Loadding'
 // import Search from '../../Search/Search'
 import Pagination from '../../Pagination/Pagination'
 
@@ -29,6 +29,7 @@ function ProductCategory() {
     }
 
 
+    console.log(loadding);
     useEffect(() => {
         const start = (page - 1) * perPage;
         const end = (page * perPage);

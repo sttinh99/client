@@ -25,6 +25,7 @@ function Products() {
             socket.on("add-product", (data) => {
                 setCallback(!data);
             })
+            return () => socket.off("add-product");
         }
     }, [socket])
     useEffect(() => {
@@ -32,6 +33,7 @@ function Products() {
             socket.on("deleteDiscount", (data) => {
                 setCallback(!data);
             })
+            return () => socket.off("deleteDiscount");
         }
     }, [socket])
     if (products.length === 0) {

@@ -36,6 +36,10 @@ function ViewDetailOrder() {
                         <label>Date Purchased: </label>
                         <span>{new Date(orderDetails.createdAt).toLocaleDateString()}</span>
                     </div>
+                    <div className="date-purchased">
+                        <label>Status: </label>
+                        <span>{orderDetails.payments}</span>
+                    </div>
                 </div>
                 <h2 style={{ "textAlign": "center" }}>View Detail</h2>
                 <table className="render">
@@ -62,7 +66,7 @@ function ViewDetailOrder() {
                             <td />
                             <td />
                             <td />
-                            <td>deliveryCharges</td>
+                            <td>Transport fee</td>
                             <td>${orderDetails.deliveryCharges}</td>
                         </tr>
                     </tbody>

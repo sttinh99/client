@@ -28,7 +28,6 @@ import { GlobalState } from '../GlobalState'
 import Checkout from './Cart/Checkout';
 import Dasboard from '../AdminDasboard/Dasboard';
 import Bill from '../Pages/Bill/Bill'
-import RenderBill from '../Pages/Bill/RenderBill'
 import ProductCategory from '../Pages/ProductCategory/ProductCategory'
 import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 

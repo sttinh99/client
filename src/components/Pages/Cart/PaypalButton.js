@@ -28,7 +28,6 @@ export default class PaypalButton extends React.Component {
         let currency = 'USD'; // or you can set this value from your props or state
         let total = this.props.total; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
         // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
-
         const client = {
             sandbox: 'AW0v-9KMmsFg-yEKA8jp2olSWpFLkUQfgOiuJMciqd30RfWOccCfutssRKQHlfY63Jqvpip1pduvm_uw',
             production: 'YOUR-PRODUCTION-APP-ID',

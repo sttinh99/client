@@ -5,7 +5,6 @@ import { Link, useHistory } from 'react-router-dom'
 
 import PaypalButton from './PaypalButton'
 import RenderAddresses from '../../Pages/CreateAddress/RenderAddresses'
-import allAddresses from '../../../assets/addresses/address.json'
 
 import axios from 'axios'
 
@@ -22,11 +21,15 @@ function Checkout() {
     const [addresses] = state.UserAPI.addresses
     const [address, setAddress] = useState("");
     const [callback, setCallback] = state.ProductAPI.callback;
-
     const socket = state.socket;
 
     let payments;
-    let deliveryCharges = 0;
+    const [deliveryCharges, setDeliveryCharges] = useState(0)
+
+    // Code tính khoảng cách:
+    const [distance, setDistance] = useState(809028);
+    const [duration, setDuration] = useState(0);
+
 
     const addToCart = async (cart) => {
         // console.log(cart, "af");
@@ -38,6 +41,50 @@ function Checkout() {
     }
     const history = useHistory();
 
+    useEffect(() => {
+        if (distance) {
+            console.log("Distance & Duration have updated", distance, duration);
+            if (distance <= 10000) {
+                setDeliveryCharges(0);
+            }
+            if (distance > 10000 && distance <= 300000) {
+                setDeliveryCharges(1)
+            }
+            if (distance > 300000 && distance <= 600000) {
+                setDeliveryCharges((1.5 + (distance - 300000) / 1000 * 0.002))
+            }
+            if (distance > 600000 && distance <= 1000000) {
+                setDeliveryCharges((2.1 + (distance - 600000) / 1000 * 0.001))
+            }
+            if (distance > 1000000) {
+                setDeliveryCharges(2.8)
+            }
+        }
+    }, [distance, duration, address]);
+
+    useEffect(() => {
+        // Get directions
+        const google = window.google;
+        const directionsService = new google.maps.DirectionsService();
+
+        directionsService.route(
+            {
+                origin: "484 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Thành phố Hồ Chí Minh",
+                destination: (address.inforAddress + ',' + address.ward + ', ' + address.district + ', ' + address.city) || '',
+                travelMode: google.maps.TravelMode.DRIVING
+            },
+
+            (result, status) => {
+                console.log(result);
+                if (status === google.maps.DirectionsStatus.OK) {
+                    setDistance(result.routes[0].legs[0].distance.value);
+                    setDuration(result.routes[0].legs[0].duration.value);
+                } else {
+                    console.error("error fetching directions", result, status);
+                }
+            }
+        );
+    }, [address.inforAddress, address.ward, address.district, address.city]);
     //get address, phone
     const orderSubmit = async (payment) => {
         // console.log(payment, 'payemnt');
@@ -75,16 +122,6 @@ function Checkout() {
         chooseAddress[index].classList.add('open');
         setAddress(item);
     }
-    // const tranSuccess = async (payment) => {
-    //     console.log(payment, 'ppm');
-    //     const { paymentID, address } = payment
-    //     await axios.post('/payment', { cart, address, paymentID }, {
-    //         headers: { Authorization: token }
-    //     });
-    //     setCart([]);
-    //     addToCart([]);
-    //     alert('Ban da order thanh cong');
-    // }
     if (cart.length === 0)
         return <div className="cart-empty">
             <h2 style={{ textAlign: 'center', fontSize: '5rem' }}>Order Empty</h2>
@@ -94,20 +131,19 @@ function Checkout() {
     const totalAllCart = cart.reduce((prev, item) => {
         return prev + item.count * item.prices
     }, 0)
-    if (address) {
-        if (address) {
-            let getCity = allAddresses.find(item => item.Name == address.city)
-            deliveryCharges = getCity.ShipCod
-            console.log(getCity);
-        }
-    }
+    // if (address) {
+    //     if (address) {
+    //         let getCity = allAddresses.find(item => item.Name === address.city)
+    //         deliveryCharges = getCity.ShipCod
+    //     }
+    // }
     const total = totalAllCart + deliveryCharges;
     return (
         <div className="check-out">
             <h2 className='out'>Checkout</h2>
             <div className="infor">
                 <div className='inf'>
-                    <h2>Choose delivery address</h2>
+                    <h2>Choose transport fee</h2>
                     {
                         addresses.length === 0 ? <Link to='/address' className='create-address'>CreateAddress</Link> : <>
                             {
@@ -153,8 +189,8 @@ function Checkout() {
                             <td />
                             <td />
                             <td />
-                            <td>deliveryCharges</td>
-                            <td>${deliveryCharges}</td>
+                            <td>Transport fee</td>
+                            <td>${deliveryCharges.toFixed(2)} ({(distance / 1000).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}km)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -171,7 +207,7 @@ function Checkout() {
                         <hr />
                         <div className='online'>
                             <label>Online Payment</label>
-                            <PaypalButton total={total} tranSuccess={orderSubmit} />
+                            <PaypalButton total={total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} tranSuccess={orderSubmit} />
                         </div>
                     </div>
                 </div>

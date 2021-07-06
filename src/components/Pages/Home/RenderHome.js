@@ -32,7 +32,7 @@ function RenderHome({ items }) {
                                                 <span>${(item.prices - (item.prices * item.discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                                                 <strike>${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</strike>
                                             </div> :
-                                            <span>${item.prices}</span>
+                                            <span>${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                                     }
                                     <h2 className="h3">{item.title}</h2>
                                     <p className="des">{item.description}</p>

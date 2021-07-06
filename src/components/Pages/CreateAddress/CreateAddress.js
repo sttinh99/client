@@ -19,7 +19,6 @@ function Address() {
     const [token] = state.token
     const [addresses] = state.UserAPI.addresses
     const [callback, setCallback] = state.UserAPI.callback
-    const [cities] = state.UserAPI.cities
 
     const [address, setAddress] = useState(initialState)
     const [city, setCity] = useState('')
@@ -47,7 +46,7 @@ function Address() {
         if (getOneDistrict) {
             setWards(getOneDistrict.Wards)
         }
-    }, [district])
+    }, [district, districts])
     const handleChangeInput = (e) => {
         const { name, value } = e.target
         setAddress({ ...address, [name]: value })
