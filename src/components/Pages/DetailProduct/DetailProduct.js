@@ -10,6 +10,8 @@ import CommentItem from '../CommentItem/CommentItem'
 import Rating from '../Rating/Rating'
 import Loading from '../../Loadding/Loadding'
 import ProductItem from '../Item/ProductItem'
+import "./detail_image_list.css"
+
 
 function DetailProduct() {
     let count = 0;
@@ -30,6 +32,7 @@ function DetailProduct() {
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false);
     const [rProducts, setRProducts] = useState([]);
+    const [img_detail,setImg_detail]=useState([])
     useEffect(() => {
         const getRProducts = async () => {
             const res = await axios(`https://recommend-api-system.herokuapp.com/recommend/${idProduct.id}`)
@@ -44,7 +47,10 @@ function DetailProduct() {
         if (idProduct) {
             if (idProduct) {
                 allproducts.forEach(product => {
-                    if (product._id === idProduct.id) setDetailProduct(product);
+                    if (product._id === idProduct.id) {
+                        setDetailProduct(product);
+                        setImg_detail(product.images.url[0])
+                    }
                 })
             }
         }
@@ -112,7 +118,16 @@ function DetailProduct() {
             <div className="dt-product">
                 <div className="detail">
                     <div className="img-infor">
-                        <img className="img" src={detailProduct.images.url} alt="" />
+                       <div className="_img-detail-list">
+                            <img className="img" src={img_detail} alt="" />
+                            <ul className="image-list-detail">
+                                {detailProduct.images.url.map((e,index)=>{
+                                    return (<li key={index} className="_img-detail" onClick={()=>setImg_detail(e)}>
+                                        <img src={e} alt="piture"/>
+                                    </li>)
+                                })}
+                            </ul>
+                       </div>
                         <div className="box-detail">
                             <p className="tt">{detailProduct.title}</p>
                             <div className="loai">
@@ -187,7 +202,7 @@ function DetailProduct() {
                                 count++;
                                 if (count >= 6) return null
                                 return <div className='product_card'>
-                                    <img src={product.images.url} alt="picture1" />
+                                    <img src={product.images.url[0]} alt="picture1" />
                                     <div className="product_box">
                                         <h2 title={product.title}>{product.title}</h2>
                                         {

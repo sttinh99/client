@@ -55,7 +55,7 @@ function CreateProduct(props) {
 
     const history = useHistory();
     const param = useParams();
-
+    const [img_detail,setImg_detail]=useState(null)
     /* update Product */
     const [onEdit, setOnEdit] = useState(false)
     const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei', "Acer"]
@@ -98,17 +98,21 @@ function CreateProduct(props) {
     const handleUpload = async e => {
         e.preventDefault();
         try {
-            const file = e.target.files[0]
-            // console.log(file);
-            // console.log(file);
+            const file = e.target.files
+            console.log(typeof (file));
             if (!file) return alert('file not exists')
-            let formData = new FormData()
-            formData.append('file', file);
-            const res = await axios.post('/images/upload', formData, {
-                headers: { 'content-type': 'multipart/form-data', Authorization: token }
-            })
-            // console.log(res, 'res');
-            setImages(res.data)
+            let image_list_detail=[]
+            for(let f of file){
+                let formData = new FormData()
+                formData.append('file', f);
+                let res = await axios.post('/images/upload', formData, {
+                    headers: { 'content-type': 'multipart/form-data', Authorization: token }
+                })
+                image_list_detail.push(res.data)
+            }
+            //console.log(image_list_detail, 'res');
+            setImg_detail(image_list_detail[0])
+            setImages(image_list_detail)
         } catch (error) {
             return alert(error.response.data.msg)
         }
@@ -191,10 +195,18 @@ function CreateProduct(props) {
     return (
         <div className='create-product'>
             <div className='add-images'>
-                <input type='file' className='images' id='file' name='file' onChange={handleUpload} />
+                {/* <input type='file' className='images' id='file' name='file' onChange={handleUpload} /> */}
+                <input type="file" name="file" multiple="multiple" className='images' id="file" onChange={handleUpload}></input>
                 <div id='file-img' style={styleUpload}>
-                    <img src={images ? images.url : ''} alt='' />
+                    <img src={img_detail ? img_detail.url : ''} alt='' />
                     <span onClick={handleDelete}>X</span>
+                    <ul className="take-picture">
+                        {images && images.map((e,index)=>{
+                            return (<li key={index} className="take-picture-detail" onClick={()=>setImg_detail(e)}>
+                            <img src={e} alt="piture"/>
+                        </li>)
+                        })}
+                    </ul>
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
@@ -210,7 +222,7 @@ function CreateProduct(props) {
                     </select>
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='brand'>Brand: </label>
+                    <label htmlFor='brand'>Manufacturer: </label>
                     {
                         (product.category === 'laptop' || product.category === 'ram' || product.category === 'harddisk') ?
                             <select name='brand' onChange={handleChangeInput}>
@@ -298,7 +310,7 @@ function CreateProduct(props) {
                                 </div>
                                 <div className="item-box">
                                     <div className='form-group vga'>
-                                        <label htmlFor='vga'>VGA: </label>
+                                        <label htmlFor='vga'>Graphics: </label>
                                         <select name='vga' onChange={handleChangeInputComputer}>
                                             <option defaultValue={product.content.vga}>{(product.content) ? product.content.vga : ""}</option>
                                             {
@@ -309,7 +321,7 @@ function CreateProduct(props) {
                                         </select>
                                     </div>
                                     <div className='form-group harddisk'>
-                                        <label htmlFor='harddisk'>Hard Disk: </label>
+                                        <label htmlFor='harddisk'>Storage: </label>
                                         <select name='harddisk' onChange={handleChangeInputComputer}>
                                             <option defaultValue={product.content.harddisk}>{(product.content) ? product.content.harddisk : ""}</option>
                                             {
@@ -439,7 +451,7 @@ function CreateProduct(props) {
                                 </>
                 }
                 <div className='form-group'>
-                    <label htmlFor='quantity'>quantity: </label>
+                    <label htmlFor='quantity'>Quantity: </label>
                     <input type='number' id='quantity' name='quantity' placeholder='add quantity' value={product.quantity} onChange={handleChangeInput} />
                 </div>
                 <button type='submit'>Save</button>

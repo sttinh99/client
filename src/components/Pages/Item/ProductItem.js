@@ -27,7 +27,7 @@ function ProductItem({ product, isAdmin }) {
     }
     return (
         <div className='product_card'>
-            <img src={product.images.url} alt="picture1" onClick={() => clickDetail(product._id)} />
+            <img src={product.images.url[0]} alt="picture1" onClick={() => clickDetail(product._id)} />
             <div className="product_box">
                 <h2 title={product.title}>{product.title}</h2>
                 <p>{product.description}</p>

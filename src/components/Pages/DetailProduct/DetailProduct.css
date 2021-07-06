@@ -18,11 +18,7 @@
     padding: 20px;
     border-radius: 20px;
 }
-.img-infor .img {
-    width: 35%;
-    margin-right: 5%;
-    object-fit: contain;
-}
+
 .img-infor .box-detail {
     width: 60%;
 }
