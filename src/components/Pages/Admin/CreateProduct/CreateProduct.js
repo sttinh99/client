@@ -99,7 +99,7 @@ function CreateProduct(props) {
         e.preventDefault();
         try {
             const file = e.target.files
-            console.log(typeof (file));
+
             if (!file) return alert('file not exists')
             let image_list_detail=[]
             for(let f of file){
@@ -110,20 +110,29 @@ function CreateProduct(props) {
                 })
                 image_list_detail.push(res.data)
             }
-            //console.log(image_list_detail, 'res');
+
             setImg_detail(image_list_detail[0])
             setImages(image_list_detail)
         } catch (error) {
             return alert(error.response.data.msg)
         }
     }
-    const handleDelete = async () => {
+    const handleDelete = async() => {
         try {
             if (!token) return alert('not upload')
-            await axios.post('/images/delete', { public_id: images.public_id }, {
+            let indx= images.findIndex(item=>item.public_id === img_detail.public_id);
+            if(indx === 0){
+                setImages(false);
+            }
+            else{
+                let arpicture=images.slice(0,indx).concat(images.slice(indx+1,images.length))
+                setImg_detail(arpicture[0])
+                setImages(arpicture);
+            }
+            await axios.post('/images/delete', { public_id: img_detail.public_id }, {
                 headers: { Authorization: token }
             })
-            await setImages(false);
+
         } catch (error) {
             alert(error.response.data.msg)
         }
@@ -167,15 +176,20 @@ function CreateProduct(props) {
             }
             if (!isAdmin) return alert('you are not admin')
             if (!images) return alert('no images upload')
+
+            let submit_image={
+                public_id: images.map(e=>e.public_id),
+                url: images.map(e=>e.url)
+            }
             if (onEdit) {
                 inforTT = inforTT.split('|').join('') || '';
-                await axios.post(`/products/update/${param.id}`, { ...product, images, title: inforTT }, {
+                await axios.post(`/products/update/${param.id}`, { ...product, submit_image, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
             else {
                 inforTT = inforTT.split('|').join('');
-                await axios.post('/products/create', { ...product, images, title: inforTT }, {
+                await axios.post('/products/create', { ...product, submit_image, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
@@ -203,7 +217,7 @@ function CreateProduct(props) {
                     <ul className="take-picture">
                         {images && images.map((e,index)=>{
                             return (<li key={index} className="take-picture-detail" onClick={()=>setImg_detail(e)}>
-                            <img src={e} alt="piture"/>
+                            <img src={e.url} alt="piture"/>
                         </li>)
                         })}
                     </ul>
