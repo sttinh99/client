@@ -50,13 +50,15 @@ function CreateProduct(props) {
         gate: '',
         size: ''
     })
-    const [images, setImages] = useState(false)
+    const [images, setImages] = useState(null)
+    const [img_detail,setImg_detail]=useState(null)
     const [callback, setCallback] = state.ProductAPI.callback
 
     const history = useHistory();
     const param = useParams();
-    const [img_detail,setImg_detail]=useState(null)
+
     /* update Product */
+
     const [onEdit, setOnEdit] = useState(false)
     const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei', "Acer"]
     const RAMBUS = ['2400MHz', '2666MHz', '3000MHz', '3200MHz', '1600MHz', '2800MHz', ' 3600MHz'];
@@ -121,7 +123,7 @@ function CreateProduct(props) {
         try {
             if (!token) return alert('not upload')
             let indx= images.findIndex(item=>item.public_id === img_detail.public_id);
-            if(indx === 0){
+            if(images.length === 1){
                 setImages(false);
             }
             else{
@@ -175,7 +177,7 @@ function CreateProduct(props) {
                 inforTT = product.title
             }
             if (!isAdmin) return alert('you are not admin')
-            if (!images) return alert('no images upload')
+            if (images.length === 0) return alert('please, take a image')
 
             let submit_image={
                 public_id: images.map(e=>e.public_id),
@@ -188,6 +190,7 @@ function CreateProduct(props) {
                 })
             }
             else {
+                console.log(submit_image)
                 inforTT = inforTT.split('|').join('');
                 await axios.post('/products/create', { ...product, submit_image, title: inforTT }, {
                     headers: { Authorization: token }
@@ -224,6 +227,7 @@ function CreateProduct(props) {
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
+            <h3>Basic Infomation</h3>
                 <div className='form-group'>
                     <label htmlFor='category'>Category: </label>
                     <select name='category' onChange={handleChangeInput}>
@@ -283,6 +287,7 @@ function CreateProduct(props) {
                     <label htmlFor='prices'>Prices: </label>
                     <input type='number' id='prices' name='prices' placeholder='add prices' value={product.prices} onChange={handleChangeInput} />
                 </div>
+                <h3>Specifications</h3>
                 {
                     (product.category === 'laptop') ?
                         (
@@ -321,6 +326,7 @@ function CreateProduct(props) {
                                             }
                                         </select>
                                     </div>
+                        
                                 </div>
                                 <div className="item-box">
                                     <div className='form-group vga'>
@@ -335,17 +341,18 @@ function CreateProduct(props) {
                                         </select>
                                     </div>
                                     <div className='form-group harddisk'>
-                                        <label htmlFor='harddisk'>Storage: </label>
-                                        <select name='harddisk' onChange={handleChangeInputComputer}>
-                                            <option defaultValue={product.content.harddisk}>{(product.content) ? product.content.harddisk : ""}</option>
-                                            {
-                                                harddiskCollection.map((item, index) => {
-                                                    return <option key={index} value={item}> {item}</option>
-                                                })
-                                            }
-                                        </select>
-                                    </div>
+                                    <label htmlFor='harddisk'>Storage: </label>
+                                    <select name='harddisk' onChange={handleChangeInputComputer}>
+                                        <option defaultValue={product.content.harddisk}>{(product.content) ? product.content.harddisk : ""}</option>
+                                        {
+                                            harddiskCollection.map((item, index) => {
+                                                return <option key={index} value={item}> {item}</option>
+                                            })
+                                        }
+                                    </select>
                                 </div>
+                                </div>
+                        
                                 <div className='form-group'>
                                     <label htmlFor='oparatingSystem'>Oparating System: </label>
                                     <select name='opearatingSysterm' onChange={handleChangeInputComputer}>

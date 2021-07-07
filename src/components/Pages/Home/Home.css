@@ -2,7 +2,7 @@
     width: 100%;
 }
 .user-home {
-    padding-bottom: 400px;
+    padding-bottom: 200px;
 }
 .user-home .box-header {
     position: relative;
@@ -16,15 +16,19 @@
 .user-home .category-sp ul {
     background: #fefefe;
     border-radius: 10px;
-    width: 229px;
+    width: 40%;
 }
 .user-home .category-sp ul li {
     padding: 10px 20px;
     /* /border-bottom: 1px solid; */
     border-radius: 10px;
+    text-transform: capitalize;
     font-weight: bold;
     transition: 0.4s;
     font-size: 20px;
+}
+.user-home .category-sp ul li.product-portfolio img{
+    width: 20%;
 }
 .user-home .category-sp ul li:hover {
     background: #d4d4d4;

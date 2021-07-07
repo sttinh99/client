@@ -11,6 +11,7 @@ import "./Home.css"
 // import ram from '../../../images/ram.svg'
 // import mouse from '../../../images/mouse.svg'
 import laptop from '../../../images/laptop.svg'
+import three_line from '../../../images/three_line.png'
 
 // import RenderBlog from './RenderBlog'
 import Carousel from '../../Pages/Carousel/Carousel'
@@ -48,7 +49,8 @@ function Home() {
                             <Carousel />
                             <div className="category-sp">
                                 <ul>
-                                    <li style={{ "background": "rgb(243 238 238)" }}>Product Portfolio</li>
+                                    <li className="product-portfolio">
+                                        <img src={three_line} alt="" />Product Portfolio</li>
                                     {
                                         categories.map((category, index) => {
                                             return <li key={index}><Link to={`/products/category/${category._id}`}><img src={laptop} alt="..." /> {category.name}</Link></li>

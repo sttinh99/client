@@ -3,7 +3,7 @@
     display: flex;
     background-color: #fff;
     justify-content: center;
-    padding-bottom: 500px;
+    padding-bottom: 250px;
 }
 .login-page form {
     width: 500px;
@@ -137,6 +137,4 @@ input::placeholder {
     justify-content: space-between;
     align-items: center;
 }
-.reset-password form .row-auth button {
-    width: ;
-}
+

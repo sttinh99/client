@@ -6,7 +6,7 @@ import axios from 'axios'
 import bell from '../../images/bell.svg'
 
 import './Header.css'
-
+import search_icon from '../../images/loupe.svg';
 import sound from '../../sound/nofication.wav'
 
 import Search from '../Search/Search'
@@ -34,7 +34,7 @@ function Header() {
 
     const [text, setText] = useState("Check Order")
     const [check1, setCheck1] = useState(false)
-
+    const [search_hidden,sethidden]=useState(true)
     //console.log(state);
     //console.log(cart);
     useEffect(() => {
@@ -73,46 +73,61 @@ function Header() {
         setOndisplay(!onDisplay)
         setCheck1(false);
     }
+    const sethidden_true=()=>{
+        sethidden(true)
+    }
     return (
-        <header>
-            {/* <div className="menu"></div> */}
-            <div className="logo">
-                <Link to='/'>
-                    <img src={react} alt="" width="100px" />
-                    <p>DogFootStore</p>
-                </Link>
-            </div>
-            {!isAdmin && !isLogged &&
-                < ul className="guest">
-                    <li><Link to="/home">Home</Link></li>
-                    <li><Link to="/products">Products</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/contact">Contact Us</Link></li>
-                    <Link to="/login" style={{ display: "flex", flexDirection: "row" }}>
-                        <img src={uimg} alt="" className="user-img" />
-                        <div className="login-text">Login</div>
-                    </Link>
-                </ul>}
-            {
-                isLogged && !isAdmin && <ClientHeader uimg={uimg} logoutUser={logoutUser}
-                    check={check} cart={cart} v={v} user={user} />
-            }
-            {
-                isAdmin && <div className="notify" onClick={showModelNotify}>
-                    <img src={bell} alt="..." />
-                    {check1 && <div className="on">
-                        <audio autoPlay>
-                            <source src={sound}></source>
-                        </audio>
-                    </div>}
-                    <div className={className}>
-                        <p onClick={checkOrder}>{text}</p>
-                    </div>
-
+        <>
+            <header>
+                {/* <div className="menu"></div> */}
+                <div className="logo">
+                    {/* <Link to='/'>
+                        <img src={react} alt="" width="100px" />
+                        <p>DogFootStore</p>
+                    </Link> */}
                 </div>
+                {!isAdmin && !isLogged &&
+                <>
+                    < ul className="guest">
+                        <li><Link to="/home">Home</Link></li>
+                        <li><Link to="/products">Products</Link></li>
+                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/contact">Contact Us</Link></li>
+                    </ul>
+                    {/* <Search /> */}
+                    <div className="search_icon" onClick={()=>sethidden(false)}>
+                        <img src={search_icon} alt="" />
+                    </div>
+                    <Link to="/login" className="sign_in">
+                            <img src={uimg} alt="" className="user-img" />
+                            <p>Sign in</p>
+                    </Link>
+                    </>}
+                {
+                    isLogged && !isAdmin && <ClientHeader uimg={uimg} logoutUser={logoutUser}
+                        check={check} cart={cart} v={v} user={user} />
+                }
+                {
+                    isAdmin && <div className="notify" onClick={showModelNotify}>
+                        <img src={bell} alt="..." />
+                        {check1 && <div className="on">
+                            <audio autoPlay>
+                                <source src={sound}></source>
+                            </audio>
+                        </div>}
+                        <div className={className}>
+                            <p onClick={checkOrder}>{text}</p>
+                        </div>
+
+                    </div>
+                }
+
+            </header >
+            {
+                !search_hidden && <Search sethidden={sethidden_true}/>
             }
-            <Search />
-        </header >
+            
+        </>
     )
 }
 export default React.memo(Header);
