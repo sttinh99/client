@@ -19,7 +19,11 @@ function RenderHome({ items }) {
     return (
         <section className="products-home">
             <div className="box-products">
-                <h2 className="text">{items[0].category + `s`}</h2>
+                <div className="product-text">
+                    <h6 className="text">{items[0].category + `s`}</h6>
+                    <div>{categories.length > 0 && <Link to={`/products/category/${categories.find(item => item.name === items[0].category)._id}`}>
+                        <p className="view-all">View all {items[0].category+"s >>"} </p></Link>}</div>
+                </div>
                 <div className="render-items">
                     {
                         items.map(item =>
@@ -35,22 +39,24 @@ function RenderHome({ items }) {
                                                 <span>${(item.prices - (item.prices * item.discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                                                 <strike>${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</strike>
                                             </div> :
-                                            <span>${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+                                            <div className="sold-and-price">
+                                                 <p className='solded'>Sold: {item.sold}</p>
+                                                <div className="item-price">${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</div>
+                                            </div>
                                     }
                                     
                                     <div className="add-cart">
                                         <Link to={`/products/detail/${item._id}`} className="view-detail"> Details</Link>
-                                        <button onClick={() => addCart(item)} className="addcart"> Add to cart</button>
+                                        <button onClick={() => addCart(item)} className="addcart"> Add To Card</button>
                                     </div>
                                 </div>
-                                <p className='solded'>Sold: {item.sold}</p>
                             </div>
                         )
                     }
                 </div>
             </div>
 
-            {categories.length > 0 && <Link to={`/products/category/${categories.find(item => item.name === items[0].category)._id}`}><h5 className="upp">View all {items[0].category}s</h5></Link>}
+
         </section >
     );
 }

@@ -10,7 +10,7 @@ function Pagination({ page, handlePageChange, products }) {
                 disabled={page <= 1}
                 onClick={() => handlePageChange(page - 1)}
             >
-                Prev
+                Previous
             </button>
             <button
                 disabled={products.length < 10}

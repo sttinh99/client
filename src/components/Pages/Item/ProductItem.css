@@ -34,9 +34,10 @@
     height: 52%;
     text-transform: capitalize;
     overflow: hidden;
-    color: blue;
+    color:  rgb(66, 66, 155);
     margin-bottom: 0px !important;
     font-size: 20px;
+    margin-top: 10px ;
 }
 .product_card .product_box p {
     height: 21%;
@@ -61,6 +62,13 @@
     width: 60%;
     display: flex;
     justify-content: space-between;
+}
+.normal-price{
+    width: 100%;
+    text-align: right;
+    font-weight: 600;
+    padding-right: 15px;
+    font-size: 18px;
 }
 .discount-product strike {
     opacity: 0.8;

@@ -75,13 +75,40 @@
 }
 .products-home .box-products {
     width: 100%;
-    margin: auto;
-}
-.products-home .box-products .text {
-    text-transform: uppercase;
     margin-bottom: 20px;
+    
+}
+.products-home .box-products .product-text{
+    width: 100%;
+    display: flex;
+    padding:10px 0 0 10px;
+    margin-bottom: 8px;
+}
+.sold-and-price{
+   display: flex;
+}
+.item-price{
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: right;
+    padding: 4px 0;
+}
+.products-home .box-products h6 {
+    text-transform: uppercase;
+    margin-bottom: 18px;
     font-size: 18px;
     font-weight: bold;
+    border-left: 5px solid #444;
+    padding-left: 8px;
+}
+
+.products-home .box-products p.view-all{
+    font-size: 15px;
+    color: #9e6f35;
+    position: absolute;
+    font-weight: 500;
+    left: 83%;
 }
 .products-home .box-products .render-items {
     width: 100%;
@@ -127,7 +154,7 @@
     max-height: 31%;
     text-transform: capitalize;
     overflow: hidden;
-    color: blue;
+    color: rgb(66, 66, 155);
     margin-bottom: 0px !important;
     font-size: 20px;
 }
@@ -137,8 +164,8 @@
 }
 .products-home .content a.view-detail {
     padding: 10px 30px;
-    background: #70e662;
-    border-radius: 20px;
+    background: #33739e;
+    border-radius: 10px;
     color: black;
     font-weight: bold;
     transition: 0.4s;
@@ -147,16 +174,16 @@
     background: #6db465;
 }
 .products-home .content .addcart {
-    padding: 10px 30px;
-    background: #5b5b5b;
-    color: wheat;
-    border-radius: 25px;
+    padding: 10px 20px;
+    background: #33739e;
+    color:#000;
+    border-radius: 10px;
     font-weight: bold;
     transition: 0.4s;
     outline: none;
 }
 .products-home .content .addcart:hover {
-    background: black;
+    background: #6db465;
 }
 p.overview {
     text-align: center;
@@ -165,10 +192,7 @@ p.overview {
     text-transform: uppercase;
     font-weight: bold;
 }
-.upp {
-    font-size: 30px;
-    font-family: fantasy;
-}
+
 .products-home .box-products .product-item img {
     object-fit: contain;
 }

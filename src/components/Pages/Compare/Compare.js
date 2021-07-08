@@ -33,14 +33,14 @@ function Compare() {
                                 <td>Image, Prices</td>
                                 <td>
                                     <div>
-                                        <img src={`${productsCompare[0].images.url}`} alt="..." />
+                                        <img src={`${productsCompare[0].images.url[0]}`} alt="..." />
                                         <p>{productsCompare[0].title}</p>
                                         <p>${(productsCompare[0].prices - (productsCompare[0].prices * productsCompare[0].discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <img src={`${productsCompare[1].images.url}`} alt="..." />
+                                        <img src={`${productsCompare[1].images.url[0]}`} alt="..." />
                                         <p>{productsCompare[1].title}</p>
                                         <p>${(productsCompare[1].prices - (productsCompare[1].prices * productsCompare[1].discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
                                     </div>
@@ -52,7 +52,7 @@ function Compare() {
                                 <td>{productsCompare[1].warranty}</td>
                             </tr>
                             <tr>
-                                <td>Brand</td>
+                                <td>Manufacturer</td>
                                 <td>{productsCompare[0].brand}</td>
                                 <td>{productsCompare[1].brand}</td>
                             </tr>
@@ -79,7 +79,7 @@ function Compare() {
                                     </tr>}
                                 {productsCompare[0].content.harddisk &&
                                     < tr >
-                                        <td>Harddisk</td>
+                                        <td>Storage</td>
                                         <td>{productsCompare[0].content.harddisk}</td>
                                         <td>{productsCompare[1].content.harddisk}</td>
                                     </tr>}
@@ -91,7 +91,7 @@ function Compare() {
                                     </tr>}
                                 {productsCompare[0].content.ram &&
                                     <tr>
-                                        <td>RAM</td>
+                                        <td>Memory</td>
                                         <td>{productsCompare[0].content.ram}</td>
                                         <td>{productsCompare[1].content.ram}</td>
                                     </tr>}
@@ -103,7 +103,7 @@ function Compare() {
                                     </tr>}
                                 {productsCompare[0].content.vga &&
                                     <tr>
-                                        <td>Card</td>
+                                        <td>Graphics</td>
                                         <td>{productsCompare[0].content.vga}</td>
                                         <td>{productsCompare[1].content.vga}</td>
                                     </tr>}

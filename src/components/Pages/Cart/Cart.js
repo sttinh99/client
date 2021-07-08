@@ -51,7 +51,10 @@ function Cart() {
             </table>
             <div className='total'>
                 <h3>Total: ${total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h3>
-                <Link to='/checkout' className='check'>Checkout</Link>
+                <button>
+                    <Link to='/checkout' className='check'>Checkout</Link>
+                </button>
+                
             </div>
         </div>
     );

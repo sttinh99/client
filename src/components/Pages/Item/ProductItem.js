@@ -21,7 +21,7 @@ function ProductItem({ product, isAdmin }) {
                     <span>Price: ${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                 </div>
                 Sold out
-                <p>solded: {product.sold}</p>
+                <p>Sold: {product.sold}</p>
             </div >
         );
     }
@@ -37,11 +37,11 @@ function ProductItem({ product, isAdmin }) {
                             <span>${(product.prices - (product.prices * product.discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                             <strike>${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</strike>
                         </div> :
-                        <span>${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+                        <div className="normal-price">${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</div>
                 }
             </div>
             <BtnRender product={product} />
-            <p>solded: {product.sold}</p>
+            <p>Sold: {product.sold}</p>
         </div >
     );
 

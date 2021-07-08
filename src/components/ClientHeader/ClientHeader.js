@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import three_line from '../../images/three_line.png'
 function ClientHeader({ logoutUser, uimg, check, v, cart, user }) {
+    const [options,setOption]=useState(false)
     return (
         <>
             <div className="client">
@@ -19,13 +20,16 @@ function ClientHeader({ logoutUser, uimg, check, v, cart, user }) {
             <div className='user'>
                 <img src={uimg} alt="" className="user-img" />
                 <div className="user-content">{user.name}
-                    <ul className='form-action'>
+                    {
+                        options && <ul className='form-action'>
                         <li><Link to="/address">List Addresses</Link></li>
                         <li><Link to="/history">Transaction History</Link></li>
                         <li><Link to={`/changepassword`}>Change Password</Link></li>
                         <li><Link to='/logout' onClick={logoutUser}>Logout</Link></li>
                     </ul>
+                    }
                 </div>
+                <img src={three_line} alt="options" className="options"  onClick={()=>setOption(!options)}/>
 
             </div>
         </>

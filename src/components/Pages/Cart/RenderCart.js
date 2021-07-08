@@ -60,7 +60,7 @@ function RenderCart({ item }) {
     return (
         <tr key={item._id}>
             <td className='images'>
-                <img src={item.images} alt="..." />
+                <img src={item.images[0]} alt="..." />
             </td>
             <td className="title">{item.title}</td>
             <td className="prices">${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>

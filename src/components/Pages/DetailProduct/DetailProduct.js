@@ -211,11 +211,14 @@ function DetailProduct() {
                                                     <span>${(product.prices - (product.prices * product.discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                                                     <strike>${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</strike>
                                                 </div> :
-                                                <p>${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
+                                                <div className="normal-price">${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</div>
                                         }
-                                        <Link className="compare" to={`/compare/${product._id}-${detailProduct._id}`}>
-                                            Compare
-                                        </Link>
+                                        <div className="compare-link">
+                                            <Link to={`/compare/${product._id}-${detailProduct._id}`}>
+                                                Compare
+                                            </Link>
+                                        </div>
+                    
                                     </div>
 
                                 </div >
