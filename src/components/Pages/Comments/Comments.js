@@ -26,7 +26,6 @@ function Comments({ id, socket, name, idProduct, rating, token }) {
     return (
         <div className="form-input">
             <span>Name: </span><strong>{name}</strong>
-            <p>Content:</p>
             <div ref={contentRef} contentEditable="true" style={{
                 height: '70px',
                 padding: '5px 10px',

@@ -173,7 +173,7 @@ function Checkout() {
                             cart.map(item => {
                                 return <tr key={item._id}>
                                     <td className='images'>
-                                        <img src={item.images} alt="..." />
+                                        <img src={item.images[0]} alt="..." />
                                     </td>
                                     <td className="title">{item.title}</td>
                                     <td className="quantity">

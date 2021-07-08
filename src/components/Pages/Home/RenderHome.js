@@ -24,7 +24,7 @@ function RenderHome({ items }) {
                     {
                         items.map(item =>
                             <div className="product-item" key={item._id}>
-                                <img src={item.images.url} alt="Apple iMac 27 Retina" onClick={() => clickDetail(item._id)} />
+                                <img src={item.images.url[0]} alt="Apple iMac 27 Retina" onClick={() => clickDetail(item._id)} />
                                 <div className="content">
                                     {
                                         item.discount > 0 ?

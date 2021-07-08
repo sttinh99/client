@@ -42,7 +42,7 @@ function AdminProducts({ product, token }) {
     return (
         <tr key={product._id}>
             <td className='images'>
-                <img src={product.images.url} alt='product'></img>
+                <img src={product.images.url[0]} alt='product'></img>
             </td>
             <td className="title">{product.title}</td>
             <td className="quantity">{product.quantity}</td>

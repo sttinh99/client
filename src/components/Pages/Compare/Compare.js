@@ -33,14 +33,14 @@ function Compare() {
                                 <td>Image, Prices</td>
                                 <td>
                                     <div>
-                                        <img src={`${productsCompare[0].images.url}`} alt="..." />
+                                        <img src={`${productsCompare[0].images.url[0]}`} alt="..." />
                                         <p>{productsCompare[0].title}</p>
                                         <p>${(productsCompare[0].prices - (productsCompare[0].prices * productsCompare[0].discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <img src={`${productsCompare[1].images.url}`} alt="..." />
+                                        <img src={`${productsCompare[1].images.url[0]}`} alt="..." />
                                         <p>{productsCompare[1].title}</p>
                                         <p>${(productsCompare[1].prices - (productsCompare[1].prices * productsCompare[1].discount) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
                                     </div>
@@ -137,6 +137,24 @@ function Compare() {
                                         <td>{productsCompare[0].content.generation}</td>
                                         <td>{productsCompare[1].content.generation}</td>
                                     </tr>}
+                                {
+                                    productsCompare[0].category === 'laptop' && <><tr>
+                                        <td>Wireless Lan</td>
+                                        <td>802.11ac 2×2 Wi-Fi</td>
+                                        <td>802.11ac 2×2 Wi-Fi</td>
+                                    </tr>
+                                        <tr>
+                                            <td>Lan</td>
+                                            <td>Gigabit Ethernet</td>
+                                            <td>Gigabit Ethernet</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Connection Port</td>
+                                            <td>USB 2.0, USB 3.0, Type C, HDMI</td>
+                                            <td>USB 2.0, USB 3.0, Type C, HDMI</td>
+                                        </tr>
+                                    </>
+                                }
                             </tbody> :
                                 <tbody>
                                     <tr>
@@ -145,25 +163,6 @@ function Compare() {
                                         <td></td>
                                     </tr>
                                 </tbody>
-                        }
-                        {
-                            productsCompare[0].category !== "laptop" && <thead>
-                                <tr className="ttc">
-                                    <th>DESCRIPTION</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                        }
-                        {
-                            productsCompare[0].category !== "laptop" && <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>{productsCompare[0].description}</td>
-                                    <td>{productsCompare[1].description}</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
                         }
                     </table>
                 }

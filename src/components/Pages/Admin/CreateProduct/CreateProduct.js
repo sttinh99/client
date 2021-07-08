@@ -50,13 +50,15 @@ function CreateProduct(props) {
         gate: '',
         size: ''
     })
-    const [images, setImages] = useState(false)
+    const [images, setImages] = useState(null)
+    const [img_detail, setImg_detail] = useState(null)
     const [callback, setCallback] = state.ProductAPI.callback
 
     const history = useHistory();
     const param = useParams();
 
     /* update Product */
+
     const [onEdit, setOnEdit] = useState(false)
     const brandCollection = ['HP', 'ASUS', 'Dell', 'Lenovo', 'MSI', 'LG', 'Avita', 'MICROSOFT', 'Huawei', "Acer"]
     const RAMBUS = ['2400MHz', '2666MHz', '3000MHz', '3200MHz', '1600MHz', '2800MHz', ' 3600MHz'];
@@ -98,17 +100,21 @@ function CreateProduct(props) {
     const handleUpload = async e => {
         e.preventDefault();
         try {
-            const file = e.target.files[0]
-            // console.log(file);
-            // console.log(file);
+            const file = e.target.files
+
             if (!file) return alert('file not exists')
-            let formData = new FormData()
-            formData.append('file', file);
-            const res = await axios.post('/images/upload', formData, {
-                headers: { 'content-type': 'multipart/form-data', Authorization: token }
-            })
-            // console.log(res, 'res');
-            setImages(res.data)
+            let image_list_detail = []
+            for (let f of file) {
+                let formData = new FormData()
+                formData.append('file', f);
+                let res = await axios.post('/images/upload', formData, {
+                    headers: { 'content-type': 'multipart/form-data', Authorization: token }
+                })
+                image_list_detail.push(res.data)
+            }
+
+            setImg_detail(image_list_detail[0])
+            setImages(image_list_detail)
         } catch (error) {
             return alert(error.response.data.msg)
         }
@@ -116,12 +122,21 @@ function CreateProduct(props) {
     const handleDelete = async () => {
         try {
             if (!token) return alert('not upload')
-            await axios.post('/images/delete', { public_id: images.public_id }, {
+            let indx = images.findIndex(item => item.public_id === img_detail.public_id);
+            if (images.length === 1) {
+                setImages(false);
+            }
+            else {
+                let arpicture = images.slice(0, indx).concat(images.slice(indx + 1, images.length))
+                setImg_detail(arpicture[0])
+                setImages(arpicture);
+            }
+            await axios.post('/images/delete', { public_id: img_detail.public_id }, {
                 headers: { Authorization: token }
             })
-            await setImages(false);
+
         } catch (error) {
-            alert(error.response.data.msg)
+            alert("Failed")
         }
     }
     const handleChangeInput = (e) => {
@@ -162,16 +177,22 @@ function CreateProduct(props) {
                 inforTT = product.title
             }
             if (!isAdmin) return alert('you are not admin')
-            if (!images) return alert('no images upload')
+            if (images.length === 0) return alert('please, take a image')
+
+            let submit_image = {
+                public_id: images.map(e => e.public_id),
+                url: images.map(e => e.url)
+            }
             if (onEdit) {
                 inforTT = inforTT.split('|').join('') || '';
-                await axios.post(`/products/update/${param.id}`, { ...product, images, title: inforTT }, {
+                await axios.post(`/products/update/${param.id}`, { ...product, submit_image, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
             else {
+                console.log(submit_image)
                 inforTT = inforTT.split('|').join('');
-                await axios.post('/products/create', { ...product, images, title: inforTT }, {
+                await axios.post('/products/create', { ...product, submit_image, title: inforTT }, {
                     headers: { Authorization: token }
                 })
             }
@@ -180,7 +201,7 @@ function CreateProduct(props) {
             await socket.emit("add-product", callback);
             await history.push("/products");
         } catch (error) {
-            alert(error.response.data.msg)
+            alert("Create Failed")
         }
     }
     /*end create*/
@@ -191,13 +212,22 @@ function CreateProduct(props) {
     return (
         <div className='create-product'>
             <div className='add-images'>
-                <input type='file' className='images' id='file' name='file' onChange={handleUpload} />
+                {/* <input type='file' className='images' id='file' name='file' onChange={handleUpload} /> */}
+                <input type="file" name="file" multiple="multiple" className='images' id="file" onChange={handleUpload}></input>
                 <div id='file-img' style={styleUpload}>
-                    <img src={images ? images.url : ''} alt='' />
+                    <img src={img_detail ? img_detail.url : ''} alt='' />
                     <span onClick={handleDelete}>X</span>
+                    <ul className="take-picture">
+                        {images && images.map((e, index) => {
+                            return (<li key={index} className="take-picture-detail" onClick={() => setImg_detail(e)}>
+                                <img src={e.url} alt="piture" />
+                            </li>)
+                        })}
+                    </ul>
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
+                <h3>Basic Infomation</h3>
                 <div className='form-group'>
                     <label htmlFor='category'>Category: </label>
                     <select name='category' onChange={handleChangeInput}>
@@ -210,7 +240,7 @@ function CreateProduct(props) {
                     </select>
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='brand'>Brand: </label>
+                    <label htmlFor='brand'>Manufacturer: </label>
                     {
                         (product.category === 'laptop' || product.category === 'ram' || product.category === 'harddisk') ?
                             <select name='brand' onChange={handleChangeInput}>
@@ -257,6 +287,7 @@ function CreateProduct(props) {
                     <label htmlFor='prices'>Prices: </label>
                     <input type='number' id='prices' name='prices' placeholder='add prices' value={product.prices} onChange={handleChangeInput} />
                 </div>
+                <h3>Specifications</h3>
                 {
                     (product.category === 'laptop') ?
                         (
@@ -295,10 +326,11 @@ function CreateProduct(props) {
                                             }
                                         </select>
                                     </div>
+
                                 </div>
                                 <div className="item-box">
                                     <div className='form-group vga'>
-                                        <label htmlFor='vga'>VGA: </label>
+                                        <label htmlFor='vga'>Graphics: </label>
                                         <select name='vga' onChange={handleChangeInputComputer}>
                                             <option defaultValue={product.content.vga}>{(product.content) ? product.content.vga : ""}</option>
                                             {
@@ -309,7 +341,7 @@ function CreateProduct(props) {
                                         </select>
                                     </div>
                                     <div className='form-group harddisk'>
-                                        <label htmlFor='harddisk'>Hard Disk: </label>
+                                        <label htmlFor='harddisk'>Storage: </label>
                                         <select name='harddisk' onChange={handleChangeInputComputer}>
                                             <option defaultValue={product.content.harddisk}>{(product.content) ? product.content.harddisk : ""}</option>
                                             {
@@ -320,6 +352,7 @@ function CreateProduct(props) {
                                         </select>
                                     </div>
                                 </div>
+
                                 <div className='form-group'>
                                     <label htmlFor='oparatingSystem'>Oparating System: </label>
                                     <select name='opearatingSysterm' onChange={handleChangeInputComputer}>
@@ -439,7 +472,7 @@ function CreateProduct(props) {
                                 </>
                 }
                 <div className='form-group'>
-                    <label htmlFor='quantity'>quantity: </label>
+                    <label htmlFor='quantity'>Quantity: </label>
                     <input type='number' id='quantity' name='quantity' placeholder='add quantity' value={product.quantity} onChange={handleChangeInput} />
                 </div>
                 <button type='submit'>Save</button>

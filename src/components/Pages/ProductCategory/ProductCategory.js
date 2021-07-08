@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 
 import ProductItem from '../Item/ProductItem'
-// import Loadding from '../../Loadding/Loadding'
+import Loadding from '../../Loadding/Loadding'
 // import Search from '../../Search/Search'
 import Pagination from '../../Pagination/Pagination'
 
@@ -57,27 +57,29 @@ function ProductCategory() {
     // }
     return (
         <>
-            <div className="category-items">
-                <div className="related-products">
-                    <h2>{category.name}</h2>
-                    {
-                        allItems.length === 0 ? <div>
-                            <p style={{ textAlign: "center" }}>Not found Products</p>
-                        </div> : <div className="products">
-                            {
-                                allItems.map(product => {
-                                    //console.log(limitRelated);
-                                    return <ProductItem key={product._id} product={product} />
-                                })
-                            }
-                        </div>
-                    }
-                </div>
-                {/* <Pagination page={page} handlePageChange={handlePageChange} products={products} /> */}
+            {
+                allproducts.length > 0 ? <div className="category-items">
+                    <div className="related-products">
+                        <h2>{category.name}</h2>
+                        {
+                            allItems.length === 0 ? <div>
+                                <p style={{ textAlign: "center" }}>Not found Products</p>
+                            </div> : <div className="products">
+                                {
+                                    allItems.map(product => {
+                                        //console.log(limitRelated);
+                                        return <ProductItem key={product._id} product={product} />
+                                    })
+                                }
+                            </div>
+                        }
+                    </div>
+                    {/* <Pagination page={page} handlePageChange={handlePageChange} products={products} /> */}
 
-                <Pagination handlePageChange={handlePageChange} products={allItems} page={page} />
+                    <Pagination handlePageChange={handlePageChange} products={allItems} page={page} />
 
-            </div>
+                </div> : <Loadding />
+            }
         </>
     );
 }
