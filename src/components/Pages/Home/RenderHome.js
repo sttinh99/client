@@ -26,6 +26,9 @@ function RenderHome({ items }) {
                             <div className="product-item" key={item._id}>
                                 <img src={item.images.url[0]} alt="Apple iMac 27 Retina" onClick={() => clickDetail(item._id)} />
                                 <div className="content">
+                        
+                                    <h2 className="h3">{item.title}</h2>
+                                    <p className="des">{item.description}</p>
                                     {
                                         item.discount > 0 ?
                                             <div className="discount-product">
@@ -34,14 +37,13 @@ function RenderHome({ items }) {
                                             </div> :
                                             <span>${item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                                     }
-                                    <h2 className="h3">{item.title}</h2>
-                                    <p className="des">{item.description}</p>
+                                    
                                     <div className="add-cart">
                                         <Link to={`/products/detail/${item._id}`} className="view-detail"> Details</Link>
                                         <button onClick={() => addCart(item)} className="addcart"> Add to cart</button>
                                     </div>
                                 </div>
-                                <p className='solded'>solded: {item.sold}</p>
+                                <p className='solded'>Sold: {item.sold}</p>
                             </div>
                         )
                     }

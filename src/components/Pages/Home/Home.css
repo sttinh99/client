@@ -9,26 +9,33 @@
 }
 .user-home .category-sp {
     position: absolute;
-    top: 70px;
-    left: 150px;
+    top: 80px;
+    left: 70px;
     z-index: 1;
 }
 .user-home .category-sp ul {
     background: #fefefe;
+    width: 35%;
     border-radius: 10px;
-    width: 40%;
+
 }
 .user-home .category-sp ul li {
-    padding: 10px 20px;
+    padding:4px 8px;
     /* /border-bottom: 1px solid; */
-    border-radius: 10px;
+    height: 40px;
     text-transform: capitalize;
-    font-weight: bold;
+    font-weight: 500;
     transition: 0.4s;
-    font-size: 20px;
+    font-size: 18px;
 }
 .user-home .category-sp ul li.product-portfolio img{
-    width: 20%;
+    width: 15%;
+}
+.user-home .category-sp ul li.product-portfolio{
+   background-color: rgb(228, 225, 225);
+   font-weight: 600;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
 }
 .user-home .category-sp ul li:hover {
     background: #d4d4d4;

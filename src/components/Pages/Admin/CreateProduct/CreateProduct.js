@@ -87,6 +87,8 @@ function CreateProduct(props) {
                     // console.log(product);
                     setProduct(product)
                     setImages(product.images)
+
+                    setImg_detail({public_id:product.images["public_id"][0],url:product.images["url"][0]})
                 }
             })
         }
@@ -112,9 +114,12 @@ function CreateProduct(props) {
                 })
                 image_list_detail.push(res.data)
             }
-
-            setImg_detail(image_list_detail[0])
-            setImages(image_list_detail)
+            let submit_image={
+                public_id:image_list_detail.map(e=>e.public_id),
+                url:image_list_detail.map(e=>e.url)
+            }
+            setImg_detail({public_id:submit_image["public_id"][0],url:submit_image["url"][0]})
+            setImages(submit_image)
         } catch (error) {
             return alert(error.response.data.msg)
         }
@@ -122,13 +127,16 @@ function CreateProduct(props) {
     const handleDelete = async() => {
         try {
             if (!token) return alert('not upload')
-            let indx= images.findIndex(item=>item.public_id === img_detail.public_id);
-            if(images.length === 1){
+            let indx= images["public_id"].findIndex(item=>item === img_detail.public_id);
+            if(images["public_id"].length === 1){
                 setImages(false);
             }
             else{
-                let arpicture=images.slice(0,indx).concat(images.slice(indx+1,images.length))
-                setImg_detail(arpicture[0])
+                let arpicture={
+                    "public_id":images["public_id"].slice(0,indx).concat(images["public_id"].slice(indx+1,images["public_id"].length)),
+                    "url":images["url"].slice(0,indx).concat(images["url"].slice(indx+1,images["url"].length))
+                }
+                setImg_detail({public_id:arpicture["public_id"][0],url:arpicture["url"][0]})
                 setImages(arpicture);
             }
             await axios.post('/images/delete', { public_id: img_detail.public_id }, {
@@ -179,10 +187,7 @@ function CreateProduct(props) {
             if (!isAdmin) return alert('you are not admin')
             if (images.length === 0) return alert('please, take a image')
 
-            let submit_image={
-                public_id: images.map(e=>e.public_id),
-                url: images.map(e=>e.url)
-            }
+            let submit_image=images
             if (onEdit) {
                 inforTT = inforTT.split('|').join('') || '';
                 await axios.post(`/products/update/${param.id}`, { ...product, submit_image, title: inforTT }, {
@@ -190,7 +195,7 @@ function CreateProduct(props) {
                 })
             }
             else {
-                console.log(submit_image)
+
                 inforTT = inforTT.split('|').join('');
                 await axios.post('/products/create', { ...product, submit_image, title: inforTT }, {
                     headers: { Authorization: token }
@@ -218,9 +223,9 @@ function CreateProduct(props) {
                     <img src={img_detail ? img_detail.url : ''} alt='' />
                     <span onClick={handleDelete}>X</span>
                     <ul className="take-picture">
-                        {images && images.map((e,index)=>{
-                            return (<li key={index} className="take-picture-detail" onClick={()=>setImg_detail(e)}>
-                            <img src={e.url} alt="piture"/>
+                        {images && images.url.map((e,index)=>{
+                            return (<li key={index} className="take-picture-detail" onClick={()=>setImg_detail({public_id:images["public_id"][index],url:images["url"][index]})}>
+                            <img src={e} alt="piture"/>
                         </li>)
                         })}
                     </ul>
