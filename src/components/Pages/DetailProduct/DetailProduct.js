@@ -33,6 +33,7 @@ function DetailProduct() {
     const [loading, setLoading] = useState(false);
     const [rProducts, setRProducts] = useState([]);
     const [img_detail, setImg_detail] = useState([])
+    console.log(allproducts);
     useEffect(() => {
         const getRProducts = async () => {
             const res = await axios(`https://recommend-api-system.herokuapp.com/recommend/${idProduct.id}`)
