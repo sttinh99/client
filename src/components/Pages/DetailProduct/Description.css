@@ -1,0 +1,59 @@
+.des-product {
+    width: 100%;
+}
+.des-product .des-laptop {
+    width: 100%;
+}
+.des-product .des-laptop p {
+    font-size: 20px;
+}
+.des-product .des-laptop strong {
+    text-transform: capitalize;
+    color: blue;
+}
+.des-product .des-laptop img {
+    display: block;
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+.des-product .des-laptop h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 1rem 0 1rem;
+}
+.des-product .des-laptop .cpu {
+    width: 99.5%;
+    height: 50px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(98, 98, 253);
+    margin-bottom: 0.5%;
+}
+.des-product .des-laptop .hdh-ram {
+    width: 100%;
+}
+.hdh-ram .hdh,
+.hdh-ram .ram {
+    width: 49.5%;
+    height: 50px;
+    display: inline-flex;
+    margin-right: 0.5%;
+    align-items: center;
+    background-color: #f5f5f5;
+    border: 1px solid rgb(98, 98, 253);
+}
+.hdh-ram .hdh p,
+.hdh-ram .ram p,
+.des-product .des-laptop .cpu p {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 200;
+    font-family: system-ui;
+    color: rgb(98, 98, 253);
+}

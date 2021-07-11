@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import { GlobalState } from '../../GlobalState'
@@ -10,6 +10,8 @@ import CommentItem from '../CommentItem/CommentItem'
 import Rating from '../Rating/Rating'
 import Loading from '../../Loadding/Loadding'
 import ProductItem from '../Item/ProductItem'
+import Description from './Description'
+
 import "./detail_image_list.css"
 
 
@@ -34,6 +36,9 @@ function DetailProduct() {
     const [rProducts, setRProducts] = useState([]);
     const [img_detail, setImg_detail] = useState([])
     console.log(allproducts);
+
+    const history = useHistory();
+
     useEffect(() => {
         const getRProducts = async () => {
             const res = await axios(`https://recommend-api-system.herokuapp.com/recommend/${idProduct.id}`)
@@ -44,18 +49,31 @@ function DetailProduct() {
         }
         getRProducts();
     }, [idProduct, allproducts])
+    // useEffect(() => {
+    //     if (idProduct) {
+    //         if (idProduct) {
+    //             allproducts.forEach(product => {
+    //                 if (product._id === idProduct.id) {
+    //                     setDetailProduct(product);
+    //                     setImg_detail(product.images.url[0])
+    //                 }
+    //             })
+    //         }
+    //     }
+    // }, [idProduct.id, allproducts, idProduct])
     useEffect(() => {
-        if (idProduct) {
-            if (idProduct) {
-                allproducts.forEach(product => {
-                    if (product._id === idProduct.id) {
-                        setDetailProduct(product);
-                        setImg_detail(product.images.url[0])
-                    }
-                })
+        try {
+            const getProducts = async () => {
+                const res = await axios.get(`/products/detail-product/${idProduct.id}`)
+                console.log(res);
+                setDetailProduct(res.data.findProduct);
+                setImg_detail(res.data.findProduct.images.url[0])
             }
+            getProducts();
+        } catch (error) {
+            return alert(error)
         }
-    }, [idProduct.id, allproducts, idProduct])
+    }, [idProduct])
     useEffect(() => {
         try {
             const getComments = async () => {
@@ -113,6 +131,9 @@ function DetailProduct() {
         setLoading(false)
         setPage(1);
     }
+    const clickDetail = (id) => {
+        history.push(`/products/detail/${id}`);
+    }
     if (detailProduct.length === 0) return <Loading />
     return (
         <div className='boxx-detail'>
@@ -169,8 +190,9 @@ function DetailProduct() {
                     <div className="content">
                         <div className="content-compare">
                             <span className="infor">Description</span>
-                            <p>{detailProduct.description}</p>
+                            <Description product={detailProduct} />
                         </div>
+                        <div className="space" style={{ border: "1px solid #ececec", width: "1px", margin: "0 15px 0" }} />
                         <div className="content-1">
                             <span className="infor">Specifications</span>
                             <table>
@@ -187,9 +209,7 @@ function DetailProduct() {
                     <div className="content">
                         <div className="content-1">
                             <span className="infor">Description</span>
-                            <p>
-                                {detailProduct.description}
-                            </p>
+                            <Description product={detailProduct} />
                         </div>
                     </div>
             }
@@ -203,7 +223,7 @@ function DetailProduct() {
                                 count++;
                                 if (count >= 6) return null
                                 return <div className='product_card'>
-                                    <img src={product.images.url[0]} alt="picture1" />
+                                    <img src={product.images.url[0]} alt="picture1" onClick={() => clickDetail(product._id)} />
                                     <div className="product_box">
                                         <h2 title={product.title}>{product.title}</h2>
                                         {
