@@ -25,7 +25,7 @@ function AdminHome() {
             const res1 = await axios.get(`/category`, {
                 headers: { Authorization: token }
             });
-            const res2 = await axios.get('/products')
+            const res2 = await axios.get('/products/all')
             setChecked(res.data.checkouts);
             setCategories(res1.data.categories)
             setProducts(res2.data.products)
@@ -78,38 +78,31 @@ function AdminHome() {
             },
         ],
     };
-    const data2 = {
-        labels: labels,
-        datasets: [
-            {
-                type: 'pie',
-                label: 'Solded Products',
-                borderColor: '#777',
-                backgroundColor: [
-                    'rgba(91, 189, 43)',
-                    'rgba(249, 244,	0)',
-                    'rgba(75, 192, 192)',
-                    'rgba(255, 206, 86)',
-                    'rgba(299, 70, 70)',
-                    'rgba(153, 102, 255)',
-                ],
-                borderWidth: 0.3,
-                fill: false,
-                data: datas,
-            },
-        ],
-    }
     return (
         <div className="admin-home">
             <div className='header'>
-                <h1 className='title'>Report</h1>
+                <div className="statistical">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>prices</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div className="chart">
                 <div className="block-chart">
                     <Bar data={data} />
-                </div>
-                <div className="block-pie">
-                    <Pie data={data2} />
                 </div>
             </div>
         </div>

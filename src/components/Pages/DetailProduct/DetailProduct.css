@@ -18,7 +18,13 @@
     padding: 20px;
     border-radius: 20px;
 }
-
+.normal-price {
+    width: 100%;
+    text-align: right;
+    font-weight: 600;
+    padding-right: 15px;
+    font-size: 18px;
+}
 .img-infor .box-detail {
     width: 60%;
 }
@@ -63,7 +69,8 @@
 .box-detail .sold-out {
     margin: 20px 0 10px 0;
     padding: 15px 80px;
-    background-color: rgb(54, 51, 224);
+    background-color: rgb(90, 90, 95);
+    opacity: 0.4;
     font-size: 20px;
     color: white;
     font-weight: 600;
@@ -128,7 +135,7 @@
 }
 .content .content-compare p,
 .content-1 p {
-    width: 100%;
+    width: 96%;
     line-height: 1.5em;
     text-align: justify;
 }
@@ -182,17 +189,19 @@
     opacity: 1;
     cursor: pointer;
 }
-.product_box .compare {
+.product_box .compare-link {
     width: 100px;
-    margin: auto;
-    background: #6d5ff0;
+    margin: 10px;
+    background-color: #4ec7f7;
     padding: 5px 10px;
-    border-radius: 7px;
-    font-weight: 600;
-    color: white;
+
+    font-weight: 500;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
 }
 .product_box .compare:hover {
-    background: #3727c9;
+    background: #135e7c;
     transition: 0.5s;
 }
 /*Other Products*/

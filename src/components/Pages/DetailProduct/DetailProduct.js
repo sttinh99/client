@@ -164,7 +164,7 @@ function DetailProduct() {
                                     <p>Price: ${detailProduct.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>}
                                 {/* <h3 className="warranty">warranty: {detailProduct.warranty}</h3> */}
                             </div>
-                            {detailProduct.isDelete === true ? <span className="sold-out">Sold out</span> :
+                            {(detailProduct.isDelete === true || detailProduct.quantity === 0) ? <span className="sold-out">Sold out</span> :
                                 <Link to="/cart" className="cart-buy" onClick={() => addCart(detailProduct)}>Buy Now</Link>}
                             <div className="review">
                                 <span>Rating: <Rating product={detailProduct} />( {detailProduct.totalReview} review)</span>

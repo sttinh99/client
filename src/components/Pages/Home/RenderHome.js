@@ -41,7 +41,7 @@ function RenderHome({ items }) {
                                         <button onClick={() => addCart(item)} className="addcart"> Add to cart</button>
                                     </div>
                                 </div>
-                                <p className='solded'>solded: {item.sold}</p>
+                                <p className='solded'>sold: {item.sold}</p>
                             </div>
                         )
                     }

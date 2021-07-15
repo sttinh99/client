@@ -194,9 +194,6 @@ function Checkout() {
                         </tr>
                     </tbody>
                 </table>
-                <div className='total x'>
-                    <input type="text" placeholder="Your Discount Code" className="discount" />
-                </div >
                 <div className='total'>
                     <h3>Grand Total: ${total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h3>
                     <div className='choose-payment'>

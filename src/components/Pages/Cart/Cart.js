@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../../GlobalState'
 import gotoshoping from '../../../images/shopping.png'
-// import Loadding from '../../Loadding/Loadding';
+import Loadding from '../../Loadding/Loadding';
 // import PaypalButton from './PaypalButton'
 import RenderCart from './RenderCart'
 
 function Cart() {
     const state = useContext(GlobalState)
-    //console.log(state);
+    const [allproducts] = state.ProductAPI.allproducts;
     const [cart] = state.UserAPI.cart;
     //const [isLogged] = useState(false)
     const [total, setTotal] = useState(0);
@@ -28,32 +28,35 @@ function Cart() {
             <img src={gotoshoping} alt="..." />
             <Link to='/products' className="shopping">Go to Shopping</Link>
         </div>
-    return (
-        <div className="cart-box">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>prices</th>
-                        <th>Quantity</th>
-                        <th>totalPrice</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        cart.map((item, index) => {
-                            return <RenderCart item={item} key={index} />
-                        })
-                    }
-                </tbody>
-            </table>
-            <div className='total'>
-                <h3>Total: ${total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h3>
-                <Link to='/checkout' className='check'>Checkout</Link>
+    return <>
+        {
+            allproducts.length === 0 ? <Loadding /> : <div className="cart-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>prices</th>
+                            <th>Quantity</th>
+                            <th>totalPrice</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            cart.map((item, index) => {
+                                return <RenderCart item={item} key={index} />
+                            })
+                        }
+                    </tbody>
+                </table>
+                <div className='total'>
+                    <h3>Totals: ${total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h3>
+                    <div className="check-1"> <Link to='/checkout' className='check'>Checkout</Link></div>
+                </div>
             </div>
-        </div>
-    );
+
+        }
+    </>;
 }
 export default React.memo(Cart);

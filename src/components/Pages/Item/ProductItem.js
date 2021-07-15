@@ -21,7 +21,7 @@ function ProductItem({ product, isAdmin }) {
                     <span>Price: ${product.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
                 </div>
                 Sold out
-                <p>solded: {product.sold}</p>
+                <p>sold: {product.sold}</p>
             </div >
         );
     }
@@ -41,7 +41,7 @@ function ProductItem({ product, isAdmin }) {
                 }
             </div>
             <BtnRender product={product} />
-            <p>solded: {product.sold}</p>
+            <p>sold: {product.sold}</p>
         </div >
     );
 

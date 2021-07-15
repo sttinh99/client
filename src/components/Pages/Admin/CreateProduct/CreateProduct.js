@@ -227,7 +227,7 @@ function CreateProduct(props) {
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
-                <h3>Basic Infomation</h3>
+                {product.category === 'laptop' && <h3>Basic Infomation</h3>}
                 <div className='form-group'>
                     <label htmlFor='category'>Category: </label>
                     <select name='category' onChange={handleChangeInput}>
@@ -287,7 +287,7 @@ function CreateProduct(props) {
                     <label htmlFor='prices'>Prices: </label>
                     <input type='number' id='prices' name='prices' placeholder='add prices' value={product.prices} onChange={handleChangeInput} />
                 </div>
-                <h3>Specifications</h3>
+                {product.category === 'laptop' && <h3>Specifications</h3>}
                 {
                     (product.category === 'laptop') ?
                         (

@@ -10,7 +10,9 @@ function Bill() {
     const state = useContext(GlobalState);
     const [history] = state.UserAPI.history;
     const [token] = state.token
+    const [callback, setCallback] = state.UserAPI.callback
     const [bill, setBill] = useState([]);
+    const [checkBill, setCheckBill] = useState(0)
     const params = useParams()
     useEffect(() => {
         if (params.id) {
@@ -18,7 +20,7 @@ function Bill() {
                 if (item._id === params.id) setBill(item)
             });
         }
-    }, [params.id, params, history])
+    }, [params.id, params, history, callback])
     if (bill.length === 0) return null
     const printPDF = async () => {
         const domElement = document.getElementById("print-bill");
@@ -32,20 +34,27 @@ function Bill() {
             pdf.addImage(imgData, "JPEG", -115, 40);
             pdf.save(`${params.id}.pdf`);
         });
+        setCheckBill(1)
     };
     const notifyUser = async () => {
-        await axios.post(`/checkout/${params.id}`, { status: true }, {
-            headers: { Authorization: token }
-        })
+        try {
+            await axios.post(`/checkout/${params.id}`, { status: 1 }, {
+                headers: { Authorization: token }
+            })
+            setCallback(!callback)
+            alert('Send Successfully');
+        } catch (error) {
+            return alert(error)
+        }
     }
     return (
         <div className="invoice-box">
-            <button id="print" onClick={printPDF}>
+            {(bill.status === 0 && checkBill === 0) ? <button id="print" onClick={printPDF}>
                 PRINT
-            </button>
-            <button onClick={notifyUser}>
-                Send
-            </button>
+            </button> :
+                <button id="print" onClick={notifyUser}>
+                    Send
+                </button>}
             <div id='print-bill'>
                 <div id="invoice-POS">
                     <center id="top">

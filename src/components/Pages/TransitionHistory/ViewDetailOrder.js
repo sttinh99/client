@@ -56,7 +56,7 @@ function ViewDetailOrder() {
                         {orderDetails.cart.map((item) => {
                             return <tr key={item._id}>
                                 <td className='title'>{item.title}</td>
-                                <td className='img'><img src={item.images} alt='images' /></td>
+                                <td className='img'><img src={item.images[0]} alt='images' /></td>
                                 <td className='prices'>{item.prices.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                                 <td className='count'>{item.count}</td>
                                 <td className='total-item'>{(item.count * item.prices).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
@@ -67,7 +67,7 @@ function ViewDetailOrder() {
                             <td />
                             <td />
                             <td>Transport fee</td>
-                            <td>${orderDetails.deliveryCharges}</td>
+                            <td>${orderDetails.deliveryCharges.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                         </tr>
                     </tbody>
                 </table>
