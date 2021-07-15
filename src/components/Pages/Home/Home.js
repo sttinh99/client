@@ -6,11 +6,12 @@ import { GlobalState } from '../../GlobalState'
 
 import "./Home.css"
 
-// import harddisk from '../../../images/harddisk.svg'
-// import headphone from '../../../images/headphones.svg'
-// import ram from '../../../images/ram.svg'
-// import mouse from '../../../images/mouse.svg'
 import laptop from '../../../images/laptop.svg'
+import mouse_icon from '../../../images/mouse-icon.png'
+import storage from '../../../images/harddisk.png'
+import headset from '../../../images/headphones.jpg'
+import keyboard from '../../../images/keyboard-icon.png'
+import ram from '../../../images/ram.png'
 
 // import RenderBlog from './RenderBlog'
 import Carousel from '../../Pages/Carousel/Carousel'
@@ -27,6 +28,8 @@ function Home() {
     const [categories] = state.CategoryAPI.categories
     const [discounts] = state.DiscountAPI.discounts
     const [loading, setLoading] = useState(false)
+
+    const icon = [keyboard, storage, ram, mouse_icon, laptop, headset]
     useEffect(() => {
         console.log(discounts);
         if (discounts) {
@@ -51,7 +54,7 @@ function Home() {
                                     <li style={{ "background": "rgb(243 238 238)" }}>Product Portfolio</li>
                                     {
                                         categories.map((category, index) => {
-                                            return <li key={index}><Link to={`/products/category/${category._id}`}><img src={laptop} alt="..." /> {category.name}</Link></li>
+                                            return <li key={index}><Link to={`/products/category/${category._id}`}><img src={icon[index]} alt="..." /> {category.name}</Link></li>
                                         })
                                     }
                                 </ul>

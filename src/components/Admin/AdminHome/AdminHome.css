@@ -8,15 +8,25 @@
     text-align: center;
 }
 .admin-home .chart {
+    width: 95%;
     display: flex;
     justify-content: space-evenly;
+    margin: auto;
 }
 .admin-home .block-chart {
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.admin-home .block-pie {
-    width: 20%;
+.admin-home .des-detail {
+    margin-top: 30px;
+    width: 50%;
+}
+.admin-home .header {
+    width: 95%;
+    margin: auto;
+}
+.admin-home .header .statistical {
+    width: 100%;
 }

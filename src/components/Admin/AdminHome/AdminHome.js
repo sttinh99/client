@@ -1,10 +1,11 @@
 // export default AdminHome;
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalState } from '../../GlobalState'
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 
 import './AdminHome.css'
+import { Link } from 'react-router-dom';
 
 function AdminHome() {
     const state = useContext(GlobalState)
@@ -16,7 +17,8 @@ function AdminHome() {
     let labels = [];
     let datas = [];
     let obj = {};
-    console.log(checked);
+    let totalP = 0;
+    let totalS = 0;
     useEffect(() => {
         const getAllHis = async () => {
             const res = await axios.get('/checkout', {
@@ -57,6 +59,15 @@ function AdminHome() {
         labels = Object.keys(obj);
         datas = Object.values(obj);
     }
+    if (checked) {
+        checked.forEach((item) => {
+            totalP += (item.total + item.deliveryCharges);
+            item.cart.forEach((product) => {
+                totalS += (product.count)
+            })
+        })
+        totalP = totalP.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
     const data = {
         labels: labels,
         datasets: [
@@ -82,27 +93,51 @@ function AdminHome() {
         <div className="admin-home">
             <div className='header'>
                 <div className="statistical">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>prices</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="title">
+                        <p style={{ textAlign: 'start', fontSize: '30px' }}>Sales Statistics</p>
+                    </div>
+                    <hr />
+                    <div className="xx" style={{ fontSize: '20px' }}>
+                        <div className="sold" >
+                            <span>Total products sold</span>
+                            <p>{totalS}</p>
+                        </div>
+                        <div className="total-prices">
+                            <span>Total amount received</span>
+                            <p>${totalP}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="xx">
+                        <Link to="/history">View List Order</Link>
+                    </div>
                 </div>
             </div>
             <div className="chart">
                 <div className="block-chart">
                     <Bar data={data} />
+                </div>
+                <div className="des-detail">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Quantity Sold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                labels.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{item}</td>
+                                            <td>{datas[index]}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

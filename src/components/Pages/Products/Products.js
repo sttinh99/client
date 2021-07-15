@@ -89,7 +89,7 @@ function Products() {
                                     <th>Quantity</th>
                                     <th>Prices</th>
                                     <th>Category</th>
-                                    <th>Solded</th>
+                                    <th>Sold</th>
                                     <th>Update/Drop</th>
                                 </tr>
                             </thead>
