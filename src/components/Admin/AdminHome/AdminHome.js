@@ -118,26 +118,28 @@ function AdminHome() {
                     <Bar data={data} />
                 </div>
                 <div className="des-detail">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Quantity Sold</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                labels.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{item}</td>
-                                            <td>{datas[index]}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
+                    {
+                        datas.length > 0 && <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Quantity Sold</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    labels.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{item}</td>
+                                                <td>{datas[index]}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    }
                 </div>
             </div>
         </div>

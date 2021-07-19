@@ -34,7 +34,7 @@ function TransitionHisory() {
     }
     const dropOrderChange = async (item) => {
         if (window.confirm("Do you want cancel this order")) {
-            if (!item.status) {
+            if (item.status !== 2) {
                 console.log(item);
                 try {
                     await axios.delete(`/checkout/delete/${item._id}`, {

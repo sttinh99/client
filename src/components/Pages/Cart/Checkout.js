@@ -27,7 +27,7 @@ function Checkout() {
     const [deliveryCharges, setDeliveryCharges] = useState(0)
 
     // Code tính khoảng cách:
-    const [distance, setDistance] = useState(809028);
+    const [distance, setDistance] = useState(0);
     const [duration, setDuration] = useState(0);
 
 
@@ -45,7 +45,7 @@ function Checkout() {
         if (distance) {
             console.log("Distance & Duration have updated", distance, duration);
             if (distance <= 10000) {
-                setDeliveryCharges(0);
+                setDeliveryCharges(0.5);
             }
             if (distance > 10000 && distance <= 300000) {
                 setDeliveryCharges(1)

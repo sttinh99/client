@@ -68,6 +68,7 @@ function Bill() {
                         <div className="info">
                             <h2>Contact Info</h2>
                             <p>
+                                Name         : {bill.address.name}<br />
                                 Address      : {bill.address.inforAddress} {bill.address.ward} {bill.address.district} {bill.address.city}<br />
                                 Email        : {bill.address.email}<br />
                                 Phone        : {bill.address.phone}<br />
@@ -101,13 +102,13 @@ function Bill() {
                                         <td />
                                         <td />
                                         <td className="Rate"><h2>Delivery Charges</h2></td>
-                                        <td className="payment"><h2>${bill.deliveryCharges}</h2></td>
+                                        <td className="payment"><h2>${bill.deliveryCharges.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h2></td>
                                     </tr>
                                     <tr className="tabletitle">
                                         <td />
                                         <td />
                                         <td className="Rate"><h2>Total</h2></td>
-                                        <td className="payment"><h2>${bill.total}</h2></td>
+                                        <td className="payment"><h2>${bill.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</h2></td>
                                     </tr>
                                 </tbody>
                             </table>
